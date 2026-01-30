@@ -14,6 +14,7 @@ import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
 import { initReportPanel } from './components/ReportPanel.js';
 import { initVizSelector } from './components/VizSelector.js';
+import { initPromptotypingPage } from './tutorial/PromptotypingPage.js';
 
 class App {
     constructor() {
@@ -67,6 +68,12 @@ class App {
         const reportEl = document.querySelector('#reportPanel');
         if (reportEl) {
             this.components.report = initReportPanel(reportEl);
+        }
+
+        // Promptotyping Page (Tutorial)
+        const promptotypingEl = document.querySelector('#promptotypingPanel');
+        if (promptotypingEl) {
+            this.components.promptotyping = initPromptotypingPage(promptotypingEl);
         }
     }
 

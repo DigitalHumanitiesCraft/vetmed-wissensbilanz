@@ -1,0 +1,533 @@
+/**
+ * Tutorial CSS - Styles für Promptotyping-Tutorial
+ *
+ * Komponenten:
+ * - PromptotypingPage Layout
+ * - Navigation mit Phasen
+ * - Markdown-Rendering
+ * - Artikel-Darstellung
+ */
+
+/* ========================================
+   PROMPTOTYPING PAGE LAYOUT
+   ======================================== */
+.promptotyping-page {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: var(--space-4);
+    min-height: 600px;
+}
+
+@media (max-width: 992px) {
+    .promptotyping-page {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Sidebar */
+.promptotyping-sidebar {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius);
+    padding: var(--space-4);
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.promptotyping-intro {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.promptotyping-intro h2 {
+    font-size: var(--font-size-lg);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.promptotyping-intro p {
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-2) 0;
+}
+
+/* Content Area */
+.promptotyping-content {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius);
+    padding: var(--space-6);
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+/* ========================================
+   NAVIGATION
+   ======================================== */
+.promptotyping-nav__phase {
+    margin-bottom: var(--space-4);
+}
+
+.promptotyping-nav__phase-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-1);
+}
+
+.promptotyping-nav__phase-order {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: white;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-bold);
+    border-radius: 50%;
+}
+
+.promptotyping-nav__phase-name {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+}
+
+.promptotyping-nav__phase-desc {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-2) 0;
+    padding-left: 32px;
+}
+
+/* Category */
+.promptotyping-nav__category {
+    margin-bottom: var(--space-2);
+    padding-left: 32px;
+}
+
+.promptotyping-nav__category-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: background var(--transition-fast);
+}
+
+.promptotyping-nav__category-header:hover {
+    background: var(--color-bg-secondary);
+}
+
+.promptotyping-nav__category-header .icon {
+    width: 16px;
+    height: 16px;
+    color: var(--color-text-muted);
+}
+
+/* Files (collapsed by default) */
+.promptotyping-nav__files {
+    display: none;
+    flex-direction: column;
+    padding-left: var(--space-4);
+    margin-top: var(--space-1);
+}
+
+.promptotyping-nav__category--expanded .promptotyping-nav__files {
+    display: flex;
+}
+
+.promptotyping-nav__file {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    border-radius: var(--border-radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.promptotyping-nav__file:hover {
+    color: var(--color-text);
+    background: var(--color-bg-secondary);
+}
+
+.promptotyping-nav__file--active {
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+    font-weight: var(--font-weight-medium);
+}
+
+/* ========================================
+   WELCOME PAGE
+   ======================================== */
+.promptotyping-welcome__content {
+    max-width: 800px;
+}
+
+.promptotyping-welcome__content h1 {
+    font-size: var(--font-size-2xl);
+    margin: 0 0 var(--space-4) 0;
+}
+
+.promptotyping-welcome__content h2 {
+    font-size: var(--font-size-lg);
+    margin: var(--space-6) 0 var(--space-3) 0;
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.promptotyping-welcome__intro {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+/* Phases Grid */
+.promptotyping-phases-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+}
+
+@media (max-width: 768px) {
+    .promptotyping-phases-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.promptotyping-phase-card {
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--space-4);
+    text-align: center;
+}
+
+.promptotyping-phase-card__number {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: white;
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-bold);
+    border-radius: 50%;
+    margin: 0 auto var(--space-2);
+}
+
+.promptotyping-phase-card h3 {
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-1) 0;
+}
+
+.promptotyping-phase-card p {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin: 0;
+}
+
+/* Doc Types */
+.promptotyping-doc-types {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    margin: var(--space-4) 0;
+}
+
+@media (max-width: 768px) {
+    .promptotyping-doc-types {
+        grid-template-columns: 1fr;
+    }
+}
+
+.promptotyping-doc-type {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius);
+    padding: var(--space-3);
+}
+
+.promptotyping-doc-type__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+}
+
+.promptotyping-doc-type__header .icon {
+    width: 20px;
+    height: 20px;
+    color: var(--color-primary);
+}
+
+.promptotyping-doc-type p {
+    font-size: var(--font-size-sm);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.promptotyping-cta {
+    margin-top: var(--space-6);
+    padding: var(--space-4);
+    background: var(--color-primary-light);
+    border-radius: var(--border-radius);
+    text-align: center;
+}
+
+.promptotyping-cta p {
+    margin: 0;
+    font-weight: var(--font-weight-medium);
+}
+
+/* ========================================
+   ARTICLE
+   ======================================== */
+.promptotyping-article {
+    max-width: 800px;
+}
+
+.promptotyping-article__header {
+    margin-bottom: var(--space-4);
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.promptotyping-article__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-2);
+}
+
+.promptotyping-article__category {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.promptotyping-article__category .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.promptotyping-article__phase-badge {
+    font-size: var(--font-size-xs);
+    padding: var(--space-1) var(--space-2);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-sm);
+    color: var(--color-text-muted);
+}
+
+.promptotyping-article__phase-badge[data-phase="foundation"] { background: #e8f4f8; color: #0c5460; }
+.promptotyping-article__phase-badge[data-phase="preparation"] { background: #d4edda; color: #155724; }
+.promptotyping-article__phase-badge[data-phase="exploration"] { background: #fff3cd; color: #856404; }
+.promptotyping-article__phase-badge[data-phase="destillation"] { background: #d1ecf1; color: #0c5460; }
+.promptotyping-article__phase-badge[data-phase="meta"] { background: #e2d9f3; color: #5a3d8e; }
+.promptotyping-article__phase-badge[data-phase="chronicle"] { background: #f8d7da; color: #721c24; }
+
+.promptotyping-article__purpose {
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) var(--space-3);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-sm);
+    border-left: 3px solid var(--color-primary);
+}
+
+.promptotyping-article__footer {
+    margin-top: var(--space-6);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--color-border-light);
+}
+
+.promptotyping-article__meta {
+    display: flex;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+}
+
+.promptotyping-article__learning-goal {
+    font-size: var(--font-size-sm);
+    padding: var(--space-3);
+    background: var(--color-primary-light);
+    border-radius: var(--border-radius);
+}
+
+/* ========================================
+   MARKDOWN BODY
+   ======================================== */
+.markdown-body {
+    font-size: var(--font-size-base);
+    line-height: 1.7;
+    color: var(--color-text);
+}
+
+.markdown-body h1 {
+    font-size: var(--font-size-2xl);
+    margin: var(--space-6) 0 var(--space-4) 0;
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.markdown-body h2 {
+    font-size: var(--font-size-xl);
+    margin: var(--space-5) 0 var(--space-3) 0;
+}
+
+.markdown-body h3 {
+    font-size: var(--font-size-lg);
+    margin: var(--space-4) 0 var(--space-2) 0;
+}
+
+.markdown-body h4, .markdown-body h5, .markdown-body h6 {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    margin: var(--space-3) 0 var(--space-2) 0;
+}
+
+.markdown-body p {
+    margin: 0 0 var(--space-3) 0;
+}
+
+.markdown-body a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.markdown-body a:hover {
+    text-decoration: underline;
+}
+
+.markdown-body .vault-link {
+    background: var(--color-primary-light);
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.markdown-body .vault-link:hover {
+    background: var(--color-primary);
+    color: white;
+    text-decoration: none;
+}
+
+.markdown-body blockquote {
+    margin: var(--space-4) 0;
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-secondary);
+    border-left: 4px solid var(--color-primary);
+    font-style: italic;
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--color-border-light);
+    margin: var(--space-5) 0;
+}
+
+/* Lists */
+.markdown-body .md-list {
+    margin: var(--space-3) 0;
+    padding-left: var(--space-4);
+}
+
+.markdown-body .md-list li {
+    margin: var(--space-1) 0;
+}
+
+/* Tables */
+.markdown-body .table-wrapper {
+    overflow-x: auto;
+    margin: var(--space-4) 0;
+}
+
+.markdown-body .md-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.markdown-body .md-table th,
+.markdown-body .md-table td {
+    padding: var(--space-2) var(--space-3);
+    border: 1px solid var(--color-border-light);
+    text-align: left;
+}
+
+.markdown-body .md-table th {
+    background: var(--color-bg-secondary);
+    font-weight: var(--font-weight-semibold);
+}
+
+.markdown-body .md-table tr:hover {
+    background: var(--color-bg-secondary);
+}
+
+/* Code */
+.markdown-body .inline-code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    padding: 2px 6px;
+    background: var(--color-bg-secondary);
+    border-radius: 3px;
+}
+
+.markdown-body pre {
+    margin: var(--space-4) 0;
+    padding: var(--space-4);
+    background: var(--color-text);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+}
+
+.markdown-body .code-block {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    color: #f8f9fa;
+    line-height: 1.5;
+}
+
+/* ========================================
+   LOADING / ERROR STATES
+   ======================================== */
+.promptotyping-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    gap: var(--space-3);
+    color: var(--color-text-muted);
+}
+
+.promptotyping-error {
+    text-align: center;
+    padding: var(--space-6);
+}
+
+.promptotyping-error h3 {
+    color: var(--color-danger);
+    margin: 0 0 var(--space-2) 0;
+}
+
+.promptotyping-error p {
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-4) 0;
+}
+
+/* ========================================
+   UTILITIES
+   ======================================== */
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+.icon {
+    flex-shrink: 0;
+}
