@@ -242,6 +242,15 @@
             </nav>
 
             <div class="header__actions">
+                <button class="btn btn--ghost btn--icon" id="shareBtn" title="Link kopieren">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                </button>
                 <button class="btn btn--ghost btn--icon" id="sidebarToggle" title="Filter ein/ausblenden">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <line x1="4" y1="6" x2="20" y2="6"/>
@@ -321,10 +330,25 @@
     <!-- App Bootstrap -->
     <script type="module" src="js/app.js"></script>
 
-    <!-- Stats Bar Update -->
+    <!-- Share Button + Stats Bar Update -->
     <script type="module">
         import { state } from './js/core/state.js';
+        import { router } from './js/core/router.js';
         import { KENNZAHL_BY_CODE, formatValue } from './js/data/metadata.js';
+
+        // Share Button
+        document.getElementById('shareBtn')?.addEventListener('click', async () => {
+            const btn = document.getElementById('shareBtn');
+            const success = await router.copyUrlToClipboard();
+            if (success) {
+                btn.title = 'Kopiert!';
+                btn.classList.add('btn--success');
+                setTimeout(() => {
+                    btn.title = 'Link kopieren';
+                    btn.classList.remove('btn--success');
+                }, 2000);
+            }
+        });
 
         state.subscribe('dataStats', (stats) => {
             const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];

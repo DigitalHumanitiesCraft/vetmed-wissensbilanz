@@ -8,6 +8,7 @@
 import { state } from './core/state.js';
 import { eventBus, EVENTS } from './core/eventBus.js';
 import { log } from './core/logger.js';
+import { router } from './core/router.js';
 import { initFilterPanel } from './components/FilterPanel.js';
 import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
@@ -35,8 +36,8 @@ class App {
         // Sidebar Toggle (Mobile)
         this.initSidebarToggle();
 
-        // URL-Parameter lesen
-        this.loadFromUrl();
+        // Router initialisieren (F2: URL-Parameter Sync)
+        router.init();
 
         log.info('App', 'ready');
     }
@@ -109,49 +110,6 @@ class App {
         }
     }
 
-    loadFromUrl() {
-        const params = new URLSearchParams(window.location.search);
-
-        // Universitäten aus URL
-        const unis = params.get('unis');
-        if (unis) {
-            state.set('selectedUniversities', unis.split(','));
-        }
-
-        // Kennzahl aus URL
-        const kennzahl = params.get('k');
-        if (kennzahl) {
-            state.set('selectedKennzahl', kennzahl);
-        }
-
-        // Zeitraum aus URL
-        const start = params.get('von');
-        const end = params.get('bis');
-        if (start && end) {
-            state.set('yearRange', {
-                start: parseInt(start),
-                end: parseInt(end)
-            });
-        }
-    }
-
-    /**
-     * Aktualisiert die URL mit aktuellen Filtern (F2: URL-Parameter)
-     */
-    updateUrl() {
-        const filterState = state.getFilterState();
-        const params = new URLSearchParams();
-
-        if (filterState.universities.length > 0) {
-            params.set('unis', filterState.universities.join(','));
-        }
-        params.set('k', filterState.kennzahl);
-        params.set('von', filterState.yearRange.start);
-        params.set('bis', filterState.yearRange.end);
-
-        const newUrl = `${window.location.pathname}?${params.toString()}`;
-        window.history.replaceState({}, '', newUrl);
-    }
 }
 
 // App starten
@@ -162,6 +120,7 @@ app.init().catch(console.error);
 window.wissensbilanz = {
     state,
     eventBus,
+    router,
     app,
     log
 };
