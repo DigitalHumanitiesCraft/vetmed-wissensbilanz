@@ -1,0 +1,34 @@
+# Rohdaten (Excel von UniData)
+# Diese Dateien werden in JSON konvertiert und sind über unidata.gv.at verfügbar
+data/*.xlsx
+data/*.xls
+
+# Generierte JSON-Dateien (werden aus Excel erzeugt)
+data/json/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.env
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Temporäre Dateien
+*.tmp
+*~

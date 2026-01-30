@@ -5,7 +5,9 @@
       "Bash(python scripts/exploration/verify_university_codes.py:*)",
       "Bash(python scripts/exploration/analyze_excel_structure.py:*)",
       "Bash(tree:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nInitial commit: Repository als Promptotyping-Lehrbeispiel strukturiert\n\nDokumentation für Workshop mit Michael Forster vorbereitet:\n- README.md als Einstiegspunkt mit Lesereihenfolge\n- GLOSSAR.md mit 30+ KI-Begriffen \\(basierend auf Pollin 2025\\)\n- HYPOTHESES.md mit 4 User Story Hypothesen \\(H1-H4\\)\n- Journal.md und Promptotyping-Learnings.md aktualisiert\n\nTechnische Grundlagen:\n- docs/index.html Platzhalter für GitHub Pages\n- Python-Skripte für Datenverifikation\n- Arbeitsgrundlage für konzeptionelle Begleitung\n\nDas Repository ist sowohl Softwareprojekt als auch Lehrbeispiel\nfür die Promptotyping-Methode.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)"
     ]
   }
 }
