@@ -35,11 +35,8 @@ class FilterPanel {
         this.container.innerHTML = `
             <div class="sidebar__section">
                 <h3 class="sidebar__section-title">Universitäten</h3>
-                <div class="filter-uni-types" id="uniTypeFilters">
-                    ${this.renderUniTypeGroups()}
-                </div>
-                <div class="filter-universities" id="universityFilters" style="margin-top: var(--space-3);">
-                    ${this.renderUniversityCheckboxes()}
+                <div class="filter-uni-accordion" id="uniAccordion">
+                    ${this.renderUniAccordion()}
                 </div>
             </div>
 
@@ -83,47 +80,49 @@ class FilterPanel {
         `;
     }
 
-    renderUniTypeGroups() {
-        return Object.values(UNI_TYPES).map(type => {
-            const unis = UNIVERSITIES_BY_TYPE[type.id] || [];
-            const count = unis.length;
-
-            return `
-                <label class="checkbox checkbox--uni-${type.id}" style="margin-bottom: var(--space-2);">
-                    <input type="checkbox"
-                           class="checkbox__input"
-                           data-uni-type="${type.id}"
-                           ${state.get('selectedUniTypes').includes(type.id) ? 'checked' : ''}>
-                    <span class="checkbox__box"></span>
-                    <span class="checkbox__label">${type.name} (${count})</span>
-                </label>
-            `;
-        }).join('');
-    }
-
-    renderUniversityCheckboxes() {
+    renderUniAccordion() {
         const selectedUnis = state.get('selectedUniversities');
 
-        // Gruppiert nach Typ anzeigen
         return Object.values(UNI_TYPES).map(type => {
             const unis = UNIVERSITIES_BY_TYPE[type.id] || [];
             if (unis.length === 0) return '';
 
+            // Check how many unis of this type are selected
+            const selectedCount = unis.filter(u => selectedUnis.includes(u.code)).length;
+            const allSelected = selectedCount === unis.length;
+            const someSelected = selectedCount > 0 && selectedCount < unis.length;
+
             return `
-                <div class="filter-uni-group" data-type="${type.id}">
-                    <div class="filter-uni-group__header text-sm text-muted" style="margin: var(--space-2) 0 var(--space-1);">
-                        ${type.name}
-                    </div>
-                    ${unis.map(uni => `
-                        <label class="checkbox checkbox--uni-${type.id}" style="margin-bottom: var(--space-1); margin-left: var(--space-2);">
+                <div class="accordion-item" data-type="${type.id}">
+                    <div class="accordion-header">
+                        <label class="checkbox checkbox--uni-${type.id}">
                             <input type="checkbox"
                                    class="checkbox__input"
-                                   data-uni-code="${uni.code}"
-                                   ${selectedUnis.includes(uni.code) ? 'checked' : ''}>
+                                   data-uni-type="${type.id}"
+                                   ${allSelected ? 'checked' : ''}
+                                   ${someSelected ? 'data-indeterminate="true"' : ''}>
                             <span class="checkbox__box"></span>
-                            <span class="checkbox__label">${uni.shortName}</span>
+                            <span class="checkbox__label">${type.name}</span>
                         </label>
-                    `).join('')}
+                        <button class="accordion-toggle" type="button" aria-expanded="false">
+                            <span class="accordion-count">${selectedCount}/${unis.length}</span>
+                            <svg class="accordion-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="accordion-content">
+                        ${unis.map(uni => `
+                            <label class="checkbox checkbox--uni-${type.id}">
+                                <input type="checkbox"
+                                       class="checkbox__input"
+                                       data-uni-code="${uni.code}"
+                                       ${selectedUnis.includes(uni.code) ? 'checked' : ''}>
+                                <span class="checkbox__box"></span>
+                                <span class="checkbox__label">${uni.shortName}</span>
+                            </label>
+                        `).join('')}
+                    </div>
                 </div>
             `;
         }).join('');
@@ -154,28 +153,44 @@ class FilterPanel {
     }
 
     attachEventListeners() {
-        // Uni-Typ Checkboxen
+        // Accordion Toggle
+        this.container.querySelectorAll('.accordion-toggle').forEach(toggle => {
+            toggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                const item = toggle.closest('.accordion-item');
+                const content = item.querySelector('.accordion-content');
+                const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+
+                toggle.setAttribute('aria-expanded', !isExpanded);
+                item.classList.toggle('accordion-item--expanded', !isExpanded);
+
+                if (!isExpanded) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+
+        // Set indeterminate state for checkboxes
+        this.container.querySelectorAll('[data-indeterminate="true"]').forEach(checkbox => {
+            checkbox.indeterminate = true;
+        });
+
+        // Uni-Typ Checkboxen (select/deselect all of type)
         this.container.querySelectorAll('[data-uni-type]').forEach(checkbox => {
             checkbox.addEventListener('change', (e) => {
                 const type = e.target.dataset.uniType;
-                const types = [...state.get('selectedUniTypes')];
+                const unis = UNIVERSITIES_BY_TYPE[type].map(u => u.code);
+                const currentUnis = state.get('selectedUniversities');
 
                 if (e.target.checked) {
-                    types.push(type);
-                    // Alle Unis dieses Typs selektieren
-                    const unis = UNIVERSITIES_BY_TYPE[type].map(u => u.code);
-                    const currentUnis = state.get('selectedUniversities');
                     state.set('selectedUniversities', [...new Set([...currentUnis, ...unis])]);
                 } else {
-                    const index = types.indexOf(type);
-                    if (index > -1) types.splice(index, 1);
-                    // Unis dieses Typs deselektieren
-                    const unis = UNIVERSITIES_BY_TYPE[type].map(u => u.code);
-                    const currentUnis = state.get('selectedUniversities');
                     state.set('selectedUniversities', currentUnis.filter(u => !unis.includes(u)));
                 }
 
-                state.set('selectedUniTypes', types);
+                this.updateAccordionState(type);
                 this.updateUniversityCheckboxes();
             });
         });
@@ -194,6 +209,12 @@ class FilterPanel {
                 }
 
                 state.set('selectedUniversities', unis);
+
+                // Update parent checkbox state
+                const item = checkbox.closest('.accordion-item');
+                if (item) {
+                    this.updateAccordionState(item.dataset.type);
+                }
             });
         });
 
@@ -244,6 +265,29 @@ class FilterPanel {
         this.container.querySelectorAll('[data-uni-code]').forEach(checkbox => {
             checkbox.checked = selectedUnis.includes(checkbox.dataset.uniCode);
         });
+    }
+
+    updateAccordionState(typeId) {
+        const selectedUnis = state.get('selectedUniversities');
+        const unis = UNIVERSITIES_BY_TYPE[typeId] || [];
+        const selectedCount = unis.filter(u => selectedUnis.includes(u.code)).length;
+        const allSelected = selectedCount === unis.length;
+        const someSelected = selectedCount > 0 && selectedCount < unis.length;
+
+        const item = this.container.querySelector(`.accordion-item[data-type="${typeId}"]`);
+        if (!item) return;
+
+        const typeCheckbox = item.querySelector(`[data-uni-type="${typeId}"]`);
+        const countSpan = item.querySelector('.accordion-count');
+
+        if (typeCheckbox) {
+            typeCheckbox.checked = allSelected;
+            typeCheckbox.indeterminate = someSelected;
+        }
+
+        if (countSpan) {
+            countSpan.textContent = `${selectedCount}/${unis.length}`;
+        }
     }
 
     updateYearDisplay() {

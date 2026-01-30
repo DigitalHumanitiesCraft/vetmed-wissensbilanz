@@ -133,5 +133,14 @@ export const EVENTS = {
     // LLM-Events
     REPORT_GENERATE: 'report:generate',
     REPORT_READY: 'report:ready',
-    REPORT_ERROR: 'report:error'
+    REPORT_ERROR: 'report:error',
+
+    // Visualization Events
+    VIZ_CHANGE: 'ui:viz:change',
+    VIZ_READY: 'ui:viz:ready',
+
+    // Tutorial Events
+    TUTORIAL_TOGGLE: 'tutorial:toggle',
+    TUTORIAL_SECTION_CHANGE: 'tutorial:section:change',
+    TUTORIAL_BADGE_CLICK: 'tutorial:badge:click'
 };

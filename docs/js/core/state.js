@@ -45,8 +45,23 @@ class AppState {
             // Report-State
             reportTemplate: 'comparison', // 'summary' | 'comparison' | 'trend' | 'anomaly'
             reportContent: '',
-            reportSources: []
+            reportSources: [],
+
+            // Visualization State
+            vizType: 'line', // 'line' | 'smallMultiples' | 'heatmap' | 'ranking'
+            vizOptions: {
+                showAverage: false,
+                rankingYear: 2024
+            },
+
+            // Tutorial State
+            tutorialMode: false,
+            tutorialSection: null, // 'filters' | 'viz' | 'reports' | null
+            viewedLearnings: [] // Persistiert in localStorage
         };
+
+        // Tutorial-Progress aus localStorage laden
+        this.loadTutorialProgress();
 
         this.subscribers = new Map();
     }
@@ -214,6 +229,58 @@ class AppState {
         console.group('AppState');
         console.table(this.state);
         console.groupEnd();
+    }
+
+    /**
+     * Gibt den aktuellen Visualisierungs-State zurück
+     * @returns {Object} Viz-State
+     */
+    getVizState() {
+        return {
+            type: this.state.vizType,
+            options: this.state.vizOptions
+        };
+    }
+
+    /**
+     * Speichert Tutorial-Progress in localStorage
+     */
+    saveTutorialProgress() {
+        try {
+            localStorage.setItem('wissensbilanz_tutorial', JSON.stringify({
+                viewedLearnings: this.state.viewedLearnings,
+                tutorialMode: this.state.tutorialMode
+            }));
+        } catch (e) {
+            console.warn('[State] Could not save tutorial progress:', e.message);
+        }
+    }
+
+    /**
+     * Lädt Tutorial-Progress aus localStorage
+     */
+    loadTutorialProgress() {
+        try {
+            const saved = localStorage.getItem('wissensbilanz_tutorial');
+            if (saved) {
+                const { viewedLearnings, tutorialMode } = JSON.parse(saved);
+                this.state.viewedLearnings = viewedLearnings || [];
+                // tutorialMode nicht automatisch laden - User soll bewusst aktivieren
+            }
+        } catch (e) {
+            console.warn('[State] Could not load tutorial progress:', e.message);
+        }
+    }
+
+    /**
+     * Markiert ein Learning als gesehen
+     * @param {string} learningId - z.B. 'L006'
+     */
+    markLearningViewed(learningId) {
+        if (!this.state.viewedLearnings.includes(learningId)) {
+            this.state.viewedLearnings = [...this.state.viewedLearnings, learningId];
+            this.saveTutorialProgress();
+        }
     }
 }
 

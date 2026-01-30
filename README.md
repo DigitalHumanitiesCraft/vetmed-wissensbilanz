@@ -6,6 +6,16 @@ Ein Wissensbilanz-Dashboard für die Veterinärmedizinische Universität Wien �
 
 Dieses Projekt ist beides: ein funktionales Tool zur Analyse von Universitäts-Kennzahlen **und** ein dokumentiertes Beispiel dafür, wie man mit KI-Unterstützung schnell von der Idee zum Prototyp kommt. Das Dashboard visualisiert Wissensbilanz-Daten österreichischer Universitäten und generiert LLM-gestützte Analyseberichte. Die gesamte Entstehung – jede Entscheidung, jeder Fehler, jede Korrektur – ist im Repository nachvollziehbar dokumentiert.
 
+## Live Demo
+
+**Das Dashboard ist hier verfügbar:** `docs/index.html` (lokal öffnen mit Live Server)
+
+Features:
+- Vergleich aller 22 österreichischen Universitäten
+- 17 Kennzahlen (Personal, Studierende, Forschung)
+- LLM-gestützte Berichtsgenerierung (Claude API)
+- Teilbare URLs für Filter-Zustände
+
 ## Für wen ist dieses Repository?
 
 - **Michael Forster** (Fachverantwortlicher): Lernt am Beispiel, wie Promptotyping funktioniert
@@ -18,12 +28,12 @@ Empfohlene Reihenfolge für Nicht-Entwickler:
 
 | Schritt | Dokument | Was du lernst |
 |---------|----------|---------------|
-| 1 | [GLOSSAR.md](knowledge/GLOSSAR.md) | Begriffe verstehen (Prompt, Token, etc.) |
-| 2 | [Promptotyping-Learnings.md](knowledge/Promptotyping-Learnings.md) | Die Methodik kennenlernen |
-| 3 | [Journal.md](knowledge/Journal.md) | Den Entstehungsprozess nachvollziehen |
-| 4 | [inputdata.md](knowledge/inputdata.md) | Die Datengrundlage verstehen |
-| 5 | [HYPOTHESES.md](knowledge/HYPOTHESES.md) | User Stories und Annahmen |
-| 6 | [Use Case 1 Wissensbilanz Dashboard.md](knowledge/Use%20Case%201%20Wissensbilanz%20Dashboard.md) | Technische Architektur (optional) |
+| 1 | [Glossar](knowledge/00-Meta/Glossar.md) | Begriffe verstehen (Prompt, Token, etc.) |
+| 2 | [Promptotyping-Methode](knowledge/00-Meta/Promptotyping-Methode.md) | Die Methodik kennenlernen |
+| 3 | [Journal](knowledge/05-Journal/) | Den Entstehungsprozess nachvollziehen |
+| 4 | [Datenquellen](knowledge/01-Domaene/Datenquellen.md) | Die Datengrundlage verstehen |
+| 5 | [Hypothesen](knowledge/03-Hypothesen/) | User Stories und Annahmen |
+| 6 | [Learnings](knowledge/04-Learnings/) | Destillierte Erkenntnisse |
 
 ## Was ist Promptotyping?
 
@@ -42,48 +52,58 @@ Das Besondere: Die KI hilft nicht nur beim Coden, sondern auch beim Verstehen de
 | Komponente | Status |
 |------------|--------|
 | Datenanalyse | ✅ Abgeschlossen |
-| Dokumentation | ✅ Abgeschlossen |
-| Verifikations-Skripte | ✅ Abgeschlossen |
-| Frontend/Dashboard | ⏳ In Planung |
-| LLM-Integration | ⏳ In Planung |
+| Excel-zu-JSON Konvertierung | ✅ 17 Dateien konvertiert |
+| Frontend/Dashboard | ✅ Vollständig implementiert |
+| Filter-System (F1-F4) | ✅ Universitäten, Zeitraum, Kennzahlen |
+| Visualisierung (Chart.js) | ✅ Zeitreihen mit Legende |
+| Datentabelle mit Pagination | ✅ Sortierbar, CSV-Export |
+| LLM-Berichtsgenerierung | ✅ 4 Templates, editierbar |
+| URL-State Sync | ✅ Teilbare Links |
+| Dokumentation (Obsidian Vault) | ✅ 8 Learnings dokumentiert |
 
-**Demo:** *Noch nicht verfügbar – wird nach Workshop deployed*
+**Workshop:** 11./13. Februar 2026 – Hypothesen-Validierung mit Michael Forster
 
 ## Repository-Struktur
 
 ```
 vetmed-wissensbilanz/
 ├── README.md                 ← Du bist hier
-├── knowledge/                ← Dokumentation & Lernmaterial
-│   ├── GLOSSAR.md            ← Begriffserklärungen
-│   ├── HYPOTHESES.md         ← User Story Hypothesen
-│   ├── Journal.md            ← Arbeitstagebuch
-│   ├── inputdata.md          ← Datenkatalog
-│   ├── Promptotyping-Learnings.md
-│   └── Use Case 1...md       ← Technische Spezifikation
+├── knowledge/                ← Obsidian Vault mit Wissen
+│   ├── 00-Meta/              ← Glossar, Methodik
+│   ├── 01-Domaene/           ← Unis, Kennzahlen, Daten
+│   ├── 02-Design/            ← UI-Prinzipien, Farben
+│   ├── 03-Hypothesen/        ← H1-H4 User Stories
+│   ├── 04-Learnings/         ← L001-L008 Erkenntnisse
+│   └── 05-Journal/           ← Chronologisches Log
 ├── data/                     ← Excel-Rohdaten (79 Dateien)
-├── scripts/                  ← Python-Analyse-Skripte
-│   └── exploration/
-└── docs/                     ← Dashboard (in Entwicklung)
+├── scripts/                  ← Python-Skripte
+│   └── convert_excel_to_json.py
+└── docs/                     ← Dashboard (produktionsreif)
+    ├── index.html            ← SPA-Einstiegspunkt
+    ├── css/                  ← Design-System
+    ├── js/                   ← Vanilla JS + ES6 Modules
+    └── data/json/            ← Konvertierte Kennzahlen
 ```
 
 ## Wie ist das Projekt entstanden?
 
-Das [Journal.md](knowledge/Journal.md) dokumentiert den gesamten Prozess chronologisch:
+Das [Journal](knowledge/05-Journal/) dokumentiert den gesamten Prozess chronologisch:
 
 1. **22.01.2026**: Projektstart, systematische Analyse aller 79 Excel-Dateien
 2. **22.01.2026**: Fehler aus früherer Iteration entdeckt und korrigiert (UI ≠ UV)
 3. **22.01.2026**: Verifikations-Skripte erstellt für reproduzierbare Analysen
-4. **30.01.2026**: Dokumentationsstruktur für Lernzwecke überarbeitet
+4. **30.01.2026**: Komplettes Dashboard implementiert (Phase 0-5)
+5. **30.01.2026**: 17 Kennzahlen konvertiert, Obsidian Vault strukturiert
+6. **30.01.2026**: URL-Router für teilbare Links, Accordion-Sidebar
 
 Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 
 ## Nächste Schritte
 
-- [ ] Workshop-Termin fixieren (11.02. oder 13.02.2026)
-- [ ] Hypothesen mit Michael Forster validieren
-- [ ] Minimales Dashboard live im Workshop bauen
+- [ ] Workshop durchführen (11./13.02.2026)
+- [ ] Hypothesen H1-H4 mit Michael Forster validieren
 - [ ] GitHub Pages Deployment
+- [ ] Fehlende Kennzahlen konvertieren (3-A-1, 3-A-3)
 
 ## Kontakt
 

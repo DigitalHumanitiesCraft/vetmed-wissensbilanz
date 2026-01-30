@@ -614,3 +614,69 @@
 .btn--success:hover {
     background: #218838;
 }
+
+/* ========================================
+   ACCORDION (für Uni-Filter)
+   ======================================== */
+.accordion-item {
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.accordion-item:last-child {
+    border-bottom: none;
+}
+
+.accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) 0;
+    gap: var(--space-2);
+}
+
+.accordion-header .checkbox {
+    flex: 1;
+}
+
+.accordion-toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-1) var(--space-2);
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+    transition: all var(--transition-base);
+}
+
+.accordion-toggle:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+}
+
+.accordion-count {
+    min-width: 30px;
+    text-align: right;
+}
+
+.accordion-icon {
+    transition: transform var(--transition-base);
+}
+
+.accordion-item--expanded .accordion-icon {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease-out;
+    padding-left: var(--space-4);
+}
+
+.accordion-content .checkbox {
+    padding: var(--space-1) 0;
+}
