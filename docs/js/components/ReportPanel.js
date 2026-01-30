@@ -254,7 +254,7 @@ class ReportPanel {
             this.container.querySelector('#editBadge').style.display = 'none';
 
         } catch (error) {
-            console.error('Report-Generierung fehlgeschlagen:', error);
+            console.error('[Report] generate error:', error.message);
             textarea.value = `Fehler bei der Generierung:\n${error.message}\n\n` +
                 'Hinweis: Stellen Sie sicher, dass der API Key korrekt ist und Sie Zugriff auf die API haben.';
         } finally {

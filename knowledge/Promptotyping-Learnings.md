@@ -95,4 +95,52 @@ User Stories vor dem Stakeholder-Gespräch sind Hypothesen, keine Anforderungen.
 
 ---
 
-*Neue Learnings werden hier ergänzt.*
+## L006: Vanilla JS + ES6 Modules fuer Lernbarkeit
+
+**Datum:** 2026-01-30
+**Kontext:** Technologieentscheidung bei Dashboard-Implementierung
+
+**Learning:**
+Bei Projekten mit Schulungszweck ist die Wahl der Technologie nicht nur eine technische, sondern eine didaktische Entscheidung. Frameworks wie React oder Vue abstrahieren zu viel - der Lernende sieht nicht mehr, was wirklich passiert.
+
+**Entscheidung:**
+- Vanilla JavaScript statt Framework
+- ES6 Modules fuer klare Struktur
+- Chart.js via CDN (keine Build-Tools)
+- Kein npm, kein Webpack, kein TypeScript
+
+**Vorteile:**
+- Jede Zeile Code ist im Browser direkt lesbar
+- Keine "Magie" durch Compiler oder Bundler
+- Forster kann den Code in DevTools Schritt fuer Schritt nachvollziehen
+- Keine Installation notwendig (nur Browser)
+
+**Regel:**
+> Bei Lehrprojekten: Weniger Abstraktion = mehr Verstaendnis. Waehle die einfachste Technologie, die das Problem loest.
+
+---
+
+## L007: Demo-Daten als Fallback-Strategie
+
+**Datum:** 2026-01-30
+**Kontext:** Dashboard-Entwicklung ohne sofort verfuegbare JSON-Daten
+
+**Learning:**
+Wenn die echten Daten noch nicht konvertiert sind, sollte das Dashboard trotzdem funktionieren. Ein Demo-Daten-Generator ermoeglicht:
+1. Fruehes Testen der UI ohne Datenabhaengigkeit
+2. Demonstration im Workshop auch ohne finale Daten
+3. Schnelleres Iterieren waehrend der Entwicklung
+
+**Implementierung:**
+```javascript
+// Wenn JSON fehlt, generiere plausible Demo-Daten
+const demoData = this.generateDemoData(kennzahlCode);
+this.cache.set(kennzahlCode, demoData); // Cache auch Demo-Daten
+```
+
+**Regel:**
+> Baue Robustheit ein: Das System sollte auch mit fehlenden Daten sinnvoll reagieren, nicht abstuerzen.
+
+---
+
+*Neue Learnings werden hier ergaenzt.*

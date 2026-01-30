@@ -69,7 +69,7 @@ class ChartContainer {
             this.renderChart(groupedData);
             this.renderLegend(groupedData);
         } catch (error) {
-            console.error('Chart-Fehler:', error);
+            console.error('[Chart] render error:', error.message);
             this.showError('Daten konnten nicht geladen werden.');
         } finally {
             this.showLoading(false);

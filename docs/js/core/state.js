@@ -157,7 +157,7 @@ class AppState {
                 try {
                     callback(newValue, oldValue);
                 } catch (error) {
-                    console.error(`Error in state subscriber for '${key}':`, error);
+                    console.error(`[State] ${key} subscriber error:`, error.message);
                 }
             });
         }
@@ -169,7 +169,7 @@ class AppState {
                 try {
                     callback({ key, newValue, oldValue });
                 } catch (error) {
-                    console.error('Error in wildcard state subscriber:', error);
+                    console.error('[State] wildcard subscriber error:', error.message);
                 }
             });
         }

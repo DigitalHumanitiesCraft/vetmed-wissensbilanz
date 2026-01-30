@@ -118,7 +118,7 @@ class DataTable {
             this.data = await dataLoader.loadFiltered();
             this.renderTable();
         } catch (error) {
-            console.error('Tabellen-Fehler:', error);
+            console.error('[Table] load error:', error.message);
             this.showError('Daten konnten nicht geladen werden.');
         }
     }

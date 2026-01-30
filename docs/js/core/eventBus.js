@@ -73,12 +73,12 @@ class EventBus {
      */
     emit(event, data) {
         const callbacks = this.listeners.get(event);
-        if (callbacks) {
+        if (callbacks && callbacks.size > 0) {
             callbacks.forEach(callback => {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`Error in event handler for '${event}':`, error);
+                    console.error(`[Event] ${event} error:`, error.message);
                 }
             });
         }

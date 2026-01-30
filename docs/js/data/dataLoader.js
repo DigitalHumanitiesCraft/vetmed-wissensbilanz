@@ -8,6 +8,7 @@
 import { KENNZAHL_BY_CODE, UNI_BY_CODE } from './metadata.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
 import { state } from '../core/state.js';
+import { log } from '../core/logger.js';
 
 class DataLoader {
     constructor() {
@@ -46,11 +47,16 @@ class DataLoader {
             return data;
 
         } catch (error) {
-            console.error(`Fehler beim Laden von ${kennzahlCode}:`, error);
-            eventBus.emit(EVENTS.DATA_ERROR, { kennzahl: kennzahlCode, error: error.message });
+            // Nur einmal loggen, nicht bei jedem Request
+            if (!this.cache.has(`_error_${kennzahlCode}`)) {
+                log.warn('DataLoader', `${kennzahlCode}: JSON not found, using demo data`);
+                this.cache.set(`_error_${kennzahlCode}`, true);
+            }
 
-            // Demo-Daten zurückgeben falls Datei fehlt
-            return this.generateDemoData(kennzahlCode);
+            // Demo-Daten generieren und cachen
+            const demoData = this.generateDemoData(kennzahlCode);
+            this.cache.set(kennzahlCode, demoData);
+            return demoData;
         }
     }
 
@@ -191,7 +197,6 @@ class DataLoader {
             });
         });
 
-        console.warn(`Demo-Daten generiert für ${kennzahlCode}`);
         return data;
     }
 

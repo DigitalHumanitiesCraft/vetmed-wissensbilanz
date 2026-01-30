@@ -7,6 +7,7 @@
 
 import { state } from './core/state.js';
 import { eventBus, EVENTS } from './core/eventBus.js';
+import { log } from './core/logger.js';
 import { initFilterPanel } from './components/FilterPanel.js';
 import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
@@ -18,7 +19,7 @@ class App {
     }
 
     async init() {
-        console.log('🎓 Wissensbilanz Dashboard wird initialisiert...');
+        log.info('App', 'init');
 
         // DOM ready
         if (document.readyState === 'loading') {
@@ -37,7 +38,7 @@ class App {
         // URL-Parameter lesen
         this.loadFromUrl();
 
-        console.log('✅ Dashboard bereit');
+        log.info('App', 'ready');
     }
 
     initComponents() {
@@ -161,5 +162,6 @@ app.init().catch(console.error);
 window.wissensbilanz = {
     state,
     eventBus,
-    app
+    app,
+    log
 };
