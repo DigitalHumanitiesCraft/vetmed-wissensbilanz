@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vetmed-wissensbilanz | Dashboard</title>
+    <style>
+        :root {
+            --color-primary: #1a5490;
+            --color-bg: #ffffff;
+            --color-text: #212529;
+            --color-text-muted: #5a6268;
+            --color-border: #dee2e6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .status {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .status-label {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            color: var(--color-text-muted);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .links {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .links a:hover {
+            background: #f8f9fa;
+            text-decoration: none;
+        }
+
+        footer {
+            margin-top: 3rem;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>vetmed-wissensbilanz</h1>
+        <p>Dashboard zur Analyse von Wissensbilanz-Daten österreichischer Universitäten</p>
+
+        <div class="status">
+            <div class="status-label">In Entwicklung</div>
+            <p>Das Dashboard wird im Workshop am 11./13. Februar 2026 gemeinsam entwickelt.</p>
+        </div>
+
+        <p>
+            Dieses Projekt ist ein <strong>Promptotyping-Lehrbeispiel</strong> im Rahmen des
+            VetMedAI-Projekts. Die gesamte Entstehung ist im Repository dokumentiert.
+        </p>
+
+        <div class="links">
+            <a href="https://github.com/chpollin/vetmed-wissensbilanz">Repository</a>
+            <a href="https://github.com/chpollin/vetmed-wissensbilanz/blob/main/README.md">Dokumentation</a>
+            <a href="https://github.com/chpollin/vetmed-wissensbilanz/blob/main/knowledge/Journal.md">Journal</a>
+        </div>
+
+        <footer>
+            VetMedAI Promptotyping und KI-Kompetenzaufbau | Stand: Januar 2026
+        </footer>
+    </div>
+</body>
+</html>

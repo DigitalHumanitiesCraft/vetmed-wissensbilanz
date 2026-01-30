@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c:*)",
+      "Bash(python scripts/exploration/verify_university_codes.py:*)",
+      "Bash(python scripts/exploration/analyze_excel_structure.py:*)",
+      "Bash(tree:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
