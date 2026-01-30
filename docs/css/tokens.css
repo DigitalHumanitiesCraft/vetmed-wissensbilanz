@@ -1,0 +1,153 @@
+/**
+ * Design Tokens - vetmed-wissensbilanz Dashboard
+ *
+ * Zentrales Design-System mit CSS Custom Properties.
+ * Alle Farben, Abstände und Typografie werden hier definiert.
+ *
+ * Basiert auf: UI-EVIDENCE.md (V1: Konsistente Farbkodierung)
+ */
+
+:root {
+    /* ========================================
+       UNIVERSITÄTSTYPEN (V1)
+       Konsistente Farbkodierung nach Uni-Typ
+       ======================================== */
+    --color-uni-voll: #1a5490;      /* Volluniversitäten - Blau */
+    --color-uni-tech: #28a745;      /* Technische Unis - Grün */
+    --color-uni-med: #dc3545;       /* Medizinische Unis - Rot */
+    --color-uni-kunst: #6f42c1;     /* Kunst-Unis - Violett */
+    --color-uni-weiterb: #fd7e14;   /* Weiterbildung - Orange */
+
+    /* Hover-Varianten (10% dunkler) */
+    --color-uni-voll-hover: #144070;
+    --color-uni-tech-hover: #1e7e34;
+    --color-uni-med-hover: #bd2130;
+    --color-uni-kunst-hover: #5a32a3;
+    --color-uni-weiterb-hover: #d56a10;
+
+    /* Hintergrund-Varianten (sehr hell, für Filter) */
+    --color-uni-voll-bg: #e8f0f8;
+    --color-uni-tech-bg: #e6f4ea;
+    --color-uni-med-bg: #fce8e8;
+    --color-uni-kunst-bg: #f0ebf8;
+    --color-uni-weiterb-bg: #fff3e6;
+
+    /* ========================================
+       BASIS-FARBEN
+       ======================================== */
+    --color-primary: #1a5490;
+    --color-primary-hover: #144070;
+    --color-primary-light: #e8f0f8;
+
+    --color-success: #28a745;
+    --color-warning: #ffc107;
+    --color-danger: #dc3545;
+    --color-info: #17a2b8;
+
+    /* ========================================
+       TEXT & HINTERGRUND
+       ======================================== */
+    --color-text: #212529;
+    --color-text-muted: #6c757d;
+    --color-text-light: #adb5bd;
+
+    --color-bg: #ffffff;
+    --color-bg-secondary: #f8f9fa;
+    --color-bg-tertiary: #e9ecef;
+
+    --color-border: #dee2e6;
+    --color-border-light: #e9ecef;
+
+    /* ========================================
+       DATEN-ZUSTÄNDE (D4: Null-Value Handling)
+       ======================================== */
+    --color-no-data: #adb5bd;           /* Grau für fehlende Daten */
+    --color-not-applicable: #e9ecef;    /* Hellgrau für n/a */
+    --color-invalid: #ffc107;           /* Gelb für ungültige Werte */
+
+    /* ========================================
+       SPACING (8px Grid)
+       ======================================== */
+    --space-1: 0.25rem;   /* 4px */
+    --space-2: 0.5rem;    /* 8px */
+    --space-3: 0.75rem;   /* 12px */
+    --space-4: 1rem;      /* 16px */
+    --space-5: 1.25rem;   /* 20px */
+    --space-6: 1.5rem;    /* 24px */
+    --space-8: 2rem;      /* 32px */
+    --space-10: 2.5rem;   /* 40px */
+    --space-12: 3rem;     /* 48px */
+
+    /* ========================================
+       TYPOGRAFIE
+       ======================================== */
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+    --font-family-mono: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono",
+                        monospace;
+
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-base: 1rem;     /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.875rem;  /* 30px */
+
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    --line-height-tight: 1.25;
+    --line-height-base: 1.5;
+    --line-height-relaxed: 1.75;
+
+    /* ========================================
+       LAYOUT
+       ======================================== */
+    --header-height: 64px;
+    --sidebar-width: 280px;
+    --sidebar-width-collapsed: 60px;
+    --main-max-width: 1400px;
+    --content-padding: var(--space-6);
+
+    /* ========================================
+       KOMPONENTEN
+       ======================================== */
+    --border-radius-sm: 4px;
+    --border-radius: 8px;
+    --border-radius-lg: 12px;
+    --border-radius-full: 9999px;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    /* ========================================
+       TRANSITIONS
+       ======================================== */
+    --transition-fast: 100ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
+
+    /* ========================================
+       Z-INDEX SCALE
+       ======================================== */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-tooltip: 600;
+}
+
+/* ========================================
+   DARK MODE (vorbereitet, nicht aktiv)
+   ======================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* Dark mode tokens hier bei Bedarf */
+    }
+}

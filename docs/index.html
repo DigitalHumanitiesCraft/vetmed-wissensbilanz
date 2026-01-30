@@ -3,125 +3,350 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vetmed-wissensbilanz | Dashboard</title>
+    <title>Wissensbilanz Dashboard | VetMed Wien</title>
+
+    <!-- Design System -->
+    <link rel="stylesheet" href="css/tokens.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
     <style>
-        :root {
-            --color-primary: #1a5490;
-            --color-bg: #ffffff;
-            --color-text: #212529;
-            --color-text-muted: #5a6268;
-            --color-border: #dee2e6;
+        /* Page-specific styles */
+        .chart-wrapper {
+            position: relative;
+            min-height: 400px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--color-text);
-            background: var(--color-bg);
-            min-height: 100vh;
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .chart-legend__item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--border-radius-sm);
+            transition: opacity var(--transition-base);
+        }
+
+        .chart-legend__item:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .chart-legend__item.is-hidden {
+            opacity: 0.4;
+        }
+
+        .chart-legend__color {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .chart-canvas-wrapper {
+            position: relative;
+            height: 350px;
+        }
+
+        .chart-loading {
+            position: absolute;
+            inset: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            gap: var(--space-3);
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 10;
         }
 
-        .container {
-            max-width: 600px;
-            text-align: center;
+        /* Table styles */
+        .table-container {
+            width: 100%;
         }
 
-        h1 {
-            color: var(--color-primary);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .status {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-
-        .status-label {
-            font-weight: 600;
-            color: #856404;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            color: var(--color-text-muted);
-            margin-bottom: 1rem;
-        }
-
-        a {
-            color: var(--color-primary);
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .links {
-            margin-top: 2rem;
+        .table-header {
             display: flex;
-            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--font-size-sm);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: var(--space-3) var(--space-4);
+            text-align: left;
+            border-bottom: 1px solid var(--color-border-light);
+        }
+
+        .data-table th {
+            background: var(--color-bg-secondary);
+            font-weight: var(--font-weight-semibold);
+            white-space: nowrap;
+        }
+
+        .data-table th.sortable {
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .data-table th.sortable:hover {
+            background: var(--color-bg-tertiary);
+        }
+
+        .data-table th.sort-asc .sort-icon::after {
+            content: " ▲";
+        }
+
+        .data-table th.sort-desc .sort-icon::after {
+            content: " ▼";
+        }
+
+        .data-table tbody tr:hover {
+            background: var(--color-bg-secondary);
+        }
+
+        .uni-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-1) var(--space-2);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            background: color-mix(in srgb, var(--uni-color, var(--color-primary)) 10%, transparent);
+            color: var(--uni-color, var(--color-primary));
+            border-radius: var(--border-radius-sm);
+        }
+
+        .value-no-data {
+            color: var(--color-no-data);
+        }
+
+        .value-not-applicable {
+            color: var(--color-not-applicable);
+            font-style: italic;
+        }
+
+        .value-invalid {
+            color: var(--color-invalid);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .table-pagination {
+            display: flex;
             justify-content: center;
+            align-items: center;
+            gap: var(--space-2);
+            margin-top: var(--space-4);
             flex-wrap: wrap;
         }
 
-        .links a {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--color-border);
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .links a:hover {
-            background: #f8f9fa;
-            text-decoration: none;
-        }
-
-        footer {
-            margin-top: 3rem;
-            font-size: 0.875rem;
+        .pagination-ellipsis {
+            padding: var(--space-2);
             color: var(--color-text-muted);
+        }
+
+        /* Report panel */
+        .report-panel {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .report-config {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .report-source {
+            padding: var(--space-4);
+            background: var(--color-bg-secondary);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--color-info);
+        }
+
+        .source-info p {
+            margin: var(--space-1) 0;
+            font-size: var(--font-size-sm);
+        }
+
+        .report-content {
+            flex: 1;
+        }
+
+        .report-content .form-textarea {
+            min-height: 300px;
+            font-family: var(--font-family);
+        }
+
+        /* Stats bar vertical variant */
+        .stats-bar--vertical {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-2);
+        }
+
+        /* Filter uni group */
+        .filter-uni-group__header {
+            border-bottom: 1px solid var(--color-border-light);
+            padding-bottom: var(--space-1);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>vetmed-wissensbilanz</h1>
-        <p>Dashboard zur Analyse von Wissensbilanz-Daten österreichischer Universitäten</p>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <a href="/" class="header__logo">
+                <svg class="header__logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="24" height="24" rx="4"/>
+                    <path d="M10 16h12M16 10v12"/>
+                </svg>
+                <span>Wissensbilanz</span>
+            </a>
 
-        <div class="status">
-            <div class="status-label">In Entwicklung</div>
-            <p>Das Dashboard wird im Workshop am 11./13. Februar 2026 gemeinsam entwickelt.</p>
-        </div>
+            <nav class="header__nav">
+                <span class="badge badge--primary">VetMed Wien</span>
+            </nav>
 
-        <p>
-            Dieses Projekt ist ein <strong>Promptotyping-Lehrbeispiel</strong> im Rahmen des
-            VetMedAI-Projekts. Die gesamte Entstehung ist im Repository dokumentiert.
-        </p>
+            <div class="header__actions">
+                <button class="btn btn--ghost btn--icon" id="sidebarToggle" title="Filter ein/ausblenden">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="6" x2="20" y2="6"/>
+                        <line x1="4" y1="12" x2="20" y2="12"/>
+                        <line x1="4" y1="18" x2="20" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
 
-        <div class="links">
-            <a href="https://github.com/chpollin/vetmed-wissensbilanz">Repository</a>
-            <a href="https://github.com/chpollin/vetmed-wissensbilanz/blob/main/README.md">Dokumentation</a>
-            <a href="https://github.com/chpollin/vetmed-wissensbilanz/blob/main/knowledge/Journal.md">Journal</a>
-        </div>
+        <!-- Sidebar (Filter Panel) -->
+        <aside class="sidebar">
+            <!-- FilterPanel.js wird hier gerendert -->
+        </aside>
 
-        <footer>
-            VetMedAI Promptotyping und KI-Kompetenzaufbau | Stand: Januar 2026
-        </footer>
+        <!-- Backdrop für Mobile -->
+        <div class="sidebar-backdrop"></div>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="main__header">
+                <h1 class="main__title">Wissensbilanz-Daten</h1>
+            </div>
+
+            <div class="main__content">
+                <!-- Stats Bar (F4: Filter Feedback) -->
+                <div class="stats-bar" id="mainStatsBar">
+                    <div class="stats-bar__item">
+                        <span class="stats-bar__label">Datenpunkte:</span>
+                        <span class="stats-bar__value" id="statsPoints">–</span>
+                    </div>
+                    <div class="stats-bar__item">
+                        <span class="stats-bar__label">Durchschnitt:</span>
+                        <span class="stats-bar__value" id="statsAverage">–</span>
+                    </div>
+                    <div class="stats-bar__item">
+                        <span class="stats-bar__label">Trend:</span>
+                        <span class="stats-bar__value" id="statsTrend">–</span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="card">
+                    <div class="tabs">
+                        <button class="tabs__tab tabs__tab--active" data-tab="chart">
+                            Chart
+                        </button>
+                        <button class="tabs__tab" data-tab="table">
+                            Tabelle
+                        </button>
+                        <button class="tabs__tab" data-tab="report">
+                            Bericht
+                        </button>
+                    </div>
+
+                    <div class="card__body">
+                        <!-- Chart Panel -->
+                        <div class="tabs__panel tabs__panel--active" id="chartPanel">
+                            <!-- ChartContainer.js wird hier gerendert -->
+                        </div>
+
+                        <!-- Table Panel -->
+                        <div class="tabs__panel" id="tablePanel">
+                            <!-- DataTable.js wird hier gerendert -->
+                        </div>
+
+                        <!-- Report Panel -->
+                        <div class="tabs__panel" id="reportPanel">
+                            <!-- ReportPanel.js wird hier gerendert -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
+
+    <!-- App Bootstrap -->
+    <script type="module" src="js/app.js"></script>
+
+    <!-- Stats Bar Update -->
+    <script type="module">
+        import { state } from './js/core/state.js';
+        import { KENNZAHL_BY_CODE, formatValue } from './js/data/metadata.js';
+
+        state.subscribe('dataStats', (stats) => {
+            const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];
+
+            document.getElementById('statsPoints').textContent =
+                stats.totalPoints.toLocaleString('de-AT');
+
+            document.getElementById('statsAverage').textContent =
+                formatValue(stats.average, kennzahl?.unit || '');
+
+            const trendEl = document.getElementById('statsTrend');
+            if (stats.trend > 0) {
+                trendEl.textContent = `+${stats.trend.toFixed(1)}%`;
+                trendEl.className = 'stats-bar__value stats-bar__value--positive';
+            } else if (stats.trend < 0) {
+                trendEl.textContent = `${stats.trend.toFixed(1)}%`;
+                trendEl.className = 'stats-bar__value stats-bar__value--negative';
+            } else {
+                trendEl.textContent = '0%';
+                trendEl.className = 'stats-bar__value';
+            }
+        });
+    </script>
 </body>
 </html>
