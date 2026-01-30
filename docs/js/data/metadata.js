@@ -259,7 +259,15 @@ export const KENNZAHLEN = [
         filename: '2-B-1.json'
     },
 
-    // Forschung (2)
+    // Studienabschlüsse (3)
+    {
+        code: '3-A-1',
+        name: 'Außerordentliche Studienabschlüsse',
+        category: 'forschung',
+        unit: 'Anzahl',
+        description: 'Außerordentliche Studienabschlüsse (nur Donau-Uni Krems)',
+        filename: '3-A-1.json'
+    },
     {
         code: '3-A-2',
         name: 'Studienabschlüsse in Toleranzstudiendauer',
@@ -267,6 +275,14 @@ export const KENNZAHLEN = [
         unit: '%',
         description: 'Abschlüsse innerhalb der Toleranzstudiendauer',
         filename: '3-A-2.json'
+    },
+    {
+        code: '3-A-3',
+        name: 'Studienabschlüsse mit Auslandsaufenthalt',
+        category: 'forschung',
+        unit: 'Anzahl',
+        description: 'Studienabschlüsse mit studienbezogenem Auslandsaufenthalt',
+        filename: '3-A-3.json'
     }
 ];
 

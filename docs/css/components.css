@@ -680,3 +680,140 @@
 .accordion-content .checkbox {
     padding: var(--space-1) 0;
 }
+
+/* ========================================
+   DATA TABLE
+   ======================================== */
+.table-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+.table-info {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.table-actions {
+    display: flex;
+    gap: var(--space-2);
+    align-items: center;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--border-radius);
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--font-size-sm);
+}
+
+.data-table th,
+.data-table td {
+    padding: var(--space-2) var(--space-3);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.data-table th {
+    background: var(--color-bg-secondary);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    white-space: nowrap;
+}
+
+.data-table th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.data-table th.sortable:hover {
+    background: var(--color-bg-tertiary);
+}
+
+.data-table th .sort-icon::after {
+    content: "↕";
+    margin-left: var(--space-1);
+    opacity: 0.3;
+    font-size: var(--font-size-xs);
+}
+
+.data-table th.sort-asc .sort-icon::after {
+    content: "↑";
+    opacity: 1;
+}
+
+.data-table th.sort-desc .sort-icon::after {
+    content: "↓";
+    opacity: 1;
+}
+
+.data-table tbody tr:hover {
+    background: var(--color-bg-secondary);
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Uni-Badge in Tabelle */
+.uni-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--uni-color, var(--color-text));
+    background: color-mix(in srgb, var(--uni-color, var(--color-text)) 10%, transparent);
+    border-radius: var(--border-radius-sm);
+}
+
+/* Null-Value Styling */
+.value-no-data,
+.value-not-applicable {
+    color: var(--color-text-muted);
+    font-style: italic;
+}
+
+.value-invalid {
+    color: var(--color-danger);
+    font-weight: var(--font-weight-semibold);
+}
+
+/* Sparkline-Zelle */
+.sparkline-cell {
+    padding: var(--space-1) var(--space-2) !important;
+    width: 140px;
+    min-width: 140px;
+}
+
+.sparkline {
+    display: block;
+}
+
+/* Pagination */
+.table-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-1);
+    padding-top: var(--space-3);
+}
+
+.pagination-ellipsis {
+    padding: 0 var(--space-2);
+    color: var(--color-text-muted);
+}

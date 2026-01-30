@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/visualizations.css">
     <link rel="stylesheet" href="css/tutorial.css">
+    <link rel="stylesheet" href="css/tutorial-badges.css">
 
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -270,6 +271,13 @@
             </nav>
 
             <div class="header__actions">
+                <!-- Tutorial Toggle -->
+                <label class="header__toggle" title="Tutorial-Badges ein/ausblenden">
+                    <input type="checkbox" id="tutorialToggle">
+                    <span class="header__toggle-slider"></span>
+                    <span class="header__toggle-label">Badges</span>
+                </label>
+
                 <button class="btn btn--ghost btn--icon" id="shareBtn" title="Link kopieren">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="18" cy="5" r="3"/>

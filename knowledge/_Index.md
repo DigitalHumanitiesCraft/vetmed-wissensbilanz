@@ -14,6 +14,7 @@ Dieser Ordner ist ein **Obsidian Vault** und dokumentiert das Promptotyping-Proj
 | Design-Entscheidungen nachvollziehen | [[UI-Prinzipien]] |
 | Den Entwicklungsprozess sehen | [[05-Journal/index]] |
 | Aus dem Projekt lernen | [[04-Learnings/index]] |
+| Das Tutorial-System verstehen | [[L009-Annotated-Interface]] |
 
 ---
 
@@ -41,7 +42,8 @@ Das Projekt folgt der [[Promptotyping-Methode]]:
 | 1. Preparation | abgeschlossen | [[Datenquellen]], [[Universitaeten]], [[Kennzahlen]] |
 | 2. Exploration | abgeschlossen | [[Excel-Struktur]], [[05-Journal/2026-01-22]] |
 | 3. Destillation | abgeschlossen | [[UI-Prinzipien]], [[Glossar]] |
-| 4. Implementation | aktiv | Dashboard in `docs/` |
+| 4. Implementation | abgeschlossen | Dashboard in `docs/` |
+| 5. Meta-Learning | aktiv | [[L009-Annotated-Interface]], Tutorial-Badges |
 
 ---
 

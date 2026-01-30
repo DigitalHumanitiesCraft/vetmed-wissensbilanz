@@ -12,6 +12,7 @@ import { state } from '../core/state.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
 import { dataLoader } from '../data/dataLoader.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, formatValue } from '../data/metadata.js';
+import { createSparkline, groupDataByUni } from '../visualizations/SparklineRenderer.js';
 
 class DataTable {
     constructor(container) {
@@ -61,6 +62,7 @@ class DataTable {
                                     Wert
                                     <span class="sort-icon"></span>
                                 </th>
+                                <th>Trend</th>
                             </tr>
                         </thead>
                         <tbody id="tableBody">
@@ -128,6 +130,9 @@ class DataTable {
         const paginated = this.getPaginatedData(sorted);
         const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];
 
+        // Gruppiere alle Daten für Sparklines
+        const groupedData = groupDataByUni(this.data);
+
         // Table Body
         const tbody = this.container.querySelector('#tableBody');
         if (tbody) {
@@ -144,9 +149,19 @@ class DataTable {
                         </td>
                         <td>${row.year}</td>
                         <td class="${valueDisplay.class}">${valueDisplay.text}</td>
+                        <td class="sparkline-cell" data-uni="${row.uniCode}"></td>
                     </tr>
                 `;
             }).join('');
+
+            // Sparklines rendern
+            tbody.querySelectorAll('.sparkline-cell').forEach(cell => {
+                const uniCode = cell.dataset.uni;
+                const uniData = groupedData.get(uniCode);
+                if (uniData) {
+                    createSparkline(cell, uniData, uniCode);
+                }
+            });
         }
 
         // Info

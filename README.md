@@ -12,9 +12,11 @@ Dieses Projekt ist beides: ein funktionales Tool zur Analyse von Universitäts-K
 
 Features:
 - Vergleich aller 22 österreichischen Universitäten
-- 17 Kennzahlen (Personal, Studierende, Forschung)
+- 19 Kennzahlen (Personal, Studierende, Forschung)
+- 4 Visualisierungstypen (Zeitreihe, Small Multiples, Heatmap, Ranking)
 - LLM-gestützte Berichtsgenerierung (Claude API)
 - Teilbare URLs für Filter-Zustände
+- **Tutorial-Badge-System**: Interaktives Lernen der Promptotyping-Methode direkt im UI
 
 ## Für wen ist dieses Repository?
 
@@ -52,14 +54,16 @@ Das Besondere: Die KI hilft nicht nur beim Coden, sondern auch beim Verstehen de
 | Komponente | Status |
 |------------|--------|
 | Datenanalyse | ✅ Abgeschlossen |
-| Excel-zu-JSON Konvertierung | ✅ 17 Dateien konvertiert |
+| Excel-zu-JSON Konvertierung | ✅ 19 Dateien konvertiert |
 | Frontend/Dashboard | ✅ Vollständig implementiert |
 | Filter-System (F1-F4) | ✅ Universitäten, Zeitraum, Kennzahlen |
-| Visualisierung (Chart.js) | ✅ Zeitreihen mit Legende |
-| Datentabelle mit Pagination | ✅ Sortierbar, CSV-Export |
+| Visualisierung (Chart.js) | ✅ 4 Typen: Line, Small Multiples, Heatmap, Ranking |
+| Datentabelle mit Sparklines | ✅ Sortierbar, CSV-Export, Mini-Zeitreihen |
 | LLM-Berichtsgenerierung | ✅ 4 Templates, editierbar |
 | URL-State Sync | ✅ Teilbare Links |
-| Dokumentation (Obsidian Vault) | ✅ 8 Learnings dokumentiert |
+| Promptotyping-Tutorial | ✅ Vault-Integration, 35 MD-Dateien |
+| **Annotated Interface** | ✅ Tutorial-Badges mit Entstehungsgeschichte |
+| Dokumentation (Obsidian Vault) | ✅ 9 Learnings dokumentiert |
 
 **Workshop:** 11./13. Februar 2026 – Hypothesen-Validierung mit Michael Forster
 
@@ -93,8 +97,11 @@ Das [Journal](knowledge/05-Journal/) dokumentiert den gesamten Prozess chronolog
 2. **22.01.2026**: Fehler aus früherer Iteration entdeckt und korrigiert (UI ≠ UV)
 3. **22.01.2026**: Verifikations-Skripte erstellt für reproduzierbare Analysen
 4. **30.01.2026**: Komplettes Dashboard implementiert (Phase 0-5)
-5. **30.01.2026**: 17 Kennzahlen konvertiert, Obsidian Vault strukturiert
+5. **30.01.2026**: 19 Kennzahlen konvertiert, Obsidian Vault strukturiert
 6. **30.01.2026**: URL-Router für teilbare Links, Accordion-Sidebar
+7. **30.01.2026**: 4 Visualisierungstypen (Zeitreihe, Small Multiples, Heatmap, Ranking)
+8. **30.01.2026**: Promptotyping-Tutorial mit Vault-Navigation
+9. **30.01.2026**: **Annotated Interface** – Tutorial-Badges zeigen Entstehungsgeschichte
 
 Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 
@@ -103,7 +110,7 @@ Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 - [ ] Workshop durchführen (11./13.02.2026)
 - [ ] Hypothesen H1-H4 mit Michael Forster validieren
 - [ ] GitHub Pages Deployment
-- [ ] Fehlende Kennzahlen konvertieren (3-A-1, 3-A-3)
+- [ ] Extended Views (Kennzahl-Kombinationen)
 
 ## Kontakt
 

@@ -58,9 +58,9 @@ Offizielle Kennzahlen gemäß Wissensbilanz-Verordnung.
 
 | Code | Name | Einheit | JSON |
 |------|------|---------|------|
-| 3-A-1 | Ordentliche Studienabschlüsse | Anzahl | - |
+| 3-A-1 | Außerordentliche Studienabschlüsse | Anzahl | `3-A-1.json` |
 | 3-A-2 | Studienabschlüsse in Toleranzstudiendauer | % | `3-A-2.json` |
-| 3-A-3 | Studienabschlüsse mit Auslandsaufenthalt | Anzahl | - |
+| 3-A-3 | Studienabschlüsse mit Auslandsaufenthalt | Anzahl | `3-A-3.json` |
 
 ---
 
@@ -76,21 +76,27 @@ Offizielle Kennzahlen gemäß Wissensbilanz-Verordnung.
 
 | Status | Anzahl | Details |
 |--------|--------|---------|
-| ✓ Konvertiert | 17 | JSON in `docs/data/json/` |
-| ○ Fehlend | 3 | 3-A-1, 3-A-3, 4-A-1 |
+| ✓ Konvertiert | 19 | JSON in `docs/data/json/` |
+| ○ Fehlend | 1 | 4-A-1 (keine Quelldatei) |
+
+### Spezialkonverter
+
+Einige Kennzahlen haben abweichende Excel-Strukturen und benötigen Spezialkonverter:
+
+| Code | Konverter | Besonderheit |
+|------|-----------|--------------|
+| 3-A-1 | `scripts/convert_3a1.py` | Nur Donau-Uni Krems (UM), 3 Jahre |
+| 3-A-3 | `scripts/convert_3a3.py` | Buchstaben-Codes (A-W), 21 Unis |
 
 ### Fehlende Kennzahlen
 
-| Code | Name | Excel vorhanden | Konvertierungsproblem |
-|------|------|-----------------|----------------------|
-| 3-A-1 | Außerordentliche Studienabschlüsse | ✓ | Andere Spaltenstruktur |
-| 3-A-3 | Studienabschlüsse mit Auslandsaufenthalt | ✓ | Andere Spaltenstruktur |
-| 4-A-1 | Drittmittel | ✗ | Keine Quelldatei |
+| Code | Name | Excel vorhanden | Status |
+|------|------|-----------------|--------|
+| 4-A-1 | Drittmittel | ✗ | Quelldatei bei UniData anfordern |
 
 ### Nächste Schritte
 
-1. **3-A-1 und 3-A-3 konvertieren:** Parser-Anpassung für abweichende Struktur
-2. **4-A-1 Drittmittel:** Quelldatei bei UniData anfordern oder manuell erstellen
+1. **4-A-1 Drittmittel:** Quelldatei bei UniData anfordern oder manuell erstellen
 
 ---
 

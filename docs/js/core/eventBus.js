@@ -143,5 +143,8 @@ export const EVENTS = {
     // Tutorial Events
     TUTORIAL_TOGGLE: 'tutorial:toggle',
     TUTORIAL_SECTION_CHANGE: 'tutorial:section:change',
-    TUTORIAL_BADGE_CLICK: 'tutorial:badge:click'
+    TUTORIAL_BADGE_CLICK: 'tutorial:badge:click',
+    TUTORIAL_MODE_CHANGE: 'tutorial:mode:change',
+    ANNOTATION_VIEWED: 'tutorial:annotation:viewed',
+    TUTORIAL_LEVEL_UP: 'tutorial:level:up'
 };

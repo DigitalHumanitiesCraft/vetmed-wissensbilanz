@@ -1,0 +1,530 @@
+/**
+ * Tutorial Badges - Annotated Interface Styles
+ *
+ * Styles für das Tutorial-Badge-System:
+ * - Badges an UI-Elementen
+ * - Annotation-Modal
+ * - Progress-Anzeige
+ * - Level-Up Notifications
+ */
+
+/* ========================================
+   TUTORIAL BADGES
+   ======================================== */
+
+.tutorial-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: inherit;
+    color: white;
+    background: var(--badge-color, #6c757d);
+    border: 2px solid white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+    z-index: 100;
+}
+
+.tutorial-badge:hover {
+    transform: scale(1.15);
+    box-shadow: var(--shadow-lg);
+}
+
+.tutorial-badge:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Kategorie-spezifische Farben */
+.tutorial-badge--filter {
+    --badge-color: #28a745;
+}
+
+.tutorial-badge--viz {
+    --badge-color: #1a5490;
+}
+
+.tutorial-badge--report {
+    --badge-color: #6f42c1;
+}
+
+.tutorial-badge--method {
+    --badge-color: #dc3545;
+}
+
+/* Puls-Animation für neue Badges */
+.tutorial-badge__pulse {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: var(--badge-color, #6c757d);
+    opacity: 0.4;
+    animation: badge-pulse 2s ease-out infinite;
+    pointer-events: none;
+}
+
+@keyframes badge-pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    70% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+/* Bereits gesehene Badges */
+.tutorial-badge--viewed {
+    opacity: 0.7;
+}
+
+.tutorial-badge--viewed:hover {
+    opacity: 1;
+}
+
+.tutorial-badge__code {
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   ANNOTATION MODAL
+   ======================================== */
+
+.annotation-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.annotation-modal--open {
+    display: flex;
+}
+
+.annotation-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.annotation-modal__content {
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: var(--color-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.annotation-modal__close {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    border-radius: 50%;
+    transition: all var(--transition-base);
+}
+
+.annotation-modal__close:hover {
+    background: var(--color-bg-secondary);
+    color: var(--color-text);
+}
+
+/* Modal Header */
+.annotation-modal__header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    padding-bottom: var(--space-4);
+    padding-right: var(--space-12);
+}
+
+.annotation-modal__code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: white;
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+}
+
+.annotation-modal__code--filter { background: #28a745; }
+.annotation-modal__code--viz { background: #1a5490; }
+.annotation-modal__code--report { background: #6f42c1; }
+.annotation-modal__code--method { background: #dc3545; }
+
+.annotation-modal__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* Modal Phase Badge */
+.annotation-modal__phase {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-sm);
+}
+
+.annotation-modal__phase-label {
+    color: var(--color-text-muted);
+}
+
+/* Modal Body */
+.annotation-modal__body {
+    padding: var(--space-6);
+    padding-top: var(--space-4);
+}
+
+.annotation-modal__description {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+    margin: 0 0 var(--space-5) 0;
+    color: var(--color-text);
+}
+
+/* Entstehungsgeschichte */
+.annotation-modal__origin {
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius);
+    padding: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.annotation-modal__origin h3 {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-3) 0;
+}
+
+.origin-item {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: var(--space-2);
+    margin-bottom: var(--space-2);
+    font-size: var(--font-size-sm);
+}
+
+.origin-item:last-child {
+    margin-bottom: 0;
+}
+
+.origin-label {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+}
+
+.origin-value {
+    color: var(--color-text);
+}
+
+/* Modal Footer */
+.annotation-modal__footer {
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-border-light);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* ========================================
+   TUTORIAL CONTROLS & PROGRESS
+   ======================================== */
+
+.tutorial-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--space-4);
+}
+
+/* Toggle Switch */
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    cursor: pointer;
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle__slider {
+    position: relative;
+    width: 44px;
+    height: 24px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-full);
+    transition: background var(--transition-base);
+}
+
+.toggle__slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base);
+}
+
+.toggle input:checked + .toggle__slider {
+    background: var(--color-primary);
+}
+
+.toggle input:checked + .toggle__slider::after {
+    transform: translateX(20px);
+}
+
+.toggle__label {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+}
+
+/* Progress Bar */
+.tutorial-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+}
+
+.progress-bar {
+    width: 120px;
+    height: 8px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-full);
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: var(--border-radius-full);
+    transition: width var(--transition-slow);
+}
+
+.progress-text {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+}
+
+.progress-level {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+}
+
+/* ========================================
+   LEVEL-UP NOTIFICATION
+   ======================================== */
+
+.level-up-toast {
+    position: fixed;
+    bottom: var(--space-6);
+    right: var(--space-6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-success);
+    color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-lg);
+    animation: slideInRight 0.3s ease, fadeOut 0.3s ease 4s forwards;
+    z-index: 1001;
+}
+
+.level-up-toast__icon {
+    font-size: 24px;
+}
+
+.level-up-toast__text {
+    font-size: var(--font-size-sm);
+}
+
+.level-up-toast__level {
+    font-weight: var(--font-weight-bold);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+
+/* ========================================
+   HEADER TOGGLE
+   ======================================== */
+
+.header__toggle {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    cursor: pointer;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--border-radius);
+    transition: background var(--transition-base);
+}
+
+.header__toggle:hover {
+    background: var(--color-bg-secondary);
+}
+
+.header__toggle input {
+    display: none;
+}
+
+.header__toggle-slider {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-full);
+    transition: background var(--transition-base);
+}
+
+.header__toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base);
+}
+
+.header__toggle input:checked + .header__toggle-slider {
+    background: var(--color-success);
+}
+
+.header__toggle input:checked + .header__toggle-slider::after {
+    transform: translateX(16px);
+}
+
+.header__toggle-label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+}
+
+.header__toggle input:checked ~ .header__toggle-label {
+    color: var(--color-success);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+    .tutorial-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .tutorial-progress {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .progress-bar {
+        flex: 1;
+    }
+
+    .annotation-modal__content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .annotation-modal__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-3);
+    }
+
+    .level-up-toast {
+        left: var(--space-4);
+        right: var(--space-4);
+        bottom: var(--space-4);
+    }
+}

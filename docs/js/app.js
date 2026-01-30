@@ -15,6 +15,8 @@ import { initDataTable } from './components/DataTable.js';
 import { initReportPanel } from './components/ReportPanel.js';
 import { initVizSelector } from './components/VizSelector.js';
 import { initPromptotypingPage } from './tutorial/PromptotypingPage.js';
+import { initTutorialBadgeSystem, tutorialBadgeSystem } from './tutorial/TutorialBadgeSystem.js';
+import { initAnnotationModal } from './tutorial/AnnotationModal.js';
 
 class App {
     constructor() {
@@ -80,6 +82,61 @@ class App {
         if (promptotypingEl) {
             this.components.promptotyping = initPromptotypingPage(promptotypingEl);
         }
+
+        // Tutorial Badge System (Annotated Interface)
+        this.components.tutorialBadges = initTutorialBadgeSystem();
+        this.components.annotationModal = initAnnotationModal();
+
+        // Level-Up Notification Handler
+        eventBus.on(EVENTS.TUTORIAL_LEVEL_UP, ({ level, name }) => {
+            this.showLevelUpNotification(level, name);
+        });
+
+        // Header Tutorial Toggle
+        this.initTutorialToggle();
+    }
+
+    /**
+     * Initialisiert den Tutorial-Toggle im Header
+     */
+    initTutorialToggle() {
+        const toggle = document.querySelector('#tutorialToggle');
+        if (!toggle) return;
+
+        // Initial-Zustand aus State
+        toggle.checked = state.get('tutorialMode') || false;
+
+        // Bei Änderung
+        toggle.addEventListener('change', () => {
+            tutorialBadgeSystem.toggle();
+        });
+
+        // State-Änderungen synchronisieren (von anderen Toggles)
+        eventBus.on(EVENTS.TUTORIAL_MODE_CHANGE, (isActive) => {
+            toggle.checked = isActive;
+        });
+    }
+
+    /**
+     * Zeigt Level-Up Toast Notification
+     */
+    showLevelUpNotification(level, name) {
+        const toast = document.createElement('div');
+        toast.className = 'level-up-toast';
+        toast.innerHTML = `
+            <span class="level-up-toast__icon">+</span>
+            <div class="level-up-toast__text">
+                Level <span class="level-up-toast__level">${level}</span> freigeschaltet: ${name}!
+            </div>
+        `;
+        document.body.appendChild(toast);
+
+        // Nach 4.5 Sekunden entfernen
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.parentNode.removeChild(toast);
+            }
+        }, 4500);
     }
 
     initTopNav() {
@@ -166,5 +223,6 @@ window.wissensbilanz = {
     eventBus,
     router,
     app,
-    log
+    log,
+    tutorialBadgeSystem
 };

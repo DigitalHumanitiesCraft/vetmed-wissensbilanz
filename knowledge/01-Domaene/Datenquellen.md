@@ -229,16 +229,27 @@ Verhältnis Professuren zu Studierenden.
 
 | Status | Kennzahlen | Details |
 |--------|------------|---------|
-| ✓ Konvertiert | 17 | In `docs/data/json/` verfügbar |
-| ○ Fehlend (WB) | 3 | 3-A-1, 3-A-3, 4-A-1 |
+| ✓ Konvertiert | 19 | In `docs/data/json/` verfügbar |
+| ○ Fehlend (WB) | 1 | 4-A-1 (keine Quelldatei) |
 | ○ Nicht konvertiert | 58 | Detaildaten (keine WB-Kennzahlen) |
+
+### Datenqualität (Stand: 30.01.2026)
+
+| Datei | Datenpunkte | Unis | Jahre | Status |
+|-------|-------------|------|-------|--------|
+| 1-A-1 bis 1-A-4 | 66 | 22 | 2022-2024 | ✓ Vollständig |
+| 1-A-5 | 3 | 1 | 2022-2024 | ⚠ Nur UA (Uni Wien) |
+| 2-A-x | 63-66 | 21-22 | 2021-2024 | ✓ Vollständig |
+| 3-A-1 | 3 | 1 | 2021-2023 | ✓ Nur UM (Donau-Uni) |
+| 3-A-2 | 63 | 21 | 2021-2023 | ✓ Vollständig |
+| 3-A-3 | 63 | 21 | 2020-2022 | ✓ Vollständig |
+
+**Gesamt:** 1104 Datenpunkte, 3 Nullwerte
 
 ### Fehlende WB-Kennzahlen
 
 | Code | Name | Grund |
 |------|------|-------|
-| 3-A-1 | Außerordentliche Studienabschlüsse | Andere Spaltenstruktur |
-| 3-A-3 | Studienabschlüsse mit Auslandsaufenthalt | Andere Spaltenstruktur |
 | 4-A-1 | Drittmittel | Keine Quelldatei vorhanden |
 
 ---

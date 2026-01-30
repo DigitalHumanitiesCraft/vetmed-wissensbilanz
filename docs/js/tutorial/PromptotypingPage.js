@@ -10,7 +10,9 @@
 import { vaultBrowser, VAULT_CATEGORIES, PROMPTOTYPING_PHASES } from './VaultBrowser.js';
 import { MarkdownRenderer } from './MarkdownRenderer.js';
 import { state } from '../core/state.js';
+import { eventBus, EVENTS } from '../core/eventBus.js';
 import { log } from '../core/logger.js';
+import { tutorialBadgeSystem } from './TutorialBadgeSystem.js';
 
 class PromptotypingPage {
     constructor(container) {
@@ -29,6 +31,20 @@ class PromptotypingPage {
                         <p>Dieses Dashboard dokumentiert seinen eigenen Entstehungsprozess.</p>
                         <p class="text-muted">Klicke auf eine Kategorie, um die zugehörigen Dokumente zu erkunden.</p>
                     </div>
+
+                    <!-- Tutorial-Badge Toggle und Progress -->
+                    <div class="tutorial-controls" id="tutorialControls">
+                        <label class="toggle">
+                            <input type="checkbox" id="tutorialModeToggle"
+                                   ${state.get('tutorialMode') ? 'checked' : ''}>
+                            <span class="toggle__slider"></span>
+                            <span class="toggle__label">Badges anzeigen</span>
+                        </label>
+                        <div class="tutorial-progress" id="tutorialProgress">
+                            ${this.renderProgress()}
+                        </div>
+                    </div>
+
                     <nav class="promptotyping-nav" id="promptotypingNav">
                         ${this.renderNavigation()}
                     </nav>
@@ -42,6 +58,58 @@ class PromptotypingPage {
         `;
 
         this.attachEventListeners();
+        this.attachTutorialListeners();
+    }
+
+    renderProgress() {
+        const progress = tutorialBadgeSystem.getProgress();
+        return `
+            <div class="progress-bar">
+                <div class="progress-bar__fill" style="width: ${progress.percentage}%"></div>
+            </div>
+            <span class="progress-text">
+                ${progress.completed}/${progress.total}
+                <span class="progress-level">(${progress.levelName})</span>
+            </span>
+        `;
+    }
+
+    updateProgress() {
+        const progressEl = this.container.querySelector('#tutorialProgress');
+        if (progressEl) {
+            progressEl.innerHTML = this.renderProgress();
+        }
+    }
+
+    attachTutorialListeners() {
+        // Tutorial-Toggle
+        const toggle = this.container.querySelector('#tutorialModeToggle');
+        if (toggle) {
+            toggle.addEventListener('change', () => {
+                tutorialBadgeSystem.toggle();
+            });
+
+            // Synchronisiere mit globalem State
+            eventBus.on(EVENTS.TUTORIAL_MODE_CHANGE, (isActive) => {
+                toggle.checked = isActive;
+            });
+        }
+
+        // Progress-Updates bei Annotation-Views
+        eventBus.on(EVENTS.ANNOTATION_VIEWED, () => {
+            this.updateProgress();
+        });
+
+        // Level-Up Updates
+        eventBus.on(EVENTS.TUTORIAL_LEVEL_UP, () => {
+            this.updateProgress();
+        });
+
+        // Document-Navigation von Modal
+        window.addEventListener('tutorial:loadDocument', (e) => {
+            const { category, filename } = e.detail;
+            this.handleVaultLink(`${category}/${filename}`);
+        });
     }
 
     renderNavigation() {

@@ -58,7 +58,9 @@ class AppState {
             // Tutorial State
             tutorialMode: false,
             tutorialSection: null, // 'filters' | 'viz' | 'reports' | null
-            viewedLearnings: [] // Persistiert in localStorage
+            tutorialLevel: 1, // 1 = Basics, 2 = Intermediate, 3 = Advanced
+            viewedLearnings: [], // Persistiert in localStorage
+            completedAnnotations: [] // F1, V1, R1, L006, etc.
         };
 
         // Tutorial-Progress aus localStorage laden
