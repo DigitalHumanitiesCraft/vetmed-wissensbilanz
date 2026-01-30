@@ -593,3 +593,24 @@
     color: var(--color-text-muted);
     max-width: 300px;
 }
+
+.empty-state--error .empty-state__icon {
+    color: var(--color-danger);
+}
+
+.empty-state--error .empty-state__title {
+    color: var(--color-danger);
+}
+
+/* ========================================
+   SUCCESS STATE (für Share Button etc.)
+   ======================================== */
+.btn--success {
+    background: var(--color-success);
+    color: white;
+    border-color: var(--color-success);
+}
+
+.btn--success:hover {
+    background: #218838;
+}

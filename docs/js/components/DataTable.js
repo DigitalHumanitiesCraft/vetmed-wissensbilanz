@@ -322,11 +322,18 @@ class DataTable {
         this.container.innerHTML = `
             <div class="alert alert--danger">
                 <div class="alert__content">
-                    <div class="alert__title">Fehler</div>
-                    ${message}
+                    <div class="alert__title">Fehler beim Laden</div>
+                    <p>${message}</p>
+                    <button class="btn btn--secondary btn--sm" id="retryTableBtn" style="margin-top: var(--space-3);">
+                        Erneut versuchen
+                    </button>
                 </div>
             </div>
         `;
+
+        this.container.querySelector('#retryTableBtn')?.addEventListener('click', () => {
+            this.render();
+        });
     }
 }
 
