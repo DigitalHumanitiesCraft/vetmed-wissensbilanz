@@ -54,6 +54,13 @@ class Router {
             }
         });
 
+        // Bei Seiten-Wechsel URL aktualisieren
+        eventBus.on(EVENTS.PAGE_CHANGE, () => {
+            if (!this.isUpdating) {
+                this.updateUrl();
+            }
+        });
+
         // Browser-Navigation (Zurück/Vorwärts)
         window.addEventListener('popstate', () => {
             this.loadFromUrl();
@@ -100,9 +107,16 @@ class Router {
                 }
             }
 
-            // Tab
+            // Page (dashboard, promptotyping, about)
+            const page = params.get('page');
+            if (page && ['dashboard', 'promptotyping', 'about'].includes(page)) {
+                state.set('activePage', page);
+                this.activatePage(page);
+            }
+
+            // Tab (nur relevant auf Dashboard)
             const tab = params.get('tab');
-            if (tab && ['chart', 'table', 'report', 'promptotyping'].includes(tab)) {
+            if (tab && ['chart', 'table', 'report'].includes(tab)) {
                 state.set('activeTab', tab);
                 // Tab-UI aktualisieren
                 this.activateTab(tab);
@@ -133,8 +147,14 @@ class Router {
      */
     updateUrl() {
         const filterState = state.getFilterState();
+        const activePage = state.get('activePage');
         const activeTab = state.get('activeTab');
         const params = new URLSearchParams();
+
+        // Page nur wenn nicht Default (dashboard)
+        if (activePage && activePage !== 'dashboard') {
+            params.set('page', activePage);
+        }
 
         // Nur setzen wenn nicht Default
         if (filterState.universities.length > 0) {
@@ -182,6 +202,28 @@ class Router {
         if (window.location.search !== (queryString ? `?${queryString}` : '')) {
             window.history.replaceState({}, '', newUrl);
             log.info('Router', `URL updated: ${newUrl}`);
+        }
+    }
+
+    /**
+     * Aktiviert eine Seite in der UI
+     */
+    activatePage(pageId) {
+        const navButtons = document.querySelectorAll('.top-nav__item');
+        const pages = document.querySelectorAll('.page');
+        const sidebar = document.querySelector('.sidebar');
+
+        navButtons.forEach(btn => {
+            btn.classList.toggle('top-nav__item--active', btn.dataset.page === pageId);
+        });
+
+        pages.forEach(page => {
+            page.classList.toggle('page--active', page.id === `${pageId}Page`);
+        });
+
+        // Sidebar nur auf Dashboard anzeigen
+        if (sidebar) {
+            sidebar.style.display = pageId === 'dashboard' ? '' : 'none';
         }
     }
 

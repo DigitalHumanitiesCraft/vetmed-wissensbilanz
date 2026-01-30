@@ -86,6 +86,47 @@ body {
     gap: var(--space-4);
 }
 
+/* ========================================
+   TOP NAVIGATION (Dashboard / Promptotyping / About)
+   ======================================== */
+.top-nav {
+    display: flex;
+    gap: var(--space-1);
+    background: var(--color-bg-secondary);
+    padding: var(--space-1);
+    border-radius: var(--border-radius);
+}
+
+.top-nav__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.top-nav__item:hover {
+    color: var(--color-text);
+    background: var(--color-bg);
+}
+
+.top-nav__item--active {
+    color: var(--color-primary);
+    background: var(--color-bg);
+    box-shadow: var(--shadow-sm);
+}
+
+.top-nav__item svg {
+    flex-shrink: 0;
+}
+
 .header__actions {
     display: flex;
     align-items: center;
@@ -224,6 +265,142 @@ body {
 
 .tabs__panel--active {
     display: block;
+}
+
+/* Tabs mit Icons */
+.tabs__tab {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.tabs__tab svg {
+    flex-shrink: 0;
+}
+
+/* ========================================
+   PAGE SYSTEM (Dashboard / Promptotyping / About)
+   ======================================== */
+.page {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+}
+
+.page--active {
+    display: flex;
+}
+
+/* Dashboard Card - volle Höhe nutzen */
+.dashboard-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card .card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-card .tabs__panel--active {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ========================================
+   ABOUT PAGE
+   ======================================== */
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: var(--space-6);
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+}
+
+.about-header h1 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-2);
+}
+
+.about-subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+}
+
+.about-section {
+    margin-bottom: var(--space-6);
+    padding: var(--space-5);
+    background: var(--color-bg);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border-light);
+}
+
+.about-section h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+    color: var(--color-primary);
+}
+
+.about-section p {
+    margin-bottom: var(--space-2);
+    line-height: 1.6;
+}
+
+.about-list {
+    list-style: none;
+    padding: 0;
+}
+
+.about-list li {
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.about-list li:last-child {
+    border-bottom: none;
+}
+
+.about-meta {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+    margin-top: var(--space-4);
+}
+
+/* Build Info Table */
+.build-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.build-info__row {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.build-info__row:last-child {
+    border-bottom: none;
+}
+
+.build-info__label {
+    color: var(--color-text-muted);
+    font-weight: var(--font-weight-medium);
+}
+
+.build-info__value {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
 }
 
 /* ========================================

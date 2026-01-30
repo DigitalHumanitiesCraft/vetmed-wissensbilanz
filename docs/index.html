@@ -19,7 +19,10 @@
         /* Page-specific styles */
         .chart-wrapper {
             position: relative;
-            min-height: 400px;
+            min-height: 450px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .chart-header {
@@ -62,7 +65,8 @@
 
         .chart-canvas-wrapper {
             position: relative;
-            height: 350px;
+            flex: 1;
+            min-height: 400px;
         }
 
         .chart-loading {
@@ -229,7 +233,7 @@
 </head>
 <body>
     <div class="app">
-        <!-- Header -->
+        <!-- Header mit globaler Navigation -->
         <header class="header">
             <a href="/" class="header__logo">
                 <svg class="header__logo-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
@@ -239,8 +243,30 @@
                 <span>Wissensbilanz</span>
             </a>
 
-            <nav class="header__nav">
-                <span class="badge badge--primary">VetMed Wien</span>
+            <!-- Globale Top-Navigation -->
+            <nav class="header__nav top-nav">
+                <button class="top-nav__item top-nav__item--active" data-page="dashboard">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="9"/>
+                        <rect x="14" y="3" width="7" height="5"/>
+                        <rect x="14" y="12" width="7" height="9"/>
+                        <rect x="3" y="16" width="7" height="5"/>
+                    </svg>
+                    <span>Dashboard</span>
+                </button>
+                <button class="top-nav__item" data-page="promptotyping">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528"/>
+                    </svg>
+                    <span>Promptotyping</span>
+                </button>
+                <button class="top-nav__item" data-page="about">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4M12 8h.01"/>
+                    </svg>
+                    <span>About</span>
+                </button>
             </nav>
 
             <div class="header__actions">
@@ -273,63 +299,137 @@
 
         <!-- Main Content -->
         <main class="main">
-            <div class="main__header">
-                <h1 class="main__title">Wissensbilanz-Daten</h1>
-            </div>
+            <!-- ========== PAGE: Dashboard ========== -->
+            <div class="page page--active" id="dashboardPage">
+                <div class="main__content">
+                    <!-- Stats Bar (F4: Filter Feedback) -->
+                    <div class="stats-bar" id="mainStatsBar">
+                        <div class="stats-bar__item">
+                            <span class="stats-bar__label">Datenpunkte:</span>
+                            <span class="stats-bar__value" id="statsPoints">–</span>
+                        </div>
+                        <div class="stats-bar__item">
+                            <span class="stats-bar__label">Durchschnitt:</span>
+                            <span class="stats-bar__value" id="statsAverage">–</span>
+                        </div>
+                        <div class="stats-bar__item">
+                            <span class="stats-bar__label">Trend:</span>
+                            <span class="stats-bar__value" id="statsTrend">–</span>
+                        </div>
+                    </div>
 
-            <div class="main__content">
-                <!-- Stats Bar (F4: Filter Feedback) -->
-                <div class="stats-bar" id="mainStatsBar">
-                    <div class="stats-bar__item">
-                        <span class="stats-bar__label">Datenpunkte:</span>
-                        <span class="stats-bar__value" id="statsPoints">–</span>
-                    </div>
-                    <div class="stats-bar__item">
-                        <span class="stats-bar__label">Durchschnitt:</span>
-                        <span class="stats-bar__value" id="statsAverage">–</span>
-                    </div>
-                    <div class="stats-bar__item">
-                        <span class="stats-bar__label">Trend:</span>
-                        <span class="stats-bar__value" id="statsTrend">–</span>
+                    <!-- Data Tabs (Chart/Tabelle/Bericht) -->
+                    <div class="card dashboard-card">
+                        <div class="tabs">
+                            <button class="tabs__tab tabs__tab--active" data-tab="chart">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                                </svg>
+                                Chart
+                            </button>
+                            <button class="tabs__tab" data-tab="table">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <line x1="3" y1="9" x2="21" y2="9"/>
+                                    <line x1="3" y1="15" x2="21" y2="15"/>
+                                    <line x1="9" y1="3" x2="9" y2="21"/>
+                                </svg>
+                                Tabelle
+                            </button>
+                            <button class="tabs__tab" data-tab="report">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                                Bericht
+                            </button>
+                        </div>
+
+                        <div class="card__body">
+                            <!-- Chart Panel -->
+                            <div class="tabs__panel tabs__panel--active" id="chartPanel">
+                                <!-- ChartContainer.js wird hier gerendert -->
+                            </div>
+
+                            <!-- Table Panel -->
+                            <div class="tabs__panel" id="tablePanel">
+                                <!-- DataTable.js wird hier gerendert -->
+                            </div>
+
+                            <!-- Report Panel -->
+                            <div class="tabs__panel" id="reportPanel">
+                                <!-- ReportPanel.js wird hier gerendert -->
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Tabs -->
-                <div class="card">
-                    <div class="tabs">
-                        <button class="tabs__tab tabs__tab--active" data-tab="chart">
-                            Chart
-                        </button>
-                        <button class="tabs__tab" data-tab="table">
-                            Tabelle
-                        </button>
-                        <button class="tabs__tab" data-tab="report">
-                            Bericht
-                        </button>
-                        <button class="tabs__tab" data-tab="promptotyping">
-                            Promptotyping
-                        </button>
+            <!-- ========== PAGE: Promptotyping ========== -->
+            <div class="page" id="promptotypingPage">
+                <div class="main__content">
+                    <div id="promptotypingPanel">
+                        <!-- PromptotypingPage.js wird hier gerendert -->
                     </div>
+                </div>
+            </div>
 
-                    <div class="card__body">
-                        <!-- Chart Panel -->
-                        <div class="tabs__panel tabs__panel--active" id="chartPanel">
-                            <!-- ChartContainer.js wird hier gerendert -->
+            <!-- ========== PAGE: About ========== -->
+            <div class="page" id="aboutPage">
+                <div class="main__content">
+                    <div class="about-container">
+                        <div class="about-header">
+                            <h1>Wissensbilanz Dashboard</h1>
+                            <p class="about-subtitle">Ein Promptotyping-Lehrbeispiel für die VetMed Wien</p>
                         </div>
 
-                        <!-- Table Panel -->
-                        <div class="tabs__panel" id="tablePanel">
-                            <!-- DataTable.js wird hier gerendert -->
+                        <div class="about-section">
+                            <h2>Was ist Promptotyping?</h2>
+                            <p>Promptotyping ist eine Methode zur schnellen, iterativen Entwicklung von Software-Prototypen mit KI-Unterstützung. Dieses Dashboard demonstriert den Prozess.</p>
                         </div>
 
-                        <!-- Report Panel -->
-                        <div class="tabs__panel" id="reportPanel">
-                            <!-- ReportPanel.js wird hier gerendert -->
+                        <div class="about-section">
+                            <h2>Build-Informationen</h2>
+                            <div class="build-info">
+                                <div class="build-info__row">
+                                    <span class="build-info__label">Version:</span>
+                                    <span class="build-info__value">1.0.0-beta</span>
+                                </div>
+                                <div class="build-info__row">
+                                    <span class="build-info__label">Build-Datum:</span>
+                                    <span class="build-info__value" id="buildDate">2026-01-30</span>
+                                </div>
+                                <div class="build-info__row">
+                                    <span class="build-info__label">Technologie:</span>
+                                    <span class="build-info__value">Vanilla JS + ES6 Modules</span>
+                                </div>
+                                <div class="build-info__row">
+                                    <span class="build-info__label">Charts:</span>
+                                    <span class="build-info__value">Chart.js 4.4.1</span>
+                                </div>
+                                <div class="build-info__row">
+                                    <span class="build-info__label">Datenquelle:</span>
+                                    <span class="build-info__value">unidata.gv.at (2021-2024)</span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Promptotyping Panel -->
-                        <div class="tabs__panel" id="promptotypingPanel">
-                            <!-- PromptotypingPage.js wird hier gerendert -->
+                        <div class="about-section">
+                            <h2>Architektur</h2>
+                            <ul class="about-list">
+                                <li><strong>EventBus:</strong> Entkoppelte Komponenten-Kommunikation</li>
+                                <li><strong>State:</strong> Zentraler, reaktiver Zustand</li>
+                                <li><strong>Router:</strong> URL-Synchronisation für teilbare Links</li>
+                                <li><strong>VizFactory:</strong> Austauschbare Visualisierungen</li>
+                            </ul>
+                        </div>
+
+                        <div class="about-section">
+                            <h2>Credits</h2>
+                            <p>Entwickelt als Teil des Promptotyping-Workshops an der VetMed Wien.</p>
+                            <p class="about-meta">© 2026 VetMed AI Initiative</p>
                         </div>
                     </div>
                 </div>

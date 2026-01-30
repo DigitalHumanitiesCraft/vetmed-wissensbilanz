@@ -29,6 +29,7 @@ class AppState {
             selectedKennzahl: '1-A-1', // Default: Personal Köpfe
 
             // UI-State
+            activePage: 'dashboard', // 'dashboard' | 'promptotyping' | 'about'
             activeTab: 'chart', // 'chart' | 'table' | 'report'
             sidebarOpen: true,
             isLoading: false,

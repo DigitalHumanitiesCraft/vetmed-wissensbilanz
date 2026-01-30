@@ -126,6 +126,7 @@ export const EVENTS = {
     DATA_ERROR: 'data:error',
 
     // UI-Events
+    PAGE_CHANGE: 'ui:page:change',
     TAB_CHANGE: 'ui:tab:change',
     SIDEBAR_TOGGLE: 'ui:sidebar:toggle',
     EXPORT_REQUEST: 'ui:export:request',

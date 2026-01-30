@@ -1,5 +1,6 @@
 ---
 created: 2026-01-22
+updated: 2026-01-30
 status: validated
 aliases: [Wissensbilanz-Kennzahlen, WB-Kennzahlen]
 tags: [status/validated, phase/preparation]
@@ -75,9 +76,21 @@ Offizielle Kennzahlen gemäß Wissensbilanz-Verordnung.
 
 | Status | Anzahl | Details |
 |--------|--------|---------|
-| Konvertiert | 17 | JSON in `docs/data/json/` |
-| Fehlend | 2 | 3-A-1, 3-A-3 (andere Struktur) |
-| Nicht verfügbar | 2 | 4-A-x (keine Quelldaten) |
+| ✓ Konvertiert | 17 | JSON in `docs/data/json/` |
+| ○ Fehlend | 3 | 3-A-1, 3-A-3, 4-A-1 |
+
+### Fehlende Kennzahlen
+
+| Code | Name | Excel vorhanden | Konvertierungsproblem |
+|------|------|-----------------|----------------------|
+| 3-A-1 | Außerordentliche Studienabschlüsse | ✓ | Andere Spaltenstruktur |
+| 3-A-3 | Studienabschlüsse mit Auslandsaufenthalt | ✓ | Andere Spaltenstruktur |
+| 4-A-1 | Drittmittel | ✗ | Keine Quelldatei |
+
+### Nächste Schritte
+
+1. **3-A-1 und 3-A-3 konvertieren:** Parser-Anpassung für abweichende Struktur
+2. **4-A-1 Drittmittel:** Quelldatei bei UniData anfordern oder manuell erstellen
 
 ---
 
@@ -92,6 +105,66 @@ Einige haben zusätzliche Dimensionen:
 - Verwendungskategorie (Personal)
 - Studienart (Bachelor, Master, Doktorat)
 - ISCED-Klassifikation
+
+---
+
+## Extended Views (Kennzahl-Kombinationen)
+
+Sinnvolle Kombinationen von Kennzahlen für erweiterte Analysen.
+
+### Personal-Intensität
+
+| Kennzahl | Einheit | Berechnung |
+|----------|---------|------------|
+| 1-A-1 | Köpfe | Basis |
+| 1-A-1-VZA | VZÄ | Basis |
+| **Beschäftigungsgrad** | % | VZÄ / Köpfe × 100 |
+
+### Gleichstellung
+
+| Kennzahl | Einheit | Insight |
+|----------|---------|---------|
+| 1-A-3 | % | Frauenanteil Kollegialorgane |
+| 1-A-4 | % | Gender Pay Gap |
+| 1-A-5 | % | Frauen in Berufungsverfahren |
+| **Korrelation** | - | 1-A-5 ↔ 1-A-4 zeitversetzt |
+
+### Studienerfolg
+
+| Kennzahl | Einheit | Insight |
+|----------|---------|---------|
+| 2-A-5 | Köpfe | Studierende gesamt |
+| 2-A-6 | Köpfe | Prüfungsaktive |
+| 3-A-2 | % | Abschlüsse in Toleranzzeit |
+| **Aktivitätsquote** | % | 2-A-6 / 2-A-5 × 100 |
+
+### Betreuungsrelation
+
+| Kennzahl | Einheit | Insight |
+|----------|---------|---------|
+| 2-A-1 | Köpfe | ProfessorInnen |
+| 2-A-5 | Köpfe | Studierende |
+| **Betreuungsverhältnis** | Ratio | 2-A-5 / 2-A-1 |
+
+### Mobilität
+
+| Kennzahl | Einheit | Insight |
+|----------|---------|---------|
+| 2-A-8 | Köpfe | Outgoing |
+| 2-A-9 | Köpfe | Incoming |
+| **Netto-Mobilität** | Köpfe | 2-A-9 - 2-A-8 |
+| **Mobilitätsquote** | % | (2-A-8 + 2-A-9) / 2-A-5 × 100 |
+
+---
+
+## Implementierungsstatus im Dashboard
+
+| Funktion | Status |
+|----------|--------|
+| Einzelne Kennzahlen | ✓ implementiert |
+| Extended Views | ○ geplant |
+| Berechnete Kennzahlen | ○ geplant |
+| Korrelationsanalyse | ○ Backlog |
 
 ---
 

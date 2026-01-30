@@ -43,13 +43,14 @@ class VizSelector {
         const currentType = state.get('vizType') || 'line';
 
         return `
+            <span class="viz-selector__label">Ansicht:</span>
             <div class="viz-selector__group">
                 ${types.map(type => `
                     <button class="viz-selector__btn ${type.id === currentType ? 'viz-selector__btn--active' : ''}"
                             data-viz="${type.id}"
                             title="${type.description}">
                         ${this.getIcon(type.icon)}
-                        <span class="viz-selector__label">${type.name}</span>
+                        <span class="viz-selector__text">${type.name}</span>
                     </button>
                 `).join('')}
             </div>
