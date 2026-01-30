@@ -177,8 +177,9 @@ class DataLoader {
      * @returns {Array} Demo-Datenpunkte
      */
     generateDemoData(kennzahlCode) {
-        const demoUniversities = ['UI', 'MW', 'MG', 'TU', 'UW'];
-        const years = [2019, 2020, 2021, 2022, 2023];
+        // Offizielle Uni-Codes (Subset für Demo)
+        const demoUniversities = ['UI', 'UN', 'UO', 'UE', 'UA'];
+        const years = [2021, 2022, 2023, 2024];
         const data = [];
 
         demoUniversities.forEach(uniCode => {

@@ -1,0 +1,380 @@
+[
+  {
+    "uniCode": "UA",
+    "year": 2023,
+    "value": 1295.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2022,
+    "value": 1169.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2021,
+    "value": 83.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2023,
+    "value": 557.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2022,
+    "value": 605.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2021,
+    "value": 571.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2023,
+    "value": 300.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2022,
+    "value": 293.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2021,
+    "value": 289.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2023,
+    "value": 267.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2022,
+    "value": 259.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2021,
+    "value": 142.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2023,
+    "value": 165.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2022,
+    "value": 157.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2021,
+    "value": 148.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2023,
+    "value": 176.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2022,
+    "value": 161.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2021,
+    "value": 168.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2023,
+    "value": 422.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2022,
+    "value": 336.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2021,
+    "value": 333.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2023,
+    "value": 634.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2022,
+    "value": 551.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2021,
+    "value": 529.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2023,
+    "value": 347.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2022,
+    "value": 356.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2021,
+    "value": 283.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2023,
+    "value": 36.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2022,
+    "value": 51.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2021,
+    "value": 57.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2023,
+    "value": 296.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2022,
+    "value": 295.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2021,
+    "value": 275.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2023,
+    "value": 111.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2022,
+    "value": 94.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2021,
+    "value": 96.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2023,
+    "value": 534.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2022,
+    "value": 527.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2021,
+    "value": 514.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2023,
+    "value": 226.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2022,
+    "value": 237.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2021,
+    "value": 266.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2023,
+    "value": 248.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2022,
+    "value": 254.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2021,
+    "value": 274.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "US",
+    "year": 2023,
+    "value": 84.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "US",
+    "year": 2022,
+    "value": 87.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "US",
+    "year": 2021,
+    "value": 77.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2023,
+    "value": 52.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2022,
+    "value": 43.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2021,
+    "value": 61.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2023,
+    "value": 48.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2022,
+    "value": 28.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2021,
+    "value": 40.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2023,
+    "value": 62.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2022,
+    "value": 73.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2021,
+    "value": 46.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2023,
+    "value": 48.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2022,
+    "value": 29.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2021,
+    "value": 31.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2023,
+    "value": 78.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2022,
+    "value": 88.0,
+    "kennzahl": "2-A-9"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2021,
+    "value": 82.0,
+    "kennzahl": "2-A-9"
+  }
+]

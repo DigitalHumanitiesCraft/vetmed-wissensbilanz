@@ -1,0 +1,398 @@
+[
+  {
+    "uniCode": "UA",
+    "year": 2024,
+    "value": 89526.58652999964,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2023,
+    "value": 91750.07790999993,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2022,
+    "value": 92971.27664999996,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2024,
+    "value": 25932.60615000004,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2023,
+    "value": 26057.523549999987,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2022,
+    "value": 26666.29250000015,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2024,
+    "value": 29035.378749999993,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2023,
+    "value": 29466.913499999977,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2022,
+    "value": 30003.515300000014,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2024,
+    "value": 7480.3,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2023,
+    "value": 7353.599999999999,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2022,
+    "value": 7224.6,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2024,
+    "value": 4211.627300000005,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2023,
+    "value": 4048.298200000006,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2022,
+    "value": 3939.301499999995,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2024,
+    "value": 3743.5,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2023,
+    "value": 3701.5,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2022,
+    "value": 3629.5,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2024,
+    "value": 13728.792050000036,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2023,
+    "value": 14083.994900000018,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2022,
+    "value": 14453.233550000017,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2024,
+    "value": 26698.16694,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2023,
+    "value": 26070.50018,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2022,
+    "value": 26104.6667,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2024,
+    "value": 14153.581149999998,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2023,
+    "value": 14118.18575,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2022,
+    "value": 14374.35855,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2024,
+    "value": 2793.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2023,
+    "value": 3006.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2022,
+    "value": 3278.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2024,
+    "value": 10538.406530000011,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2023,
+    "value": 10294.66991,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2022,
+    "value": 10200.806650000002,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2024,
+    "value": 2183.94,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2023,
+    "value": 2162.89,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2022,
+    "value": 2140.460000000001,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2024,
+    "value": 22351.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2023,
+    "value": 21724.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2022,
+    "value": 21699.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2024,
+    "value": 21541.917200000113,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2023,
+    "value": 20736.365050000048,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2022,
+    "value": 20892.181350000024,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2024,
+    "value": 8013.102250000003,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2023,
+    "value": 7838.437799999998,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2022,
+    "value": 8049.597400000032,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "US",
+    "year": 2024,
+    "value": 1935.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "US",
+    "year": 2023,
+    "value": 1878.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "US",
+    "year": 2022,
+    "value": 1801.5,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2024,
+    "value": 2795.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2023,
+    "value": 2740.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2022,
+    "value": 2711.13,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2024,
+    "value": 1636.3520500000002,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2023,
+    "value": 1562.7469999999996,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2022,
+    "value": 1546.712500000001,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2024,
+    "value": 1700.60655,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2023,
+    "value": 1673.5375500000002,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2022,
+    "value": 1737.1865000000003,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2024,
+    "value": 1368.5524000000003,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2023,
+    "value": 1295.4993000000002,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2022,
+    "value": 1217.9721499999996,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2024,
+    "value": 1630.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2023,
+    "value": 1572.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2022,
+    "value": 1513.5,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2024,
+    "value": 37.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2023,
+    "value": 30.0,
+    "kennzahl": "2-A-7"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2022,
+    "value": 22.0,
+    "kennzahl": "2-A-7"
+  }
+]

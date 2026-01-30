@@ -25,7 +25,7 @@ class AppState {
             // Filter-State
             selectedUniversities: ['UI'], // Default: VetMed Wien
             selectedUniTypes: [],
-            yearRange: { start: 2019, end: 2023 },
+            yearRange: { start: 2021, end: 2024 },
             selectedKennzahl: '1-A-1', // Default: Personal Köpfe
 
             // UI-State
@@ -105,7 +105,7 @@ class AppState {
         this.update({
             selectedUniversities: ['UI'],
             selectedUniTypes: [],
-            yearRange: { start: 2019, end: 2023 },
+            yearRange: { start: 2021, end: 2024 },
             selectedKennzahl: '1-A-1'
         });
         eventBus.emit(EVENTS.FILTER_RESET);

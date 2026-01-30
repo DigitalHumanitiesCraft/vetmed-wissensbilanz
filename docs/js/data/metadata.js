@@ -1,10 +1,11 @@
 /**
  * Metadata - Universitäten und Kennzahlen
  *
- * Zentrale Definition aller Metadaten aus inputdata.md.
+ * Zentrale Definition aller Metadaten.
  * Dient als Single Source of Truth für das Dashboard.
  *
- * Quelle: knowledge/inputdata.md
+ * WICHTIG: Uni-Codes aus offizieller Wissensbilanz-Verordnung
+ * Verifiziert aus: 1-A-1 Personal - Köpfe.xlsx (Spalte "Codex")
  */
 
 /**
@@ -44,43 +45,43 @@ export const UNI_TYPES = {
 };
 
 /**
- * Alle 22 Universitäten mit Codes und Typen
- * Code-Schema gemäß UniData Excel (UI = VetMed Wien)
+ * Alle 22 Universitäten mit offiziellen Codex-Codes
+ * Quelle: Wissensbilanz-Verordnung, Excel "Universität (Codex)"
  */
 export const UNIVERSITIES = [
     // Volluniversitäten (6)
-    { code: 'UW', name: 'Universität Wien', type: 'voll', shortName: 'Uni Wien' },
-    { code: 'UG', name: 'Universität Graz', type: 'voll', shortName: 'Uni Graz' },
-    { code: 'UI', name: 'Universität für Veterinärmedizin Wien', type: 'med', shortName: 'VetMed' }, // VetMed!
-    { code: 'US', name: 'Universität Salzburg', type: 'voll', shortName: 'Uni Salzburg' },
-    { code: 'UL', name: 'Universität Linz', type: 'voll', shortName: 'JKU Linz' },
-    { code: 'UK', name: 'Universität Klagenfurt', type: 'voll', shortName: 'AAU' },
+    { code: 'UA', name: 'Universität Wien', type: 'voll', shortName: 'Uni Wien' },
+    { code: 'UB', name: 'Universität Graz', type: 'voll', shortName: 'Uni Graz' },
+    { code: 'UC', name: 'Universität Innsbruck', type: 'voll', shortName: 'Uni Innsbruck' },
+    { code: 'UD', name: 'Universität Salzburg', type: 'voll', shortName: 'Uni Salzburg' },
+    { code: 'UK', name: 'Universität Linz', type: 'voll', shortName: 'JKU Linz' },
+    { code: 'UL', name: 'Universität Klagenfurt', type: 'voll', shortName: 'AAU Klagenfurt' },
 
     // Technische Universitäten (3)
-    { code: 'TU', name: 'TU Wien', type: 'tech', shortName: 'TU Wien' },
-    { code: 'TG', name: 'TU Graz', type: 'tech', shortName: 'TU Graz' },
-    { code: 'MB', name: 'Montanuniversität Leoben', type: 'tech', shortName: 'MU Leoben' },
+    { code: 'UE', name: 'Technische Universität Wien', type: 'tech', shortName: 'TU Wien' },
+    { code: 'UF', name: 'Technische Universität Graz', type: 'tech', shortName: 'TU Graz' },
+    { code: 'UG', name: 'Montanuniversität Leoben', type: 'tech', shortName: 'MU Leoben' },
 
-    // Medizinische Universitäten (4) - inkl. VetMed
-    { code: 'MW', name: 'Medizinische Universität Wien', type: 'med', shortName: 'Med Uni Wien' },
-    { code: 'MG', name: 'Medizinische Universität Graz', type: 'med', shortName: 'Med Uni Graz' },
-    { code: 'MK', name: 'Medizinische Universität Innsbruck', type: 'med', shortName: 'Med Uni IBK' },
+    // Medizinische Universitäten (4)
+    { code: 'UN', name: 'Medizinische Universität Wien', type: 'med', shortName: 'Med Uni Wien' },
+    { code: 'UO', name: 'Medizinische Universität Graz', type: 'med', shortName: 'Med Uni Graz' },
+    { code: 'UQ', name: 'Medizinische Universität Innsbruck', type: 'med', shortName: 'Med Uni IBK' },
+    { code: 'UI', name: 'Veterinärmedizinische Universität Wien', type: 'med', shortName: 'VetMed' },
 
-    // Kunst-Universitäten (7)
-    { code: 'AW', name: 'Akademie der bildenden Künste Wien', type: 'kunst', shortName: 'Akademie Wien' },
-    { code: 'AN', name: 'Universität für angewandte Kunst Wien', type: 'kunst', shortName: 'Angewandte' },
-    { code: 'MO', name: 'Universität für Musik und darstellende Kunst Wien', type: 'kunst', shortName: 'MDW' },
-    { code: 'MS', name: 'Universität Mozarteum Salzburg', type: 'kunst', shortName: 'Mozarteum' },
-    { code: 'KG', name: 'Universität für Musik und darstellende Kunst Graz', type: 'kunst', shortName: 'KUG' },
-    { code: 'KL', name: 'Kunstuniversität Linz', type: 'kunst', shortName: 'Kunst Uni Linz' },
-    { code: 'FI', name: 'Filmakademie Wien', type: 'kunst', shortName: 'Filmakademie' },
+    // Sonderformen (2)
+    { code: 'UH', name: 'Universität für Bodenkultur Wien', type: 'voll', shortName: 'BOKU' },
+    { code: 'UJ', name: 'Wirtschaftsuniversität Wien', type: 'voll', shortName: 'WU Wien' },
 
-    // Sonstige (2)
-    { code: 'BO', name: 'Universität für Bodenkultur Wien', type: 'voll', shortName: 'BOKU' },
-    { code: 'WU', name: 'Wirtschaftsuniversität Wien', type: 'voll', shortName: 'WU Wien' },
+    // Kunst-Universitäten (6)
+    { code: 'UR', name: 'Akademie der bildenden Künste Wien', type: 'kunst', shortName: 'Akademie Wien' },
+    { code: 'US', name: 'Universität für angewandte Kunst Wien', type: 'kunst', shortName: 'Angewandte' },
+    { code: 'UT', name: 'Universität für Musik und darstellende Kunst Wien', type: 'kunst', shortName: 'MDW' },
+    { code: 'UU', name: 'Universität Mozarteum Salzburg', type: 'kunst', shortName: 'Mozarteum' },
+    { code: 'UV', name: 'Universität für Musik und darstellende Kunst Graz', type: 'kunst', shortName: 'KUG' },
+    { code: 'UW', name: 'Universität für künstlerische und industrielle Gestaltung Linz', type: 'kunst', shortName: 'Kunst Uni Linz' },
 
     // Weiterbildung (1)
-    { code: 'DK', name: 'Universität für Weiterbildung Krems', type: 'weiterb', shortName: 'Donau-Uni' }
+    { code: 'UM', name: 'Universität für Weiterbildung Krems', type: 'weiterb', shortName: 'Donau-Uni' }
 ];
 
 /**
@@ -117,192 +118,154 @@ export const KENNZAHL_CATEGORIES = {
         id: 'forschung',
         name: 'Forschung',
         description: 'Forschungsleistung und -output'
-    },
-    FINANZEN: {
-        id: 'finanzen',
-        name: 'Finanzen',
-        description: 'Erlöse und Drittmittel'
     }
 };
 
 /**
- * Alle 21 Kennzahlen aus der Wissensbilanz-Verordnung
+ * Kennzahlen - Abgestimmt auf die generierten JSON-Dateien
+ * Dateinamen entsprechen dem Output von convert_excel_to_json.py
  */
 export const KENNZAHLEN = [
-    // Personal (4)
+    // Personal (5)
     {
         code: '1-A-1',
         name: 'Personal - Köpfe',
         category: 'personal',
         unit: 'Köpfe',
         description: 'Gesamtpersonal nach Köpfen',
-        filename: '1-A-1_Personal_Koepfe.json'
+        filename: '1-A-1.json'
     },
     {
-        code: '1-A-2',
+        code: '1-A-1-VZA',
         name: 'Personal - VZÄ',
         category: 'personal',
         unit: 'VZÄ',
         description: 'Vollzeitäquivalente des Personals',
-        filename: '1-A-2_Personal_VZÄ.json'
+        filename: '1-A-1-VZA.json'
     },
     {
-        code: '1-B-1',
-        name: 'Berufungen',
+        code: '1-A-2',
+        name: 'Berufungen an die Universität',
         category: 'personal',
         unit: 'Anzahl',
-        description: 'Anzahl der Berufungen auf Professuren',
-        filename: '1-B-1_Berufungen.json'
+        description: 'Anzahl der Berufungen',
+        filename: '1-A-2.json'
     },
     {
-        code: '1-B-2',
-        name: 'Frauenquote Professuren',
+        code: '1-A-3',
+        name: 'Frauenquote in Kollegialorganen',
         category: 'personal',
         unit: '%',
-        description: 'Frauenanteil bei Professuren',
-        filename: '1-B-2_Frauenquote.json'
+        description: 'Frauenanteil in Kollegialorganen',
+        filename: '1-A-3.json'
+    },
+    {
+        code: '1-A-4',
+        name: 'Gender Pay Gap',
+        category: 'personal',
+        unit: '%',
+        description: 'Gehaltsunterschied nach Geschlecht',
+        filename: '1-A-4.json'
+    },
+    {
+        code: '1-A-5',
+        name: 'Repräsentanz von Frauen in Berufungsverfahren',
+        category: 'personal',
+        unit: '%',
+        description: 'Frauenanteil in Berufungsverfahren',
+        filename: '1-A-5.json'
     },
 
-    // Studierende (8)
+    // Studierende (10)
     {
         code: '2-A-1',
-        name: 'Studien - Begonnene',
+        name: 'ProfessorInnen und Äquivalente',
         category: 'studierende',
-        unit: 'Anzahl',
-        description: 'Anzahl begonnener Studien',
-        filename: '2-A-1_Begonnene_Studien.json'
+        unit: 'Köpfe',
+        description: 'Anzahl Professuren',
+        filename: '2-A-1.json'
     },
     {
         code: '2-A-2',
-        name: 'Studierende insgesamt',
+        name: 'Eingerichtete Studien',
         category: 'studierende',
-        unit: 'Köpfe',
-        description: 'Gesamtzahl der Studierenden',
-        filename: '2-A-2_Studierende.json'
+        unit: 'Anzahl',
+        description: 'Anzahl eingerichteter Studien',
+        filename: '2-A-2.json'
     },
     {
         code: '2-A-3',
-        name: 'Studienabschlüsse',
+        name: 'Studienabschlussquote',
         category: 'studierende',
-        unit: 'Anzahl',
-        description: 'Anzahl der Studienabschlüsse',
-        filename: '2-A-3_Abschluesse.json'
+        unit: '%',
+        description: 'Quote der Studienabschlüsse',
+        filename: '2-A-3.json'
     },
     {
         code: '2-A-4',
-        name: 'Studiendauer',
+        name: 'Besondere Zulassungsbedingungen',
         category: 'studierende',
-        unit: 'Semester',
-        description: 'Durchschnittliche Studiendauer',
-        filename: '2-A-4_Studiendauer.json'
+        unit: 'Anzahl',
+        description: 'Studien mit besonderen Zulassungsbedingungen',
+        filename: '2-A-4.json'
     },
     {
         code: '2-A-5',
-        name: 'Erfolgsquote',
+        name: 'Anzahl Studierender',
         category: 'studierende',
-        unit: '%',
-        description: 'Erfolgsquote ordentlicher Studien',
-        filename: '2-A-5_Erfolgsquote.json'
+        unit: 'Köpfe',
+        description: 'Gesamtzahl der Studierenden',
+        filename: '2-A-5.json'
     },
     {
         code: '2-A-6',
-        name: 'Doktoratsabschlüsse',
+        name: 'Anzahl Prüfungsaktive',
+        category: 'studierende',
+        unit: 'Köpfe',
+        description: 'Prüfungsaktive Studierende',
+        filename: '2-A-6.json'
+    },
+    {
+        code: '2-A-7',
+        name: 'Belegte ordentliche Studien',
         category: 'studierende',
         unit: 'Anzahl',
-        description: 'Anzahl der Doktoratsabschlüsse',
-        filename: '2-A-6_Doktorate.json'
+        description: 'Anzahl belegter ordentlicher Studien',
+        filename: '2-A-7.json'
     },
     {
         code: '2-A-8',
-        name: 'Mobilitätsprogramme (Outgoing)',
+        name: 'Ordentliche Studierende (Outgoing)',
         category: 'studierende',
-        unit: 'Anzahl',
-        description: 'Outgoing-Studierende in Mobilitätsprogrammen',
-        filename: '2-A-8_Mobilitaet_Out.json'
+        unit: 'Köpfe',
+        description: 'Outgoing-Mobilität',
+        filename: '2-A-8.json'
     },
     {
         code: '2-A-9',
-        name: 'Mobilitätsprogramme (Incoming)',
+        name: 'Ordentliche Studierende (Incoming)',
         category: 'studierende',
-        unit: 'Anzahl',
-        description: 'Incoming-Studierende in Mobilitätsprogrammen',
-        filename: '2-A-9_Mobilitaet_In.json'
+        unit: 'Köpfe',
+        description: 'Incoming-Mobilität',
+        filename: '2-A-9.json'
+    },
+    {
+        code: '2-B-1',
+        name: 'Doktoratsstudierende mit Betreuungsverhältnis',
+        category: 'studierende',
+        unit: 'Köpfe',
+        description: 'Doktoratsstudierende mit BV zur Universität',
+        filename: '2-B-1.json'
     },
 
-    // Forschung (4)
-    {
-        code: '3-A-1',
-        name: 'Publikationen',
-        category: 'forschung',
-        unit: 'Anzahl',
-        description: 'Anzahl wissenschaftlicher Publikationen',
-        filename: '3-A-1_Publikationen.json'
-    },
+    // Forschung (2)
     {
         code: '3-A-2',
-        name: 'Vorträge und Poster',
+        name: 'Studienabschlüsse in Toleranzstudiendauer',
         category: 'forschung',
-        unit: 'Anzahl',
-        description: 'Wissenschaftliche Vorträge und Posterpräsentationen',
-        filename: '3-A-2_Vortraege.json'
-    },
-    {
-        code: '3-B-1',
-        name: 'Erlöse Forschungsprojekte',
-        category: 'forschung',
-        unit: '€',
-        description: 'Erlöse aus F&E-Projekten',
-        filename: '3-B-1_FE_Erloese.json'
-    },
-    {
-        code: '3-B-2',
-        name: 'Doktoratsstudierende (Betreuungsverhältnisse)',
-        category: 'forschung',
-        unit: 'Anzahl',
-        description: 'Betreuungsverhältnisse bei Doktoratsstudien',
-        filename: '3-B-2_Doktorat_Betreuung.json'
-    },
-
-    // Finanzen (5)
-    {
-        code: '4-A-1',
-        name: 'Erlöse gesamt',
-        category: 'finanzen',
-        unit: '€',
-        description: 'Gesamterlöse der Universität',
-        filename: '4-A-1_Erloese_Gesamt.json'
-    },
-    {
-        code: '4-A-2',
-        name: 'Drittmittelerlöse',
-        category: 'finanzen',
-        unit: '€',
-        description: 'Erlöse aus Drittmitteln',
-        filename: '4-A-2_Drittmittel.json'
-    },
-    {
-        code: '4-A-3',
-        name: 'Investitionen',
-        category: 'finanzen',
-        unit: '€',
-        description: 'Investitionsausgaben',
-        filename: '4-A-3_Investitionen.json'
-    },
-    {
-        code: '4-A-4',
-        name: 'Erlöse je Professur',
-        category: 'finanzen',
-        unit: '€',
-        description: 'Erlöse pro Professur',
-        filename: '4-A-4_Erloese_Prof.json'
-    },
-    {
-        code: '4-A-5',
-        name: 'Erlöse je wissenschaftl. Personal',
-        category: 'finanzen',
-        unit: '€',
-        description: 'Erlöse pro wissenschaftlichem Personal',
-        filename: '4-A-5_Erloese_Wiss.json'
+        unit: '%',
+        description: 'Abschlüsse innerhalb der Toleranzstudiendauer',
+        filename: '3-A-2.json'
     }
 ];
 
@@ -323,11 +286,11 @@ export const KENNZAHL_BY_CODE = KENNZAHLEN.reduce((acc, k) => {
 }, {});
 
 /**
- * Verfügbare Jahre in den Daten
+ * Verfügbare Jahre in den Daten (aus Excel-Konvertierung)
  */
 export const AVAILABLE_YEARS = {
-    start: 2019,
-    end: 2023
+    start: 2021,
+    end: 2024
 };
 
 /**

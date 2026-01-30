@@ -1,0 +1,398 @@
+[
+  {
+    "uniCode": "UA",
+    "year": 2024,
+    "value": 4282.501699999998,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2023,
+    "value": 4182.532199999999,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UA",
+    "year": 2022,
+    "value": 4172.3928000000005,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2024,
+    "value": 1566.9783,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2023,
+    "value": 1570.5494000000003,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UB",
+    "year": 2022,
+    "value": 1573.0935,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2024,
+    "value": 2038.6461,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2023,
+    "value": 2023.2238999999995,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UC",
+    "year": 2022,
+    "value": 2027.9431999999997,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2024,
+    "value": 3216.9000000000005,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2023,
+    "value": 3099.82,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UN",
+    "year": 2022,
+    "value": 2999.0400000000004,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2024,
+    "value": 1079.9052000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2023,
+    "value": 1102.9327000000003,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UO",
+    "year": 2022,
+    "value": 1045.2567000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2024,
+    "value": 1037.5824,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2023,
+    "value": 1001.5402,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UQ",
+    "year": 2022,
+    "value": 963.5224,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2024,
+    "value": 1095.6227000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2023,
+    "value": 1088.1947999999998,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UD",
+    "year": 2022,
+    "value": 1073.1652,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2024,
+    "value": 2964.7875000000017,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2023,
+    "value": 2847.600000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UE",
+    "year": 2022,
+    "value": 2742.9,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2024,
+    "value": 1584.9814999999999,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2023,
+    "value": 1666.5773,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UF",
+    "year": 2022,
+    "value": 1644.7418999999995,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2024,
+    "value": 617.692,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2023,
+    "value": 621.14,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UG",
+    "year": 2022,
+    "value": 618.4406999999999,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2024,
+    "value": 1233.8345000000002,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2023,
+    "value": 1214.7651,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UH",
+    "year": 2022,
+    "value": 1173.702,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2024,
+    "value": 587.1857000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2023,
+    "value": 581.3512000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UI",
+    "year": 2022,
+    "value": 551.7432,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2024,
+    "value": 886.3102999999999,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2023,
+    "value": 833.6102999999999,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UJ",
+    "year": 2022,
+    "value": 851.7931999999996,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2024,
+    "value": 1371.0361999999998,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2023,
+    "value": 1316.8670999999997,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UK",
+    "year": 2022,
+    "value": 1325.2116000000003,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2024,
+    "value": 526.364,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2023,
+    "value": 525.4504999999997,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UL",
+    "year": 2022,
+    "value": 526.2965999999997,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "US",
+    "year": 2024,
+    "value": 285.89480000000003,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "US",
+    "year": 2023,
+    "value": 291.85740000000004,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "US",
+    "year": 2022,
+    "value": 294.16040000000004,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2024,
+    "value": 640.3858000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2023,
+    "value": 632.1583,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UT",
+    "year": 2022,
+    "value": 624.6833,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2024,
+    "value": 346.22980000000007,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2023,
+    "value": 341.2711,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UU",
+    "year": 2022,
+    "value": 345.67839999999995,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2024,
+    "value": 328.4548,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2023,
+    "value": 323.3412000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UV",
+    "year": 2022,
+    "value": 320.114,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2024,
+    "value": 174.5675,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2023,
+    "value": 162.582,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UW",
+    "year": 2022,
+    "value": 152.8018,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2024,
+    "value": 193.21249999999998,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2023,
+    "value": 194.9375,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UR",
+    "year": 2022,
+    "value": 190.0,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2024,
+    "value": 325.8896000000001,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2023,
+    "value": 323.99749999999995,
+    "kennzahl": "1-A-1-VZA"
+  },
+  {
+    "uniCode": "UM",
+    "year": 2022,
+    "value": 329.41309999999993,
+    "kennzahl": "1-A-1-VZA"
+  }
+]
