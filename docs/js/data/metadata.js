@@ -10,37 +10,38 @@
 
 /**
  * Universitäts-Typen mit Farben (V1: Konsistente Farbkodierung)
+ * Keys sind lowercase für einfachen Lookup mit university.type
  */
 export const UNI_TYPES = {
-    VOLL: {
+    voll: {
         id: 'voll',
         name: 'Volluniversitäten',
-        color: 'var(--color-uni-voll)',
-        bgColor: 'var(--color-uni-voll-bg)'
+        color: '#1a5490',
+        bgColor: 'rgba(26, 84, 144, 0.1)'
     },
-    TECH: {
+    tech: {
         id: 'tech',
         name: 'Technische Universitäten',
-        color: 'var(--color-uni-tech)',
-        bgColor: 'var(--color-uni-tech-bg)'
+        color: '#28a745',
+        bgColor: 'rgba(40, 167, 69, 0.1)'
     },
-    MED: {
+    med: {
         id: 'med',
         name: 'Medizinische Universitäten',
-        color: 'var(--color-uni-med)',
-        bgColor: 'var(--color-uni-med-bg)'
+        color: '#dc3545',
+        bgColor: 'rgba(220, 53, 69, 0.1)'
     },
-    KUNST: {
+    kunst: {
         id: 'kunst',
         name: 'Kunst-Universitäten',
-        color: 'var(--color-uni-kunst)',
-        bgColor: 'var(--color-uni-kunst-bg)'
+        color: '#6f42c1',
+        bgColor: 'rgba(111, 66, 193, 0.1)'
     },
-    WEITERB: {
+    weiterb: {
         id: 'weiterb',
         name: 'Weiterbildungsuniversität',
-        color: 'var(--color-uni-weiterb)',
-        bgColor: 'var(--color-uni-weiterb-bg)'
+        color: '#fd7e14',
+        bgColor: 'rgba(253, 126, 20, 0.1)'
     }
 };
 
@@ -87,8 +88,8 @@ export const UNIVERSITIES = [
 /**
  * Universitäten nach Typ gruppiert (für Filter-UI)
  */
-export const UNIVERSITIES_BY_TYPE = Object.values(UNI_TYPES).reduce((acc, type) => {
-    acc[type.id] = UNIVERSITIES.filter(uni => uni.type === type.id);
+export const UNIVERSITIES_BY_TYPE = Object.keys(UNI_TYPES).reduce((acc, typeId) => {
+    acc[typeId] = UNIVERSITIES.filter(uni => uni.type === typeId);
     return acc;
 }, {});
 

@@ -13,6 +13,7 @@ import { initFilterPanel } from './components/FilterPanel.js';
 import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
 import { initReportPanel } from './components/ReportPanel.js';
+import { initVizSelector } from './components/VizSelector.js';
 
 class App {
     constructor() {
@@ -49,9 +50,10 @@ class App {
             this.components.filterPanel = initFilterPanel(sidebarEl);
         }
 
-        // Chart Container
+        // Chart Container mit VizSelector
         const chartEl = document.querySelector('#chartPanel');
         if (chartEl) {
+            this.components.vizSelector = initVizSelector(chartEl);
             this.components.chart = initChartContainer(chartEl);
         }
 
