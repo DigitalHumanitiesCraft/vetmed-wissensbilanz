@@ -1,6 +1,6 @@
-# Glossar: KI-Begriffe für Promptotyping
+# Glossar: LLM-Begriffe fuer Promptotyping
 
-Dieses Glossar erklärt Begriffe, die im Kontext von LLMs und Promptotyping verwendet werden. Zielgruppe: Fachpersonen, die mit KI-Tools arbeiten wollen, aber keinen technischen Hintergrund haben.
+Dieses Glossar erklaert Begriffe, die im Kontext von LLMs und Promptotyping verwendet werden. Zielgruppe: Fachpersonen, die mit LLMs arbeiten wollen, aber keinen technischen Hintergrund haben.
 
 **Quelle:** Definitionen basieren auf Pollin (2025): "Promptotyping: Zwischen Vibe Coding, Vibe Research und Context Engineering".
 

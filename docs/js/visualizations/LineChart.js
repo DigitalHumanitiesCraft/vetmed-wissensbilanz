@@ -36,7 +36,10 @@ export class LineChart {
                 <div class="chart-legend" id="chartLegend"></div>
                 <div class="chart-actions">
                     <button class="btn btn--ghost btn--sm" id="toggleAverage" title="Durchschnittslinie ein/aus">
-                        Ø Durchschnitt
+                        Durchschnitt
+                    </button>
+                    <button class="btn btn--ghost btn--sm" id="exportPng" title="Als PNG exportieren">
+                        PNG Export
                     </button>
                 </div>
             </div>
@@ -53,6 +56,10 @@ export class LineChart {
     attachEventListeners() {
         this.container.querySelector('#toggleAverage')?.addEventListener('click', () => {
             this.toggleAverageLine();
+        });
+
+        this.container.querySelector('#exportPng')?.addEventListener('click', () => {
+            this.exportAsPng();
         });
     }
 
@@ -272,9 +279,25 @@ export class LineChart {
     }
 
     /**
-     * Passt Größe an Container an
+     * Passt Groesse an Container an
      */
     resize() {
         this.chart?.resize();
+    }
+
+    /**
+     * Exportiert Chart als PNG
+     */
+    exportAsPng() {
+        if (!this.chart) return;
+
+        const kennzahl = state.get('selectedKennzahl') || 'chart';
+        const timestamp = new Date().toISOString().split('T')[0];
+        const filename = `wissensbilanz_${kennzahl}_${timestamp}.png`;
+
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = this.chart.toBase64Image('image/png', 1);
+        link.click();
     }
 }

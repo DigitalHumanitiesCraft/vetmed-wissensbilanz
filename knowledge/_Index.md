@@ -9,7 +9,7 @@ Dieser Ordner ist ein **Obsidian Vault** und dokumentiert das Promptotyping-Proj
 | Ich will... | Dann lies... |
 |-------------|--------------|
 | Das Projekt verstehen | [[Use Case Wissensbilanz]] |
-| KI-Begriffe nachschlagen | [[Glossar]] |
+| LLM-Begriffe nachschlagen | [[Glossar]] |
 | Die Datenquellen verstehen | [[Datenquellen]] |
 | Design-Entscheidungen nachvollziehen | [[UI-Prinzipien]] |
 | Den Entwicklungsprozess sehen | [[05-Journal/index]] |

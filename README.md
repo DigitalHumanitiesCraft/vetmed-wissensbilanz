@@ -4,11 +4,11 @@ Ein Wissensbilanz-Dashboard für die Veterinärmedizinische Universität Wien �
 
 ## Worum geht's?
 
-Dieses Projekt ist beides: ein funktionales Tool zur Analyse von Universitäts-Kennzahlen **und** ein dokumentiertes Beispiel dafür, wie man mit KI-Unterstützung schnell von der Idee zum Prototyp kommt. Das Dashboard visualisiert Wissensbilanz-Daten österreichischer Universitäten und generiert LLM-gestützte Analyseberichte. Die gesamte Entstehung – jede Entscheidung, jeder Fehler, jede Korrektur – ist im Repository nachvollziehbar dokumentiert.
+Dieses Projekt ist beides: ein funktionales Tool zur Analyse von Universitaets-Kennzahlen **und** ein dokumentiertes Beispiel fuer LLM-gestuetztes Rapid Prototyping. Das Dashboard visualisiert Wissensbilanz-Daten oesterreichischer Universitaeten und generiert LLM-gestuetzte Analyseberichte (Claude). Die gesamte Entstehung - jede Entscheidung, jeder Fehler, jede Korrektur - ist im Repository nachvollziehbar dokumentiert.
 
 ## Live Demo
 
-**Das Dashboard ist hier verfügbar:** `docs/index.html` (lokal öffnen mit Live Server)
+**[Live Demo: chpollin.github.io/vetmed-wissensbilanz](https://chpollin.github.io/vetmed-wissensbilanz/)**
 
 Features:
 - Vergleich aller 22 österreichischen Universitäten
@@ -22,7 +22,7 @@ Features:
 
 - **Michael Forster** (Fachverantwortlicher): Lernt am Beispiel, wie Promptotyping funktioniert
 - **VetMedAI-Team**: Referenzprojekt für weitere Use Cases
-- **Interessierte**: Nachvollziehbares Beispiel für KI-gestützte Softwareentwicklung
+- **Interessierte**: Nachvollziehbares Beispiel fuer LLM-gestuetzte Softwareentwicklung
 
 ## Wie lese ich dieses Repository?
 
@@ -39,7 +39,7 @@ Empfohlene Reihenfolge für Nicht-Entwickler:
 
 ## Was ist Promptotyping?
 
-**Promptotyping = Rapid Prototyping mit KI-Unterstützung.**
+**Promptotyping = Rapid Prototyping mit LLM-Unterstuetzung (z.B. Claude, GPT-4).**
 
 Statt wochenlang Anforderungen zu sammeln und dann zu entwickeln, entsteht ein funktionaler Prototyp im Dialog mit einem LLM. Der Prozess ist iterativ:
 
@@ -47,7 +47,7 @@ Statt wochenlang Anforderungen zu sammeln und dann zu entwickeln, entsteht ein f
 Idee -> Prompt -> Ergebnis -> Korrektur -> besseres Ergebnis -> ...
 ```
 
-Das Besondere: Die KI hilft nicht nur beim Coden, sondern auch beim Verstehen der Daten, beim Finden von Fehlern und beim Dokumentieren. Mehr dazu in [Promptotyping-Learnings.md](knowledge/Promptotyping-Learnings.md).
+Das Besondere: Das LLM unterstuetzt nicht nur beim Coden, sondern auch beim Verstehen der Daten, beim Finden von Fehlern und beim Dokumentieren. Mehr dazu in den [Learnings](knowledge/04-Learnings/).
 
 ## Projektstatus
 
@@ -103,9 +103,9 @@ Das [Journal](knowledge/05-Journal/) dokumentiert den gesamten Prozess chronolog
 
 Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 
-## Nächste Schritte
+## Naechste Schritte
 
-- [ ] GitHub Pages Deployment
+- [x] GitHub Pages Deployment
 - [ ] Extended Views (Kennzahl-Kombinationen)
 - [ ] Hypothesen H1-H4 validieren
 
