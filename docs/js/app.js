@@ -13,7 +13,7 @@ import { initFilterPanel } from './components/FilterPanel.js';
 import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
 import { initReportPanel } from './components/ReportPanel.js';
-import { initVizSelector } from './components/VizSelector.js';
+// VizSelector ist jetzt in der Toolbar integriert (index.html)
 import { initPromptotypingPage } from './tutorial/PromptotypingPage.js';
 import { initTutorialBadgeSystem, tutorialBadgeSystem } from './tutorial/TutorialBadgeSystem.js';
 import { initAnnotationModal } from './tutorial/AnnotationModal.js';
@@ -57,12 +57,10 @@ class App {
             this.components.filterPanel = initFilterPanel(sidebarEl);
         }
 
-        // Chart Container mit VizSelector
-        // WICHTIG: ChartContainer zuerst, dann VizSelector (der prepended)
+        // Chart Container (VizSelector ist jetzt in der Toolbar integriert)
         const chartEl = document.querySelector('#chartPanel');
         if (chartEl) {
             this.components.chart = initChartContainer(chartEl);
-            this.components.vizSelector = initVizSelector(chartEl);
         }
 
         // Data Table
@@ -170,27 +168,8 @@ class App {
     }
 
     initTabs() {
-        const tabButtons = document.querySelectorAll('.tabs__tab');
-        const tabPanels = document.querySelectorAll('.tabs__panel');
-
-        tabButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tabId = btn.dataset.tab;
-
-                // Buttons aktualisieren
-                tabButtons.forEach(b => b.classList.remove('tabs__tab--active'));
-                btn.classList.add('tabs__tab--active');
-
-                // Panels aktualisieren
-                tabPanels.forEach(panel => {
-                    panel.classList.toggle('tabs__panel--active', panel.id === `${tabId}Panel`);
-                });
-
-                // State aktualisieren
-                state.set('activeTab', tabId);
-                eventBus.emit(EVENTS.TAB_CHANGE, tabId);
-            });
-        });
+        // Tab-Logik ist jetzt in der Toolbar (index.html)
+        // Diese Methode bleibt für Kompatibilität, macht aber nichts mehr
     }
 
     initSidebarToggle() {

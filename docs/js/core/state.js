@@ -207,14 +207,34 @@ class AppState {
         const totalPoints = values.length;
         const average = values.reduce((a, b) => a + b, 0) / totalPoints;
 
-        // Trend: Vergleich letztes Jahr vs. vorletztes Jahr
+        // Trend: Vergleich erstes vs. letztes Jahr (aggregiert über alle Unis)
+        // Gruppiere nach Jahr und berechne Durchschnitt pro Jahr
         let trend = 0;
-        if (data.length >= 2) {
-            const sorted = [...data].sort((a, b) => b.year - a.year);
-            const lastYear = sorted[0]?.value;
-            const prevYear = sorted[1]?.value;
-            if (lastYear && prevYear) {
-                trend = ((lastYear - prevYear) / prevYear) * 100;
+        const byYear = new Map();
+        data.forEach(d => {
+            if (d.value !== null && d.value !== undefined) {
+                if (!byYear.has(d.year)) {
+                    byYear.set(d.year, []);
+                }
+                byYear.get(d.year).push(d.value);
+            }
+        });
+
+        if (byYear.size >= 2) {
+            // Sortiere Jahre und nimm erstes und letztes
+            const years = [...byYear.keys()].sort((a, b) => a - b);
+            const firstYear = years[0];
+            const lastYear = years[years.length - 1];
+
+            const firstValues = byYear.get(firstYear);
+            const lastValues = byYear.get(lastYear);
+
+            // Durchschnitt pro Jahr berechnen
+            const firstAvg = firstValues.reduce((a, b) => a + b, 0) / firstValues.length;
+            const lastAvg = lastValues.reduce((a, b) => a + b, 0) / lastValues.length;
+
+            if (firstAvg !== 0) {
+                trend = ((lastAvg - firstAvg) / firstAvg) * 100;
             }
         }
 

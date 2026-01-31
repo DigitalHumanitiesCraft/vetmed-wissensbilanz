@@ -218,7 +218,137 @@
             font-family: var(--font-family);
         }
 
-        /* Stats bar vertical variant */
+        /* ========================================
+           UNIFIED TOOLBAR
+           ======================================== */
+        .toolbar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-bg-secondary);
+            border-bottom: 1px solid var(--color-border-light);
+            flex-wrap: wrap;
+        }
+
+        .toolbar__group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .toolbar__label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .toolbar__buttons {
+            display: flex;
+            gap: 2px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-sm);
+            padding: 2px;
+        }
+
+        .toolbar__btn {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-2);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-text-muted);
+            background: transparent;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+
+        .toolbar__btn:hover {
+            color: var(--color-text);
+            background: var(--color-bg-secondary);
+        }
+
+        .toolbar__btn--active {
+            color: var(--color-primary);
+            background: var(--color-primary-light);
+        }
+
+        .toolbar__btn svg {
+            flex-shrink: 0;
+            width: 14px;
+            height: 14px;
+        }
+
+        .toolbar__divider {
+            width: 1px;
+            height: 24px;
+            background: var(--color-border);
+        }
+
+        .toolbar__spacer {
+            flex: 1;
+        }
+
+        .toolbar__stats {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            font-size: var(--font-size-xs);
+            color: var(--color-text-muted);
+        }
+
+        .toolbar__stat {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .toolbar__stat-value {
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+        }
+
+        .toolbar__stat-value--positive {
+            color: var(--color-success);
+        }
+
+        .toolbar__stat-value--negative {
+            color: var(--color-danger);
+        }
+
+        @media (max-width: 900px) {
+            .toolbar__btn span {
+                display: none;
+            }
+            .toolbar__btn {
+                padding: var(--space-2);
+            }
+            .toolbar__btn svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .toolbar {
+                gap: var(--space-2);
+            }
+            .toolbar__stats {
+                width: 100%;
+                justify-content: space-around;
+                padding-top: var(--space-2);
+                border-top: 1px solid var(--color-border-light);
+            }
+        }
+
+        /* Stats bar vertical variant (sidebar) */
         .stats-bar--vertical {
             flex-direction: column;
             align-items: flex-start;
@@ -310,49 +440,98 @@
             <!-- ========== PAGE: Dashboard ========== -->
             <div class="page page--active" id="dashboardPage">
                 <div class="main__content">
-                    <!-- Stats Bar (F4: Filter Feedback) -->
-                    <div class="stats-bar" id="mainStatsBar">
-                        <div class="stats-bar__item">
-                            <span class="stats-bar__label">Datenpunkte:</span>
-                            <span class="stats-bar__value" id="statsPoints">–</span>
-                        </div>
-                        <div class="stats-bar__item">
-                            <span class="stats-bar__label">Durchschnitt:</span>
-                            <span class="stats-bar__value" id="statsAverage">–</span>
-                        </div>
-                        <div class="stats-bar__item">
-                            <span class="stats-bar__label">Trend:</span>
-                            <span class="stats-bar__value" id="statsTrend">–</span>
-                        </div>
-                    </div>
-
-                    <!-- Data Tabs (Chart/Tabelle/Bericht) -->
+                    <!-- Unified Toolbar -->
                     <div class="card dashboard-card">
-                        <div class="tabs">
-                            <button class="tabs__tab tabs__tab--active" data-tab="chart">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
-                                </svg>
-                                Chart
-                            </button>
-                            <button class="tabs__tab" data-tab="table">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
-                                    <line x1="3" y1="9" x2="21" y2="9"/>
-                                    <line x1="3" y1="15" x2="21" y2="15"/>
-                                    <line x1="9" y1="3" x2="9" y2="21"/>
-                                </svg>
-                                Tabelle
-                            </button>
-                            <button class="tabs__tab" data-tab="report">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                    <polyline points="14,2 14,8 20,8"/>
-                                    <line x1="16" y1="13" x2="8" y2="13"/>
-                                    <line x1="16" y1="17" x2="8" y2="17"/>
-                                </svg>
-                                Bericht
-                            </button>
+                        <div class="toolbar">
+                            <!-- Output Type: Chart/Tabelle/Bericht -->
+                            <div class="toolbar__group toolbar__group--output">
+                                <span class="toolbar__label">Ausgabe:</span>
+                                <div class="toolbar__buttons">
+                                    <button class="toolbar__btn toolbar__btn--active" data-tab="chart" title="Visualisierung anzeigen">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/>
+                                        </svg>
+                                        <span>Chart</span>
+                                    </button>
+                                    <button class="toolbar__btn" data-tab="table" title="Datentabelle anzeigen">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                            <line x1="3" y1="9" x2="21" y2="9"/>
+                                            <line x1="3" y1="15" x2="21" y2="15"/>
+                                            <line x1="9" y1="3" x2="9" y2="21"/>
+                                        </svg>
+                                        <span>Tabelle</span>
+                                    </button>
+                                    <button class="toolbar__btn" data-tab="report" title="LLM-Bericht generieren">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                            <polyline points="14,2 14,8 20,8"/>
+                                            <line x1="16" y1="13" x2="8" y2="13"/>
+                                            <line x1="16" y1="17" x2="8" y2="17"/>
+                                        </svg>
+                                        <span>Bericht</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="toolbar__divider" id="vizTypeDivider"></div>
+
+                            <!-- Viz Type: Zeitreihe/Small Multiples/Heatmap/Ranking (nur bei Chart) -->
+                            <div class="toolbar__group toolbar__group--viz" id="vizTypeGroup">
+                                <span class="toolbar__label">Typ:</span>
+                                <div class="toolbar__buttons">
+                                    <button class="toolbar__btn toolbar__btn--active" data-viz="line" title="Liniendiagramm">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                        </svg>
+                                        <span>Zeitreihe</span>
+                                    </button>
+                                    <button class="toolbar__btn" data-viz="smallMultiples" title="Kleine Charts nach Uni-Typ">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="3" width="7" height="7"></rect>
+                                            <rect x="14" y="3" width="7" height="7"></rect>
+                                            <rect x="3" y="14" width="7" height="7"></rect>
+                                            <rect x="14" y="14" width="7" height="7"></rect>
+                                        </svg>
+                                        <span>Small Multiples</span>
+                                    </button>
+                                    <button class="toolbar__btn" data-viz="heatmap" title="Matrix-Ansicht">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                                            <line x1="3" y1="15" x2="21" y2="15"></line>
+                                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                                            <line x1="15" y1="3" x2="15" y2="21"></line>
+                                        </svg>
+                                        <span>Heatmap</span>
+                                    </button>
+                                    <button class="toolbar__btn" data-viz="ranking" title="Balkendiagramm sortiert">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <line x1="18" y1="20" x2="18" y2="10"></line>
+                                            <line x1="12" y1="20" x2="12" y2="4"></line>
+                                            <line x1="6" y1="20" x2="6" y2="14"></line>
+                                        </svg>
+                                        <span>Ranking</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Spacer -->
+                            <div class="toolbar__spacer"></div>
+
+                            <!-- Stats (kompakt) -->
+                            <div class="toolbar__stats">
+                                <span class="toolbar__stat" title="Anzahl Datenpunkte">
+                                    <span class="toolbar__stat-value" id="statsPoints">–</span> Punkte
+                                </span>
+                                <span class="toolbar__stat" title="Durchschnittswert">
+                                    Ø <span class="toolbar__stat-value" id="statsAverage">–</span>
+                                </span>
+                                <span class="toolbar__stat" title="Trend (erstes vs. letztes Jahr)">
+                                    <span class="toolbar__stat-value" id="statsTrend">–</span>
+                                </span>
+                            </div>
                         </div>
 
                         <div class="card__body">
@@ -448,10 +627,11 @@
     <!-- App Bootstrap -->
     <script type="module" src="js/app.js"></script>
 
-    <!-- Share Button + Stats Bar Update -->
+    <!-- Toolbar Logic + Stats Update -->
     <script type="module">
         import { state } from './js/core/state.js';
         import { router } from './js/core/router.js';
+        import { eventBus, EVENTS } from './js/core/eventBus.js';
         import { KENNZAHL_BY_CODE, formatValue } from './js/data/metadata.js';
 
         // Share Button
@@ -468,6 +648,60 @@
             }
         });
 
+        // Toolbar: Output Type (Chart/Tabelle/Bericht)
+        document.querySelectorAll('.toolbar__btn[data-tab]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tab = btn.dataset.tab;
+
+                // Update buttons
+                document.querySelectorAll('.toolbar__btn[data-tab]').forEach(b =>
+                    b.classList.remove('toolbar__btn--active'));
+                btn.classList.add('toolbar__btn--active');
+
+                // Update panels
+                document.querySelectorAll('.tabs__panel').forEach(p =>
+                    p.classList.remove('tabs__panel--active'));
+                document.getElementById(tab + 'Panel')?.classList.add('tabs__panel--active');
+
+                // Show/hide viz type buttons
+                const vizGroup = document.getElementById('vizTypeGroup');
+                const vizDivider = document.getElementById('vizTypeDivider');
+                if (tab === 'chart') {
+                    vizGroup.style.display = 'flex';
+                    vizDivider.style.display = 'block';
+                } else {
+                    vizGroup.style.display = 'none';
+                    vizDivider.style.display = 'none';
+                }
+
+                state.set('activeTab', tab);
+            });
+        });
+
+        // Toolbar: Viz Type (Zeitreihe/Small Multiples/Heatmap/Ranking)
+        document.querySelectorAll('.toolbar__btn[data-viz]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const vizType = btn.dataset.viz;
+                if (vizType === state.get('vizType')) return;
+
+                // Update buttons
+                document.querySelectorAll('.toolbar__btn[data-viz]').forEach(b =>
+                    b.classList.remove('toolbar__btn--active'));
+                btn.classList.add('toolbar__btn--active');
+
+                state.set('vizType', vizType);
+                eventBus.emit(EVENTS.VIZ_CHANGE, vizType);
+            });
+        });
+
+        // Sync viz type from state (URL restore)
+        state.subscribe('vizType', (type) => {
+            document.querySelectorAll('.toolbar__btn[data-viz]').forEach(b => {
+                b.classList.toggle('toolbar__btn--active', b.dataset.viz === type);
+            });
+        });
+
+        // Stats Update
         state.subscribe('dataStats', (stats) => {
             const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];
 
@@ -480,13 +714,13 @@
             const trendEl = document.getElementById('statsTrend');
             if (stats.trend > 0) {
                 trendEl.textContent = `+${stats.trend.toFixed(1)}%`;
-                trendEl.className = 'stats-bar__value stats-bar__value--positive';
+                trendEl.className = 'toolbar__stat-value toolbar__stat-value--positive';
             } else if (stats.trend < 0) {
                 trendEl.textContent = `${stats.trend.toFixed(1)}%`;
-                trendEl.className = 'stats-bar__value stats-bar__value--negative';
+                trendEl.className = 'toolbar__stat-value toolbar__stat-value--negative';
             } else {
                 trendEl.textContent = '0%';
-                trendEl.className = 'stats-bar__value';
+                trendEl.className = 'toolbar__stat-value';
             }
         });
     </script>

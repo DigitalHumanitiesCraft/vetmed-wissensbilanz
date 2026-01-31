@@ -218,25 +218,37 @@ class FilterPanel {
             });
         });
 
-        // Jahr-Auswahl
+        // Jahr-Auswahl mit Validierung (Bis >= Von)
         const yearStart = this.container.querySelector('#yearStart');
         const yearEnd = this.container.querySelector('#yearEnd');
 
         yearStart.addEventListener('change', (e) => {
+            const newStart = parseInt(e.target.value);
             const current = state.get('yearRange');
-            state.set('yearRange', {
-                start: parseInt(e.target.value),
-                end: Math.max(parseInt(e.target.value), current.end)
-            });
+
+            // Wenn Start > End, passe End an
+            const newEnd = Math.max(newStart, current.end);
+            state.set('yearRange', { start: newStart, end: newEnd });
+
+            // UI synchronisieren falls End angepasst wurde
+            if (newEnd !== current.end) {
+                yearEnd.value = newEnd;
+            }
             this.updateYearDisplay();
         });
 
         yearEnd.addEventListener('change', (e) => {
+            const newEnd = parseInt(e.target.value);
             const current = state.get('yearRange');
-            state.set('yearRange', {
-                start: Math.min(current.start, parseInt(e.target.value)),
-                end: parseInt(e.target.value)
-            });
+
+            // Wenn End < Start, passe Start an
+            const newStart = Math.min(current.start, newEnd);
+            state.set('yearRange', { start: newStart, end: newEnd });
+
+            // UI synchronisieren falls Start angepasst wurde
+            if (newStart !== current.start) {
+                yearStart.value = newStart;
+            }
             this.updateYearDisplay();
         });
 
