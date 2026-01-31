@@ -108,6 +108,24 @@ export const log = {
     disable() {
         localStorage.removeItem('debug');
         console.log('[Logger] Debug disabled.');
+    },
+
+    /**
+     * Debug-Level: Detaillierte technische Informationen
+     * Nur sichtbar wenn Debug-Modus aktiv
+     */
+    debug(module, message, data = null) {
+        if (!DEBUG) return;
+        const output = data ? `[${module}] ${message}` : `[${module}] ${message}`;
+        console.log('%c' + output, 'color: #6c757d', data || '');
+    },
+
+    /**
+     * Prueft ob Debug-Modus aktiv ist
+     * @returns {boolean}
+     */
+    isDebugEnabled() {
+        return DEBUG;
     }
 };
 

@@ -10,6 +10,7 @@
 
 import { state } from '../core/state.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, formatValue } from '../data/metadata.js';
+import { getUniColor } from '../utils/colorUtils.js';
 
 export class LineChart {
     /**
@@ -68,7 +69,19 @@ export class LineChart {
         if (!canvas) return;
 
         const ctx = canvas.getContext('2d');
+        const isRatio = this.options.isRatio;
         const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];
+        const secondaryKennzahl = KENNZAHL_BY_CODE[state.get('secondaryKennzahl')];
+
+        // Titel und Y-Achsen-Label fuer Ratio-Modus
+        let chartTitle, yAxisLabel;
+        if (isRatio && kennzahl && secondaryKennzahl) {
+            chartTitle = `Verhaeltnis: ${kennzahl.code} / ${secondaryKennzahl.code}`;
+            yAxisLabel = `${kennzahl.name} / ${secondaryKennzahl.name}`;
+        } else {
+            chartTitle = kennzahl ? `${kennzahl.code}: ${kennzahl.name}` : 'Kennzahl';
+            yAxisLabel = kennzahl?.unit || 'Wert';
+        }
 
         // Datasets vorbereiten
         const datasets = Object.entries(this.data).map(([uniCode, group]) => {
@@ -108,7 +121,7 @@ export class LineChart {
                 plugins: {
                     title: {
                         display: true,
-                        text: kennzahl ? `${kennzahl.code}: ${kennzahl.name}` : 'Kennzahl',
+                        text: chartTitle,
                         font: { size: 16, weight: '600' },
                         padding: { bottom: 20 }
                     },
@@ -123,7 +136,9 @@ export class LineChart {
                         cornerRadius: 8,
                         callbacks: {
                             label: (context) => {
-                                const value = formatValue(context.parsed.y, kennzahl?.unit || '');
+                                const value = isRatio
+                                    ? context.parsed.y.toFixed(3)
+                                    : formatValue(context.parsed.y, kennzahl?.unit || '');
                                 return `${context.dataset.label}: ${value}`;
                             }
                         }
@@ -147,13 +162,13 @@ export class LineChart {
                         }
                     },
                     y: {
-                        beginAtZero: kennzahl?.unit === '%' ? false : true,
+                        beginAtZero: isRatio ? false : (kennzahl?.unit === '%' ? false : true),
                         title: {
                             display: true,
-                            text: kennzahl?.unit || 'Wert'
+                            text: yAxisLabel
                         },
                         ticks: {
-                            callback: (value) => formatValue(value, kennzahl?.unit || '')
+                            callback: (value) => isRatio ? value.toFixed(2) : formatValue(value, kennzahl?.unit || '')
                         },
                         grid: {
                             color: 'rgba(0, 0, 0, 0.05)'
@@ -195,15 +210,9 @@ export class LineChart {
         });
     }
 
+    // Verwendet zentrale colorUtils - Legacy-Methode fuer Kompatibilitaet
     getColorForUni(uni) {
-        const colorMap = {
-            'voll': '#1a5490',
-            'tech': '#28a745',
-            'med': '#dc3545',
-            'kunst': '#6f42c1',
-            'weiterb': '#fd7e14'
-        };
-        return colorMap[uni.type] || '#6c757d';
+        return getUniColor(uni);
     }
 
     toggleDatasetVisibility(uniCode) {

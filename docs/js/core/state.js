@@ -18,6 +18,30 @@
  */
 
 import { eventBus, EVENTS } from './eventBus.js';
+import { log } from './logger.js';
+
+/**
+ * State-Validatoren fuer wichtige State-Keys
+ * Gibt true zurueck wenn Wert gueltig, false wenn ungueltig
+ */
+const STATE_VALIDATORS = {
+    selectedUniversities: (val) => Array.isArray(val) && val.length >= 0,
+    selectedUniTypes: (val) => Array.isArray(val),
+    yearRange: (val) => {
+        if (!val || typeof val !== 'object') return false;
+        const { start, end } = val;
+        return Number.isInteger(start) && Number.isInteger(end) &&
+               start >= 2019 && end <= 2030 && start <= end;
+    },
+    selectedKennzahl: (val) => typeof val === 'string' && val.length > 0,
+    secondaryKennzahl: (val) => val === null || (typeof val === 'string' && val.length > 0),
+    combinationType: (val) => val === null || ['dualAxis', 'ratio', 'scatter'].includes(val),
+    dualMode: (val) => typeof val === 'boolean',
+    activeTab: (val) => ['chart', 'table', 'report'].includes(val),
+    vizType: (val) => ['line', 'smallMultiples', 'heatmap', 'ranking'].includes(val),
+    isLoading: (val) => typeof val === 'boolean',
+    tutorialMode: (val) => typeof val === 'boolean'
+};
 
 class AppState {
     constructor() {
@@ -27,6 +51,11 @@ class AppState {
             selectedUniTypes: [],
             yearRange: { start: 2021, end: 2024 },
             selectedKennzahl: '1-A-1', // Default: Personal Köpfe
+
+            // Dual-Mode (Kennzahl-Kombinationen)
+            secondaryKennzahl: null, // Zweite Kennzahl fuer kombinierte Ansichten
+            dualMode: false, // Single/Dual Modus
+            combinationType: null, // 'dualAxis' | 'ratio' | 'scatter'
 
             // UI-State
             activePage: 'dashboard', // 'dashboard' | 'promptotyping' | 'about'
@@ -67,6 +96,7 @@ class AppState {
         this.loadTutorialProgress();
 
         this.subscribers = new Map();
+        this.isBatching = false; // Fuer batch() Methode
     }
 
     /**
@@ -88,20 +118,66 @@ class AppState {
 
     /**
      * Setzt einen State-Wert und benachrichtigt Subscriber
-     * @param {string} key - State-Schlüssel
+     * @param {string} key - State-Schluessel
      * @param {*} value - Neuer Wert
+     * @returns {boolean} true wenn erfolgreich, false wenn Validierung fehlschlaegt
      */
     set(key, value) {
+        // Validierung wenn Validator existiert
+        const validator = STATE_VALIDATORS[key];
+        if (validator && !validator(value)) {
+            log.warn('State', `Ungültiger Wert für ${key}:`, value);
+            return false;
+        }
+
         const oldValue = this.state[key];
         if (JSON.stringify(oldValue) === JSON.stringify(value)) {
-            return; // Keine Änderung
+            return true; // Keine Änderung, aber kein Fehler
         }
 
         this.state[key] = value;
-        this.notifySubscribers(key, value, oldValue);
 
-        // Filter-Änderungen an EventBus weiterleiten
-        if (key.startsWith('selected') || key === 'yearRange') {
+        // Nicht benachrichtigen wenn im Batch-Modus
+        if (!this.isBatching) {
+            this.notifySubscribers(key, value, oldValue);
+
+            // Filter-Änderungen an EventBus weiterleiten
+            if (key.startsWith('selected') || key === 'yearRange') {
+                eventBus.emit(EVENTS.FILTER_CHANGE, this.getFilterState());
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Batch-Update: Setzt mehrere Werte ohne zwischenzeitliche Events
+     * Events werden erst am Ende gesammelt ausgeloest
+     * @param {Object} updates - Objekt mit key-value Paaren
+     */
+    batch(updates) {
+        this.isBatching = true;
+        const changedKeys = [];
+
+        Object.entries(updates).forEach(([key, value]) => {
+            const oldValue = this.state[key];
+            if (this.set(key, value) && JSON.stringify(oldValue) !== JSON.stringify(value)) {
+                changedKeys.push({ key, oldValue, newValue: value });
+            }
+        });
+
+        this.isBatching = false;
+
+        // Jetzt alle Subscriber benachrichtigen
+        changedKeys.forEach(({ key, oldValue, newValue }) => {
+            this.notifySubscribers(key, newValue, oldValue);
+        });
+
+        // Ein FILTER_CHANGE Event wenn Filter geaendert wurden
+        const filterChanged = changedKeys.some(c =>
+            c.key.startsWith('selected') || c.key === 'yearRange'
+        );
+        if (filterChanged) {
             eventBus.emit(EVENTS.FILTER_CHANGE, this.getFilterState());
         }
     }
@@ -194,7 +270,7 @@ class AppState {
     }
 
     /**
-     * Berechnet Statistiken für die gefilterten Daten
+     * Berechnet Statistiken fuer die gefilterten Daten
      * @param {Array} data - Gefilterte Datenpunkte
      */
     calculateStats(data) {
@@ -203,16 +279,23 @@ class AppState {
             return;
         }
 
-        const values = data.map(d => d.value).filter(v => v !== null && v !== undefined);
+        const values = data.map(d => d.value).filter(v => v !== null && v !== undefined && !isNaN(v));
         const totalPoints = values.length;
+
+        // Guard: Keine gueltigen Werte
+        if (totalPoints === 0) {
+            this.set('dataStats', { totalPoints: 0, average: 0, trend: 0 });
+            return;
+        }
+
         const average = values.reduce((a, b) => a + b, 0) / totalPoints;
 
-        // Trend: Vergleich erstes vs. letztes Jahr (aggregiert über alle Unis)
+        // Trend: Vergleich erstes vs. letztes Jahr (aggregiert ueber alle Unis)
         // Gruppiere nach Jahr und berechne Durchschnitt pro Jahr
         let trend = 0;
         const byYear = new Map();
         data.forEach(d => {
-            if (d.value !== null && d.value !== undefined) {
+            if (d.value !== null && d.value !== undefined && !isNaN(d.value)) {
                 if (!byYear.has(d.year)) {
                     byYear.set(d.year, []);
                 }
@@ -233,9 +316,17 @@ class AppState {
             const firstAvg = firstValues.reduce((a, b) => a + b, 0) / firstValues.length;
             const lastAvg = lastValues.reduce((a, b) => a + b, 0) / lastValues.length;
 
+            // Division durch 0 vermeiden mit sinnvollen Edge-Cases
             if (firstAvg !== 0) {
                 trend = ((lastAvg - firstAvg) / firstAvg) * 100;
+            } else if (lastAvg > 0) {
+                // Von 0 auf positiv = maximales Wachstum (100%)
+                trend = 100;
+            } else if (lastAvg < 0) {
+                // Von 0 auf negativ = maximaler Rueckgang (-100%)
+                trend = -100;
             }
+            // Wenn beide 0 sind: trend bleibt 0
         }
 
         this.set('dataStats', {

@@ -10,6 +10,7 @@
 
 import { state } from '../core/state.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
+import { log } from '../core/logger.js';
 import { dataLoader } from '../data/dataLoader.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, UNIVERSITIES, formatValue } from '../data/metadata.js';
 
@@ -254,7 +255,7 @@ class ReportPanel {
             this.container.querySelector('#editBadge').style.display = 'none';
 
         } catch (error) {
-            console.error('[Report] generate error:', error.message);
+            log.error('ReportPanel', 'Fehler bei der Berichtsgenerierung', error);
             textarea.value = `Fehler bei der Generierung:\n${error.message}\n\n` +
                 'Hinweis: Stellen Sie sicher, dass der API Key korrekt ist und Sie Zugriff auf die API haben.';
         } finally {

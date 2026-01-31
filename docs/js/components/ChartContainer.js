@@ -59,8 +59,8 @@ class ChartContainer {
         this.showLoading(true);
 
         try {
-            const filteredData = await dataLoader.loadFiltered();
-            const groupedData = dataLoader.groupByUniversity(filteredData);
+            const isDualMode = state.get('dualMode');
+            const combinationType = state.get('combinationType');
 
             // Vorherige Visualization zerstören
             if (this.currentViz) {
@@ -77,27 +77,67 @@ class ChartContainer {
                 rankingYear: state.get('vizOptions')?.rankingYear || 2024
             };
 
-            // Neue Visualization erstellen via Factory
-            this.currentViz = VizFactory.create(
-                this.vizType,
-                vizContent,
-                groupedData,
-                options
-            );
-
-            // Rendern
-            this.currentViz.render();
+            if (isDualMode && combinationType) {
+                // Dual-Mode: Zwei Kennzahlen laden
+                await this.renderDualMode(vizContent, combinationType, options);
+            } else {
+                // Single-Mode: Eine Kennzahl
+                await this.renderSingleMode(vizContent, options);
+            }
 
             // Event emittieren
-            eventBus.emit(EVENTS.VIZ_READY, this.vizType);
+            eventBus.emit(EVENTS.VIZ_READY, isDualMode ? combinationType : this.vizType);
 
-            log.info('ChartContainer', `Rendered ${this.vizType} with ${Object.keys(groupedData).length} universities`);
         } catch (error) {
             log.error('ChartContainer', 'render error:', error.message);
             this.showError('Daten konnten nicht geladen werden.');
         } finally {
             this.showLoading(false);
         }
+    }
+
+    async renderSingleMode(vizContent, options) {
+        const filteredData = await dataLoader.loadFiltered();
+        const groupedData = dataLoader.groupByUniversity(filteredData);
+
+        // Neue Visualization erstellen via Factory
+        this.currentViz = VizFactory.create(
+            this.vizType,
+            vizContent,
+            groupedData,
+            options
+        );
+
+        this.currentViz.render();
+        log.info('ChartContainer', `Rendered ${this.vizType} with ${Object.keys(groupedData).length} universities`);
+    }
+
+    async renderDualMode(vizContent, combinationType, options) {
+        const dualData = await dataLoader.loadDualFiltered();
+
+        // Gruppierte Daten vorbereiten
+        const dualGrouped = {
+            primaryGrouped: dataLoader.groupByUniversity(dualData.primary),
+            secondaryGrouped: dataLoader.groupByUniversity(dualData.secondary),
+            merged: dualData.merged
+        };
+
+        // Bei Ratio: Verhaeltnis berechnen und gruppieren
+        if (combinationType === 'ratio') {
+            const ratioData = dataLoader.calculateRatio(dualData.primary, dualData.secondary);
+            dualGrouped.ratioGrouped = dataLoader.groupByUniversity(ratioData);
+        }
+
+        // Dual-Visualization erstellen via Factory
+        this.currentViz = VizFactory.createDual(
+            combinationType,
+            vizContent,
+            dualGrouped,
+            options
+        );
+
+        this.currentViz.render();
+        log.info('ChartContainer', `Rendered dual-mode ${combinationType} with ${Object.keys(dualGrouped.primaryGrouped).length} universities`);
     }
 
     showLoading(show) {

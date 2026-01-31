@@ -10,7 +10,8 @@
  * - Universitäts-Typ-Gruppen
  * - Einzelne Universitäten
  * - Zeitraum-Slider
- * - Kennzahl-Auswahl
+ *
+ * Hinweis: Kennzahl-Auswahl wurde in die Toolbar verschoben
  */
 
 import { state } from '../core/state.js';
@@ -18,9 +19,7 @@ import { eventBus, EVENTS } from '../core/eventBus.js';
 import {
     UNIVERSITIES,
     UNIVERSITIES_BY_TYPE,
-    UNI_TYPES,
-    KENNZAHLEN_BY_CATEGORY,
-    KENNZAHL_CATEGORIES
+    UNI_TYPES
 } from '../data/metadata.js';
 
 class FilterPanel {
@@ -57,13 +56,6 @@ class FilterPanel {
                         </select>
                     </div>
                 </div>
-            </div>
-
-            <div class="sidebar__section">
-                <h3 class="sidebar__section-title">Kennzahl</h3>
-                <select class="form-select" id="kennzahlSelect">
-                    ${this.renderKennzahlOptions()}
-                </select>
             </div>
 
             <div class="sidebar__footer">
@@ -129,27 +121,10 @@ class FilterPanel {
     }
 
     renderYearOptions(selected, type) {
-        const years = [2019, 2020, 2021, 2022, 2023];
+        const years = [2019, 2020, 2021, 2022, 2023, 2024];
         return years.map(year => `
             <option value="${year}" ${year === selected ? 'selected' : ''}>${year}</option>
         `).join('');
-    }
-
-    renderKennzahlOptions() {
-        const selectedKennzahl = state.get('selectedKennzahl');
-
-        return Object.values(KENNZAHL_CATEGORIES).map(cat => {
-            const kennzahlen = KENNZAHLEN_BY_CATEGORY[cat.id] || [];
-            return `
-                <optgroup label="${cat.name}">
-                    ${kennzahlen.map(k => `
-                        <option value="${k.code}" ${k.code === selectedKennzahl ? 'selected' : ''}>
-                            ${k.code}: ${k.name}
-                        </option>
-                    `).join('')}
-                </optgroup>
-            `;
-        }).join('');
     }
 
     attachEventListeners() {
@@ -250,11 +225,6 @@ class FilterPanel {
                 yearStart.value = newStart;
             }
             this.updateYearDisplay();
-        });
-
-        // Kennzahl-Auswahl
-        this.container.querySelector('#kennzahlSelect').addEventListener('change', (e) => {
-            state.set('selectedKennzahl', e.target.value);
         });
 
         // Reset-Button

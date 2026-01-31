@@ -8,11 +8,24 @@
  *
  * URL-Format:
  *   ?unis=UI,UN&k=1-A-1&von=2021&bis=2024&tab=chart&viz=heatmap&tutorial=filters
+ *
+ * Dual-Mode-Parameter:
+ *   &k2=1-A-1-VZA  - Zweite Kennzahl
+ *   &comb=scatter  - Kombinations-Typ (dualAxis, ratio, scatter)
  */
 
 import { state } from './state.js';
 import { eventBus, EVENTS } from './eventBus.js';
 import { log } from './logger.js';
+import { UNI_BY_CODE, KENNZAHL_BY_CODE } from '../data/metadata.js';
+
+// Gueltige Werte fuer URL-Parameter
+const VALID_PAGES = ['dashboard', 'promptotyping', 'about'];
+const VALID_TABS = ['chart', 'table', 'report'];
+const VALID_VIZ_TYPES = ['line', 'smallMultiples', 'heatmap', 'ranking'];
+const VALID_COMBO_TYPES = ['dualAxis', 'ratio', 'scatter'];
+const VALID_TUTORIAL_SECTIONS = ['filters', 'viz', 'reports'];
+const VALID_YEAR_RANGE = { min: 2019, max: 2030 };
 
 class Router {
     constructor() {
@@ -70,7 +83,7 @@ class Router {
     }
 
     /**
-     * Liest Filter-State aus URL-Parametern
+     * Liest Filter-State aus URL-Parametern mit Validierung
      */
     loadFromUrl() {
         this.isUpdating = true;
@@ -78,65 +91,97 @@ class Router {
         try {
             const params = new URLSearchParams(window.location.search);
 
-            // Universitäten
+            // Universitaeten - nur gueltige Codes akzeptieren
             const unis = params.get('unis');
             if (unis) {
-                const uniList = unis.split(',').filter(u => u.trim());
-                if (uniList.length > 0) {
-                    state.set('selectedUniversities', uniList);
-                    log.info('Router', `Loaded unis from URL: ${uniList.join(', ')}`);
+                const validUnis = unis.split(',')
+                    .map(u => u.trim())
+                    .filter(u => UNI_BY_CODE[u]); // Nur bekannte Uni-Codes
+
+                if (validUnis.length > 0) {
+                    state.set('selectedUniversities', validUnis);
+                    log.info('Router', `Loaded unis from URL: ${validUnis.join(', ')}`);
+                } else {
+                    log.warn('Router', `No valid university codes in URL: ${unis}`);
                 }
             }
 
-            // Kennzahl
+            // Kennzahl (primaer) - validieren gegen Metadaten
             const kennzahl = params.get('k');
             if (kennzahl) {
-                state.set('selectedKennzahl', kennzahl);
-                log.info('Router', `Loaded kennzahl from URL: ${kennzahl}`);
+                if (KENNZAHL_BY_CODE[kennzahl]) {
+                    state.set('selectedKennzahl', kennzahl);
+                    log.info('Router', `Loaded kennzahl from URL: ${kennzahl}`);
+                } else {
+                    log.warn('Router', `Unknown kennzahl code in URL: ${kennzahl}`);
+                }
             }
 
-            // Zeitraum
+            // Zweite Kennzahl (Dual-Mode) - validieren
+            const secondaryKennzahl = params.get('k2');
+            if (secondaryKennzahl) {
+                if (KENNZAHL_BY_CODE[secondaryKennzahl]) {
+                    state.set('secondaryKennzahl', secondaryKennzahl);
+                    state.set('dualMode', true);
+                    log.info('Router', `Loaded secondary kennzahl from URL: ${secondaryKennzahl}`);
+                } else {
+                    log.warn('Router', `Unknown secondary kennzahl code in URL: ${secondaryKennzahl}`);
+                }
+            }
+
+            // Kombinations-Typ (Dual-Mode)
+            const combinationType = params.get('comb');
+            if (combinationType && VALID_COMBO_TYPES.includes(combinationType)) {
+                state.set('combinationType', combinationType);
+                log.info('Router', `Loaded combination type from URL: ${combinationType}`);
+            }
+
+            // Zeitraum - mit Bereichsvalidierung und Korrektur
             const start = params.get('von');
             const end = params.get('bis');
-            if (start && end) {
-                const startYear = parseInt(start);
-                const endYear = parseInt(end);
-                if (!isNaN(startYear) && !isNaN(endYear) && startYear <= endYear) {
-                    state.set('yearRange', { start: startYear, end: endYear });
-                    log.info('Router', `Loaded yearRange from URL: ${startYear}-${endYear}`);
-                }
+            if (start || end) {
+                let startYear = parseInt(start) || VALID_YEAR_RANGE.min;
+                let endYear = parseInt(end) || VALID_YEAR_RANGE.max;
+
+                // Werte auf gueltigen Bereich begrenzen
+                startYear = Math.max(VALID_YEAR_RANGE.min, Math.min(VALID_YEAR_RANGE.max, startYear));
+                endYear = Math.max(startYear, Math.min(VALID_YEAR_RANGE.max, endYear));
+
+                state.set('yearRange', { start: startYear, end: endYear });
+                log.info('Router', `Loaded yearRange from URL: ${startYear}-${endYear}`);
             }
 
             // Page (dashboard, promptotyping, about)
             const page = params.get('page');
-            if (page && ['dashboard', 'promptotyping', 'about'].includes(page)) {
+            if (page && VALID_PAGES.includes(page)) {
                 state.set('activePage', page);
                 this.activatePage(page);
             }
 
             // Tab (nur relevant auf Dashboard)
             const tab = params.get('tab');
-            if (tab && ['chart', 'table', 'report'].includes(tab)) {
+            if (tab && VALID_TABS.includes(tab)) {
                 state.set('activeTab', tab);
-                // Tab-UI aktualisieren
                 this.activateTab(tab);
             }
 
-            // Visualization Type (nur relevant wenn tab=chart)
+            // Visualization Type
             const viz = params.get('viz');
-            if (viz && ['line', 'smallMultiples', 'heatmap', 'ranking'].includes(viz)) {
+            if (viz && VALID_VIZ_TYPES.includes(viz)) {
                 state.set('vizType', viz);
                 log.info('Router', `Loaded vizType from URL: ${viz}`);
             }
 
             // Tutorial Section
             const tutorial = params.get('tutorial');
-            if (tutorial && ['filters', 'viz', 'reports'].includes(tutorial)) {
+            if (tutorial && VALID_TUTORIAL_SECTIONS.includes(tutorial)) {
                 state.set('tutorialSection', tutorial);
-                state.set('tutorialMode', true); // Implizit aktivieren
+                state.set('tutorialMode', true);
                 log.info('Router', `Loaded tutorial section from URL: ${tutorial}`);
             }
 
+        } catch (error) {
+            log.error('Router', 'Error loading from URL', error);
         } finally {
             this.isUpdating = false;
         }
@@ -163,6 +208,16 @@ class Router {
 
         if (filterState.kennzahl && filterState.kennzahl !== '1-A-1') {
             params.set('k', filterState.kennzahl);
+        }
+
+        // Dual-Mode: Zweite Kennzahl und Kombinations-Typ
+        const secondaryKennzahl = state.get('secondaryKennzahl');
+        const combinationType = state.get('combinationType');
+        if (secondaryKennzahl) {
+            params.set('k2', secondaryKennzahl);
+        }
+        if (combinationType) {
+            params.set('comb', combinationType);
         }
 
         // Zeitraum nur wenn nicht Default (2021-2024)

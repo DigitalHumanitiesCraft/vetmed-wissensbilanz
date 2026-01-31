@@ -10,8 +10,10 @@
 
 import { state } from '../core/state.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
+import { log } from '../core/logger.js';
 import { dataLoader } from '../data/dataLoader.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, formatValue } from '../data/metadata.js';
+import { getUniColor } from '../utils/colorUtils.js';
 import { createSparkline, groupDataByUni } from '../visualizations/SparklineRenderer.js';
 
 class DataTable {
@@ -120,8 +122,8 @@ class DataTable {
             this.data = await dataLoader.loadFiltered();
             this.renderTable();
         } catch (error) {
-            console.error('[Table] load error:', error.message);
-            this.showError('Daten konnten nicht geladen werden.');
+            log.error('DataTable', 'Fehler beim Laden der Daten', error);
+            this.showError('Daten konnten nicht geladen werden. Bitte versuchen Sie es erneut.');
         }
     }
 
@@ -143,7 +145,7 @@ class DataTable {
                 return `
                     <tr>
                         <td>
-                            <span class="uni-badge" style="--uni-color: ${this.getUniColor(uni)};">
+                            <span class="uni-badge" style="--uni-color: ${this.getUniColorForCell(uni)};">
                                 ${uni?.shortName || row.uniCode}
                             </span>
                         </td>
@@ -215,15 +217,9 @@ class DataTable {
         return { text: formatValue(value, unit), class: '' };
     }
 
-    getUniColor(uni) {
-        const colorMap = {
-            'voll': '#1a5490',
-            'tech': '#28a745',
-            'med': '#dc3545',
-            'kunst': '#6f42c1',
-            'weiterb': '#fd7e14'
-        };
-        return colorMap[uni?.type] || '#6c757d';
+    // Verwendet zentrale colorUtils
+    getUniColorForCell(uni) {
+        return getUniColor(uni);
     }
 
     updateSortIndicators() {

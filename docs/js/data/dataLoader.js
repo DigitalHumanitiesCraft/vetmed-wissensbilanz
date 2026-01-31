@@ -201,6 +201,134 @@ class DataLoader {
         return data;
     }
 
+    // ========================================
+    // DUAL-MODE METHODEN
+    // ========================================
+
+    /**
+     * Lädt Daten für beide Kennzahlen im Dual-Mode
+     * @returns {Promise<Object>} { primary, secondary, merged }
+     */
+    async loadDualFiltered() {
+        const filterState = state.getFilterState();
+        const primaryCode = filterState.kennzahl;
+        const secondaryCode = state.get('secondaryKennzahl');
+
+        if (!secondaryCode) {
+            // Fallback auf Single-Mode
+            const primary = await this.loadFiltered();
+            return { primary, secondary: null, merged: null };
+        }
+
+        // Parallel laden
+        const [primaryRaw, secondaryRaw] = await Promise.all([
+            this.loadKennzahl(primaryCode),
+            this.loadKennzahl(secondaryCode)
+        ]);
+
+        // Filter anwenden
+        const filterFn = (point) => {
+            if (filterState.universities.length > 0) {
+                if (!filterState.universities.includes(point.uniCode)) {
+                    return false;
+                }
+            }
+            if (filterState.uniTypes.length > 0) {
+                const uni = UNI_BY_CODE[point.uniCode];
+                if (!uni || !filterState.uniTypes.includes(uni.type)) {
+                    return false;
+                }
+            }
+            if (point.year < filterState.yearRange.start ||
+                point.year > filterState.yearRange.end) {
+                return false;
+            }
+            return true;
+        };
+
+        const primary = primaryRaw.filter(filterFn);
+        const secondary = secondaryRaw.filter(filterFn);
+
+        // Merge für Korrelation (Scatter)
+        const merged = this.mergeDataForCorrelation(primary, secondary);
+
+        // Stats berechnen (nur für Primary)
+        state.calculateStats(primary);
+        state.set('filteredData', primary);
+
+        return { primary, secondary, merged };
+    }
+
+    /**
+     * Merged zwei Datensätze für Korrelationsanalyse
+     * Matched by uniCode + year
+     * @param {Array} primary - Primäre Datenpunkte
+     * @param {Array} secondary - Sekundäre Datenpunkte
+     * @returns {Array} Gematchte { x, y, uniCode, year } Paare
+     */
+    mergeDataForCorrelation(primary, secondary) {
+        const merged = [];
+
+        // Index für schnellen Lookup
+        const secondaryIndex = new Map();
+        secondary.forEach(point => {
+            const key = `${point.uniCode}_${point.year}`;
+            secondaryIndex.set(key, point.value);
+        });
+
+        // Matche primary mit secondary
+        primary.forEach(point => {
+            const key = `${point.uniCode}_${point.year}`;
+            const secondaryValue = secondaryIndex.get(key);
+
+            if (secondaryValue !== undefined && point.value !== null && secondaryValue !== null) {
+                merged.push({
+                    x: point.value,
+                    y: secondaryValue,
+                    uniCode: point.uniCode,
+                    year: point.year,
+                    university: UNI_BY_CODE[point.uniCode]
+                });
+            }
+        });
+
+        return merged;
+    }
+
+    /**
+     * Berechnet Verhältnis zwischen zwei Kennzahlen
+     * @param {Array} primary - Zähler
+     * @param {Array} secondary - Nenner
+     * @returns {Array} Verhältnis-Datenpunkte
+     */
+    calculateRatio(primary, secondary) {
+        const ratioData = [];
+
+        // Index für schnellen Lookup
+        const secondaryIndex = new Map();
+        secondary.forEach(point => {
+            const key = `${point.uniCode}_${point.year}`;
+            secondaryIndex.set(key, point.value);
+        });
+
+        primary.forEach(point => {
+            const key = `${point.uniCode}_${point.year}`;
+            const secondaryValue = secondaryIndex.get(key);
+
+            if (secondaryValue && secondaryValue !== 0 && point.value !== null) {
+                ratioData.push({
+                    uniCode: point.uniCode,
+                    year: point.year,
+                    value: point.value / secondaryValue,
+                    primaryValue: point.value,
+                    secondaryValue: secondaryValue
+                });
+            }
+        });
+
+        return ratioData;
+    }
+
     /**
      * Leert den Cache
      */

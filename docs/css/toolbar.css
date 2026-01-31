@@ -1,0 +1,257 @@
+/**
+ * Toolbar Styles
+ *
+ * Unified Toolbar fuer das Wissensbilanz Dashboard.
+ * Enthaelt Kennzahl-Selector, Dual-Mode Controls, Output-Tabs, Viz-Type Buttons.
+ */
+
+/* ========================================
+   TOOLBAR CONTAINER
+   ======================================== */
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-3) var(--space-4);
+    background: var(--color-bg-secondary);
+    border-bottom: 1px solid var(--color-border-light);
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   TOOLBAR GROUPS
+   ======================================== */
+
+.toolbar__group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.toolbar__group--kennzahl {
+    flex-shrink: 0;
+}
+
+.toolbar__group--secondary .toolbar__label {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-muted);
+}
+
+.toolbar__group--combination .toolbar__btn--active {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+/* Hidden State fuer Gruppen */
+.toolbar__group--hidden {
+    display: none;
+}
+
+/* ========================================
+   TOOLBAR LABELS
+   ======================================== */
+
+.toolbar__label {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* ========================================
+   TOOLBAR BUTTONS
+   ======================================== */
+
+.toolbar__buttons {
+    display: flex;
+    gap: 2px;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    padding: 2px;
+}
+
+.toolbar__btn {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+}
+
+.toolbar__btn:hover {
+    color: var(--color-text);
+    background: var(--color-bg-secondary);
+}
+
+.toolbar__btn--active {
+    color: var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+.toolbar__btn svg {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+}
+
+/* Icon-Only Buttons */
+.toolbar__btn--icon {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius-sm);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.toolbar__btn--icon:hover {
+    background: var(--color-primary-light);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* Remove Button */
+.toolbar__btn--remove {
+    color: var(--color-danger);
+    border-color: transparent;
+    background: transparent;
+}
+
+.toolbar__btn--remove:hover {
+    background: color-mix(in srgb, var(--color-danger) 10%, transparent);
+    color: var(--color-danger);
+}
+
+/* ========================================
+   TOOLBAR SELECT
+   ======================================== */
+
+.toolbar__select {
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    min-width: 180px;
+    max-width: 280px;
+}
+
+.toolbar__select:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px var(--color-primary-light);
+}
+
+/* ========================================
+   TOOLBAR UNIT BADGE
+   ======================================== */
+
+.toolbar__unit {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    background: var(--color-bg-tertiary);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--border-radius-sm);
+    white-space: nowrap;
+}
+
+/* ========================================
+   TOOLBAR DIVIDER & SPACER
+   ======================================== */
+
+.toolbar__divider {
+    width: 1px;
+    height: 24px;
+    background: var(--color-border);
+}
+
+.toolbar__spacer {
+    flex: 1;
+}
+
+/* ========================================
+   TOOLBAR STATS
+   ======================================== */
+
+.toolbar__stats {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.toolbar__stat {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+}
+
+.toolbar__stat-value {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+}
+
+.toolbar__stat-value--positive {
+    color: var(--color-success);
+}
+
+.toolbar__stat-value--negative {
+    color: var(--color-danger);
+}
+
+/* ========================================
+   RESPONSIVE: TABLET
+   ======================================== */
+
+@media (max-width: 900px) {
+    .toolbar__btn span {
+        display: none;
+    }
+
+    .toolbar__btn {
+        padding: var(--space-2);
+    }
+
+    .toolbar__btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* ========================================
+   RESPONSIVE: MOBILE
+   ======================================== */
+
+@media (max-width: 640px) {
+    .toolbar {
+        gap: var(--space-2);
+    }
+
+    .toolbar__stats {
+        width: 100%;
+        justify-content: space-around;
+        padding-top: var(--space-2);
+        border-top: 1px solid var(--color-border-light);
+    }
+}

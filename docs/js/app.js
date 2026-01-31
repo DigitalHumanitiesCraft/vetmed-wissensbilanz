@@ -13,7 +13,7 @@ import { initFilterPanel } from './components/FilterPanel.js';
 import { initChartContainer } from './components/ChartContainer.js';
 import { initDataTable } from './components/DataTable.js';
 import { initReportPanel } from './components/ReportPanel.js';
-// VizSelector ist jetzt in der Toolbar integriert (index.html)
+import { initToolbar } from './components/Toolbar.js';
 import { initPromptotypingPage } from './tutorial/PromptotypingPage.js';
 import { initTutorialBadgeSystem, tutorialBadgeSystem } from './tutorial/TutorialBadgeSystem.js';
 import { initAnnotationModal } from './tutorial/AnnotationModal.js';
@@ -51,13 +51,16 @@ class App {
     }
 
     initComponents() {
+        // Toolbar (Kennzahl-Selektor, Dual-Mode, Tabs, etc.)
+        this.components.toolbar = initToolbar();
+
         // Filter Panel
         const sidebarEl = document.querySelector('.sidebar');
         if (sidebarEl) {
             this.components.filterPanel = initFilterPanel(sidebarEl);
         }
 
-        // Chart Container (VizSelector ist jetzt in der Toolbar integriert)
+        // Chart Container
         const chartEl = document.querySelector('#chartPanel');
         if (chartEl) {
             this.components.chart = initChartContainer(chartEl);

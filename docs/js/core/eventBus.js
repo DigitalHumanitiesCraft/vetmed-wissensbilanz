@@ -17,9 +17,12 @@
  *   eventBus.off('filter:change', handler);
  */
 
+import { log } from './logger.js';
+
 class EventBus {
     constructor() {
         this.listeners = new Map();
+        this.debounceTimers = new Map();
     }
 
     /**
@@ -67,21 +70,48 @@ class EventBus {
     }
 
     /**
-     * Löst ein Event aus
+     * Loest ein Event aus
      * @param {string} event - Event-Name
      * @param {*} data - Event-Daten
      */
     emit(event, data) {
+        // Debug-Logging wenn aktiviert
+        if (log.isDebugEnabled?.()) {
+            log.debug('EventBus', `Emit: ${event}`, data);
+        }
+
         const callbacks = this.listeners.get(event);
         if (callbacks && callbacks.size > 0) {
             callbacks.forEach(callback => {
                 try {
                     callback(data);
                 } catch (error) {
-                    console.error(`[Event] ${event} error:`, error.message);
+                    log.error('EventBus', `${event} handler error:`, error.message);
                 }
             });
         }
+    }
+
+    /**
+     * Loest ein Event mit Debounce aus (fuer haeufige Events wie FILTER_CHANGE)
+     * Mehrere Aufrufe innerhalb des Delays werden zu einem zusammengefasst
+     * @param {string} event - Event-Name
+     * @param {*} data - Event-Daten
+     * @param {number} delay - Debounce-Delay in ms (default: 100)
+     */
+    emitDebounced(event, data, delay = 100) {
+        // Vorherigen Timer loeschen
+        if (this.debounceTimers.has(event)) {
+            clearTimeout(this.debounceTimers.get(event));
+        }
+
+        // Neuen Timer setzen
+        const timer = setTimeout(() => {
+            this.emit(event, data);
+            this.debounceTimers.delete(event);
+        }, delay);
+
+        this.debounceTimers.set(event, timer);
     }
 
     /**

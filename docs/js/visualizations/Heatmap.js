@@ -11,6 +11,7 @@
 
 import { state } from '../core/state.js';
 import { KENNZAHL_BY_CODE, formatValue, UNI_TYPES } from '../data/metadata.js';
+import { getUniColor, getUniColorWithAlpha } from '../utils/colorUtils.js';
 
 export class Heatmap {
     constructor(container, data, options = {}) {
@@ -132,23 +133,15 @@ export class Heatmap {
         // Normalisieren auf 0-1
         const normalized = (value - valueRange.min) / (valueRange.max - valueRange.min);
 
-        // Farbe basierend auf Uni-Typ mit Opacity
-        const uniColor = UNI_TYPES[row.university.type]?.color || '#1a5490';
-        const opacity = Math.round(20 + normalized * 80); // 20-100%
+        // Farbe basierend auf Uni-Typ mit Opacity (20-100%)
+        const opacity = 0.2 + normalized * 0.8;
 
         return {
             value,
             formatted: formatValue(value, kennzahl?.unit || ''),
-            color: this.hexToRgba(uniColor, opacity / 100),
+            color: getUniColorWithAlpha(row.university, opacity),
             isNull: false
         };
-    }
-
-    hexToRgba(hex, alpha) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     }
 
     attachEventListeners() {

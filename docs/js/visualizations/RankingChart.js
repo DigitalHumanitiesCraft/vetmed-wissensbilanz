@@ -9,6 +9,7 @@
 
 import { state } from '../core/state.js';
 import { KENNZAHL_BY_CODE, formatValue, UNI_TYPES } from '../data/metadata.js';
+import { getUniColor } from '../utils/colorUtils.js';
 
 export class RankingChart {
     constructor(container, data, options = {}) {
@@ -85,7 +86,7 @@ export class RankingChart {
 
         return rankings.map((item, index) => {
             const percent = (item.value / maxValue) * 100;
-            const color = UNI_TYPES[item.university.type]?.color || '#1a5490';
+            const color = getUniColor(item.university);
 
             return `
                 <div class="ranking-bar" data-uni="${item.uniCode}">

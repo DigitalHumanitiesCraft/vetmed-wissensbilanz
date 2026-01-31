@@ -10,6 +10,7 @@
 import { state } from '../core/state.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
 import { KENNZAHL_BY_CODE, UNI_TYPES, formatValue } from '../data/metadata.js';
+import { getUniColor } from '../utils/colorUtils.js';
 
 export class SmallMultiples {
     constructor(container, data, options = {}) {
