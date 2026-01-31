@@ -23,6 +23,7 @@ Destillierte Erkenntnisse aus dem Promptotyping-Prozess.
 | [[L006-Vanilla-JS-Lernbarkeit]] | Vanilla JS + ES6 Modules für Lernbarkeit | 2026-01-30 | Technologie |
 | [[L007-Demo-Daten-Fallback]] | Demo-Daten als Fallback-Strategie | 2026-01-30 | Robustheit |
 | [[L008-Vault-Refactoring]] | Wissensstrukturierung als Obsidian Vault | 2026-01-30 | Dokumentation |
+| [[L009-Annotated-Interface]] | Annotated Interface macht Methoden erlebbar | 2026-01-30 | Didaktik |
 
 ---
 
@@ -36,6 +37,7 @@ Destillierte Erkenntnisse aus dem Promptotyping-Prozess.
 ### Didaktik & Dokumentation
 - [[L004-Lehrbeispiel-Struktur]]
 - [[L008-Vault-Refactoring]]
+- [[L009-Annotated-Interface]]
 
 ### Technische Entscheidungen
 - [[L006-Vanilla-JS-Lernbarkeit]]
