@@ -13,7 +13,8 @@ Dieses Projekt ist beides: ein funktionales Tool zur Analyse von Universitaets-K
 Features:
 - Vergleich aller 22 österreichischen Universitäten
 - 19 Kennzahlen (Personal, Studierende, Forschung)
-- 4 Visualisierungstypen (Zeitreihe, Small Multiples, Heatmap, Ranking)
+- 7 Visualisierungstypen (Zeitreihe, Small Multiples, Heatmap, Ranking, DualAxis, Scatter, Ratio)
+- **Dual-Mode Kennzahl-Kombinationen**: Zwei Kennzahlen gleichzeitig analysieren
 - LLM-gestützte Berichtsgenerierung (Claude API)
 - Teilbare URLs für Filter-Zustände
 - **Tutorial-Badge-System**: Interaktives Lernen der Promptotyping-Methode direkt im UI
@@ -57,7 +58,7 @@ Das Besondere: Das LLM unterstuetzt nicht nur beim Coden, sondern auch beim Vers
 | Excel-zu-JSON Konvertierung | DONE - 19 Dateien konvertiert |
 | Frontend/Dashboard | DONE |
 | Filter-System (F1-F4) | DONE - Universitaeten, Zeitraum, Kennzahlen |
-| Visualisierung (Chart.js) | DONE - 4 Typen: Line, Small Multiples, Heatmap, Ranking |
+| Visualisierung (Chart.js) | DONE - 7 Typen: Line, Small Multiples, Heatmap, Ranking, DualAxis, Scatter, Ratio |
 | Datentabelle mit Sparklines | DONE - Sortierbar, CSV-Export, Mini-Zeitreihen |
 | LLM-Berichtsgenerierung | DONE - 4 Templates, editierbar |
 | URL-State Sync | DONE - Teilbare Links |
@@ -79,12 +80,25 @@ vetmed-wissensbilanz/
 |   +-- 05-Journal/              # Chronologisches Log
 +-- data/                        # Excel-Rohdaten (79 Dateien)
 +-- scripts/                     # Python-Skripte
-|   +-- convert_excel_to_json.py
+|   +-- convert.py               # Unified Excel-zu-JSON Konverter
 +-- docs/                        # Dashboard (produktionsreif)
     +-- index.html               # SPA-Einstiegspunkt
     +-- css/                     # Design-System
+    |   +-- tokens.css           # CSS Custom Properties
+    |   +-- layout.css           # Grid, Flexbox
+    |   +-- components.css       # Buttons, Cards, etc.
+    |   +-- toolbar.css          # Toolbar-Styles
+    |   +-- dashboard.css        # Chart/Dashboard-Styles
+    |   +-- visualizations.css   # Chart-spezifische Styles
+    |   +-- tutorial-badges.css  # Tutorial-System
     +-- js/                      # Vanilla JS + ES6 Modules
-    +-- data/json/               # Konvertierte Kennzahlen
+    |   +-- core/                # State, EventBus, Router, Logger
+    |   +-- data/                # DataLoader, Metadata
+    |   +-- components/          # FilterPanel, ChartContainer, Toolbar
+    |   +-- visualizations/      # 7 Chart-Typen (Line, Heatmap, etc.)
+    |   +-- utils/               # colorUtils, formatUtils
+    |   +-- tutorial/            # Badge-System, VaultBrowser
+    +-- data/json/               # Konvertierte Kennzahlen (19 Dateien)
 ```
 
 ## Wie ist das Projekt entstanden?
@@ -100,14 +114,17 @@ Das [Journal](knowledge/05-Journal/) dokumentiert den gesamten Prozess chronolog
 7. **30.01.2026**: 4 Visualisierungstypen (Zeitreihe, Small Multiples, Heatmap, Ranking)
 8. **30.01.2026**: Promptotyping-Tutorial mit Vault-Navigation
 9. **30.01.2026**: **Annotated Interface** – Tutorial-Badges zeigen Entstehungsgeschichte
+10. **31.01.2026**: **Umfassendes Refactoring** – CSS/JS/Python zentralisiert, Dual-Mode Visualisierungen
 
 Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 
 ## Naechste Schritte
 
 - [x] GitHub Pages Deployment
-- [ ] Extended Views (Kennzahl-Kombinationen)
+- [x] Extended Views (Kennzahl-Kombinationen) – Dual-Mode mit DualAxis, Scatter, Ratio
+- [x] Code-Refactoring – CSS/JS/Python zentralisiert
 - [ ] Hypothesen H1-H4 validieren
+- [ ] End-to-End Tests fuer alle Visualisierungen
 
 ## Kontakt
 
