@@ -6,7 +6,7 @@ tags: [learning, didaktik]
 # L004: Repository als Lehrbeispiel strukturieren
 
 **Datum:** 2026-01-30
-**Kontext:** Vorbereitung des Repositories für Workshop mit Michael Forster
+**Kontext:** Vorbereitung des Repositories als Lehrbeispiel
 
 ---
 
@@ -37,7 +37,7 @@ Dieses Repository ist sowohl:
 1. **Softwareprojekt** (Dashboard in `docs/`)
 2. **Lehrbeispiel** (Promptotyping-Methode in `knowledge/`)
 
-Die Dokumentation erklärt nicht nur WAS gebaut wurde, sondern WIE und WARUM.
+Die Dokumentation erklaert nicht nur WAS gebaut wurde, sondern WIE und WARUM.
 
 ---
 

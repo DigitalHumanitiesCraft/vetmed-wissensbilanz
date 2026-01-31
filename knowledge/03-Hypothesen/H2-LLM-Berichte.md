@@ -1,10 +1,10 @@
 ---
 created: 2026-01-30
-status: offen
-tags: [validierung/offen, workshop/vorbereitung]
+status: active
+tags: [status/active, phase/destillation]
 ---
 
-# H2: LLM-gestützte Berichterstellung
+# H2: LLM-gestuetzte Berichterstellung
 
 ## User Story
 
@@ -14,49 +14,31 @@ tags: [validierung/offen, workshop/vorbereitung]
 
 ## Annahme
 
-Forster schreibt regelmäßig Texte, die Kennzahlen interpretieren. Diese Texte folgen einem ähnlichen Muster und könnten teilweise automatisiert werden.
+Der Fachverantwortliche schreibt regelmaessig Texte, die Kennzahlen interpretieren. Diese Texte folgen einem aehnlichen Muster und koennten teilweise automatisiert werden.
 
 **Konfidenz:** mittel
 
 ---
 
-## Validierungsfragen
-
-1. "Beschreiben Sie, wie Sie einen Wissensbilanz-Bericht erstellen."
-2. "Welcher Teil dauert am längsten?"
-3. "Gibt es Textbausteine, die Sie wiederverwenden?"
-
----
-
-## Implikation für das Dashboard
+## Implikation fuer das Dashboard
 
 | Wenn validiert | Wenn falsifiziert |
 |----------------|-------------------|
 | LLM-Berichtsgenerierung ist Kernfeature | LLM-Integration optional |
 | Verschiedene Report-Templates anbieten | Nur Export (CSV/PNG) |
-| Prompt-Vorlagen für verschiedene Zwecke | Keine Prompts nötig |
+| Prompt-Vorlagen fuer verschiedene Zwecke | Keine Prompts noetig |
 
 ---
 
 ## Implementierte Templates
 
-| Template | Länge | Verwendung |
-|----------|-------|------------|
-| Zusammenfassung | max. 150 Wörter | Schneller Überblick |
-| Vergleich | max. 300 Wörter | Uni A vs. B |
-| Trend-Fokus | max. 200 Wörter | Jahresveränderungen |
-| Auffälligkeiten | max. 200 Wörter | Anomalie-Erkennung |
+| Template | Laenge | Verwendung |
+|----------|--------|------------|
+| Zusammenfassung | max. 150 Woerter | Schneller Ueberblick |
+| Vergleich | max. 300 Woerter | Uni A vs. B |
+| Trend-Fokus | max. 200 Woerter | Jahresveraenderungen |
+| Auffaelligkeiten | max. 200 Woerter | Anomalie-Erkennung |
 
 ---
 
-## Status nach Workshop
-
-- [ ] Validiert
-- [ ] Falsifiziert
-- [ ] Modifiziert
-
-**Notizen:** (nach Workshop ausfüllen)
-
----
-
-*Verknüpft mit: [[03-Hypothesen/index]], [[UI-Prinzipien]] (R1-R6)*
+*Verknuepft mit: [[03-Hypothesen/index]], [[UI-Prinzipien]] (R1-R6)*

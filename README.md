@@ -44,7 +44,7 @@ Empfohlene Reihenfolge für Nicht-Entwickler:
 Statt wochenlang Anforderungen zu sammeln und dann zu entwickeln, entsteht ein funktionaler Prototyp im Dialog mit einem LLM. Der Prozess ist iterativ:
 
 ```
-Idee → Prompt → Ergebnis → Korrektur → besseres Ergebnis → ...
+Idee -> Prompt -> Ergebnis -> Korrektur -> besseres Ergebnis -> ...
 ```
 
 Das Besondere: Die KI hilft nicht nur beim Coden, sondern auch beim Verstehen der Daten, beim Finden von Fehlern und beim Dokumentieren. Mehr dazu in [Promptotyping-Learnings.md](knowledge/Promptotyping-Learnings.md).
@@ -53,40 +53,38 @@ Das Besondere: Die KI hilft nicht nur beim Coden, sondern auch beim Verstehen de
 
 | Komponente | Status |
 |------------|--------|
-| Datenanalyse | ✅ Abgeschlossen |
-| Excel-zu-JSON Konvertierung | ✅ 19 Dateien konvertiert |
-| Frontend/Dashboard | ✅ Vollständig implementiert |
-| Filter-System (F1-F4) | ✅ Universitäten, Zeitraum, Kennzahlen |
-| Visualisierung (Chart.js) | ✅ 4 Typen: Line, Small Multiples, Heatmap, Ranking |
-| Datentabelle mit Sparklines | ✅ Sortierbar, CSV-Export, Mini-Zeitreihen |
-| LLM-Berichtsgenerierung | ✅ 4 Templates, editierbar |
-| URL-State Sync | ✅ Teilbare Links |
-| Promptotyping-Tutorial | ✅ Vault-Integration, 35 MD-Dateien |
-| **Annotated Interface** | ✅ Tutorial-Badges mit Entstehungsgeschichte |
-| Dokumentation (Obsidian Vault) | ✅ 9 Learnings dokumentiert |
-
-**Workshop:** 11./13. Februar 2026 – Hypothesen-Validierung mit Michael Forster
+| Datenanalyse | DONE |
+| Excel-zu-JSON Konvertierung | DONE - 19 Dateien konvertiert |
+| Frontend/Dashboard | DONE |
+| Filter-System (F1-F4) | DONE - Universitaeten, Zeitraum, Kennzahlen |
+| Visualisierung (Chart.js) | DONE - 4 Typen: Line, Small Multiples, Heatmap, Ranking |
+| Datentabelle mit Sparklines | DONE - Sortierbar, CSV-Export, Mini-Zeitreihen |
+| LLM-Berichtsgenerierung | DONE - 4 Templates, editierbar |
+| URL-State Sync | DONE - Teilbare Links |
+| Promptotyping-Tutorial | DONE - Vault-Integration |
+| **Annotated Interface** | DONE - Tutorial-Badges mit Entstehungsgeschichte |
+| Dokumentation (Obsidian Vault) | DONE - 9 Learnings dokumentiert |
 
 ## Repository-Struktur
 
 ```
 vetmed-wissensbilanz/
-├── README.md                 ← Du bist hier
-├── knowledge/                ← Obsidian Vault mit Wissen
-│   ├── 00-Meta/              ← Glossar, Methodik
-│   ├── 01-Domaene/           ← Unis, Kennzahlen, Daten
-│   ├── 02-Design/            ← UI-Prinzipien, Farben
-│   ├── 03-Hypothesen/        ← H1-H4 User Stories
-│   ├── 04-Learnings/         ← L001-L008 Erkenntnisse
-│   └── 05-Journal/           ← Chronologisches Log
-├── data/                     ← Excel-Rohdaten (79 Dateien)
-├── scripts/                  ← Python-Skripte
-│   └── convert_excel_to_json.py
-└── docs/                     ← Dashboard (produktionsreif)
-    ├── index.html            ← SPA-Einstiegspunkt
-    ├── css/                  ← Design-System
-    ├── js/                   ← Vanilla JS + ES6 Modules
-    └── data/json/            ← Konvertierte Kennzahlen
++-- README.md                    # Du bist hier
++-- knowledge/                   # Obsidian Vault mit Wissen
+|   +-- 00-Meta/                 # Glossar, Methodik
+|   +-- 01-Domaene/              # Unis, Kennzahlen, Daten
+|   +-- 02-Design/               # UI-Prinzipien, Farben
+|   +-- 03-Hypothesen/           # H1-H4 User Stories
+|   +-- 04-Learnings/            # L001-L009 Erkenntnisse
+|   +-- 05-Journal/              # Chronologisches Log
++-- data/                        # Excel-Rohdaten (79 Dateien)
++-- scripts/                     # Python-Skripte
+|   +-- convert_excel_to_json.py
++-- docs/                        # Dashboard (produktionsreif)
+    +-- index.html               # SPA-Einstiegspunkt
+    +-- css/                     # Design-System
+    +-- js/                      # Vanilla JS + ES6 Modules
+    +-- data/json/               # Konvertierte Kennzahlen
 ```
 
 ## Wie ist das Projekt entstanden?
@@ -107,10 +105,9 @@ Jeder Eintrag zeigt: Was war das Ziel? Was wurde entschieden? Was wurde gelernt?
 
 ## Nächste Schritte
 
-- [ ] Workshop durchführen (11./13.02.2026)
-- [ ] Hypothesen H1-H4 mit Michael Forster validieren
 - [ ] GitHub Pages Deployment
 - [ ] Extended Views (Kennzahl-Kombinationen)
+- [ ] Hypothesen H1-H4 validieren
 
 ## Kontakt
 

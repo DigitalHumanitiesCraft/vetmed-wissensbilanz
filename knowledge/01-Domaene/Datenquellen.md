@@ -41,9 +41,9 @@ Dokumentation aller Excel-Datenquellen für das Wissensbilanz-Dashboard.
 
 | Typ | Erkennung | Anzahl | Status |
 |-----|-----------|--------|--------|
-| **WB-Kennzahlen** | Prefix `X-Y-Z` | 15 | ✓ konvertiert |
-| **Detaildaten** | Deskriptiver Name | 63 | ○ nicht konvertiert |
-| **Dokumentation** | Underscore `_` | 4 | ✗ ignorieren |
+| **WB-Kennzahlen** | Prefix `X-Y-Z` | 15 | [x] konvertiert |
+| **Detaildaten** | Deskriptiver Name | 63 | [ ] nicht konvertiert |
+| **Dokumentation** | Underscore `_` | 4 | -- ignorieren |
 
 Für Kennzahl-Details siehe [[Kennzahlen]].
 
@@ -84,14 +84,14 @@ Für Kennzahl-Details siehe [[Kennzahlen]].
 
 ```
 Excel (UniData)
-      │
-      ▼
+      |
+      v
 scripts/convert_excel_to_json.py
-      │
-      ▼
+      |
+      v
 docs/data/json/*.json
-      │
-      ▼
+      |
+      v
 Dashboard (dataLoader.js)
 ```
 
@@ -229,20 +229,20 @@ Verhältnis Professuren zu Studierenden.
 
 | Status | Kennzahlen | Details |
 |--------|------------|---------|
-| ✓ Konvertiert | 19 | In `docs/data/json/` verfügbar |
-| ○ Fehlend (WB) | 1 | 4-A-1 (keine Quelldatei) |
-| ○ Nicht konvertiert | 58 | Detaildaten (keine WB-Kennzahlen) |
+| [x] Konvertiert | 19 | In `docs/data/json/` verfuegbar |
+| [ ] Fehlend (WB) | 1 | 4-A-1 (keine Quelldatei) |
+| [ ] Nicht konvertiert | 58 | Detaildaten (keine WB-Kennzahlen) |
 
 ### Datenqualität (Stand: 30.01.2026)
 
 | Datei | Datenpunkte | Unis | Jahre | Status |
 |-------|-------------|------|-------|--------|
-| 1-A-1 bis 1-A-4 | 66 | 22 | 2022-2024 | ✓ Vollständig |
-| 1-A-5 | 3 | 1 | 2022-2024 | ⚠ Nur UA (Uni Wien) |
-| 2-A-x | 63-66 | 21-22 | 2021-2024 | ✓ Vollständig |
-| 3-A-1 | 3 | 1 | 2021-2023 | ✓ Nur UM (Donau-Uni) |
-| 3-A-2 | 63 | 21 | 2021-2023 | ✓ Vollständig |
-| 3-A-3 | 63 | 21 | 2020-2022 | ✓ Vollständig |
+| 1-A-1 bis 1-A-4 | 66 | 22 | 2022-2024 | OK |
+| 1-A-5 | 3 | 1 | 2022-2024 | Nur UA (Uni Wien) |
+| 2-A-x | 63-66 | 21-22 | 2021-2024 | OK |
+| 3-A-1 | 3 | 1 | 2021-2023 | Nur UM (Donau-Uni) |
+| 3-A-2 | 63 | 21 | 2021-2023 | OK |
+| 3-A-3 | 63 | 21 | 2020-2022 | OK |
 
 **Gesamt:** 1104 Datenpunkte, 3 Nullwerte
 

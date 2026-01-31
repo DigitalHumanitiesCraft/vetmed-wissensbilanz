@@ -76,8 +76,8 @@ Offizielle Kennzahlen gemäß Wissensbilanz-Verordnung.
 
 | Status | Anzahl | Details |
 |--------|--------|---------|
-| ✓ Konvertiert | 19 | JSON in `docs/data/json/` |
-| ○ Fehlend | 1 | 4-A-1 (keine Quelldatei) |
+| [x] Konvertiert | 19 | JSON in `docs/data/json/` |
+| [ ] Fehlend | 1 | 4-A-1 (keine Quelldatei) |
 
 ### Spezialkonverter
 
@@ -92,7 +92,7 @@ Einige Kennzahlen haben abweichende Excel-Strukturen und benötigen Spezialkonve
 
 | Code | Name | Excel vorhanden | Status |
 |------|------|-----------------|--------|
-| 4-A-1 | Drittmittel | ✗ | Quelldatei bei UniData anfordern |
+| 4-A-1 | Drittmittel | nein | Quelldatei bei UniData anfordern |
 
 ### Nächste Schritte
 
@@ -133,7 +133,7 @@ Sinnvolle Kombinationen von Kennzahlen für erweiterte Analysen.
 | 1-A-3 | % | Frauenanteil Kollegialorgane |
 | 1-A-4 | % | Gender Pay Gap |
 | 1-A-5 | % | Frauen in Berufungsverfahren |
-| **Korrelation** | - | 1-A-5 ↔ 1-A-4 zeitversetzt |
+| **Korrelation** | - | 1-A-5 vs 1-A-4 zeitversetzt |
 
 ### Studienerfolg
 
@@ -167,10 +167,10 @@ Sinnvolle Kombinationen von Kennzahlen für erweiterte Analysen.
 
 | Funktion | Status |
 |----------|--------|
-| Einzelne Kennzahlen | ✓ implementiert |
-| Extended Views | ○ geplant |
-| Berechnete Kennzahlen | ○ geplant |
-| Korrelationsanalyse | ○ Backlog |
+| Einzelne Kennzahlen | [x] implementiert |
+| Extended Views | [ ] geplant |
+| Berechnete Kennzahlen | [ ] geplant |
+| Korrelationsanalyse | [ ] Backlog |
 
 ---
 

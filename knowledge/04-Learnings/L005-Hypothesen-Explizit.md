@@ -3,19 +3,19 @@ created: 2026-01-30
 tags: [learning, requirements]
 ---
 
-# L005: Hypothesen vor dem Workshop explizit machen
+# L005: Hypothesen explizit machen
 
 **Datum:** 2026-01-30
-**Kontext:** Vorbereitung von User Stories für Workshop
+**Kontext:** Vorbereitung von User Stories
 
 ---
 
 ## Learning
 
-User Stories vor dem Stakeholder-Gespräch sind Hypothesen, keine Anforderungen. Sie explizit als Hypothesen zu kennzeichnen (mit Validierungsfragen) verhindert zwei Fehler:
+User Stories vor dem Stakeholder-Gespraech sind Hypothesen, keine Anforderungen. Sie explizit als Hypothesen zu kennzeichnen (mit Validierungsfragen) verhindert zwei Fehler:
 
 1. Features bauen, die niemand braucht (Over-Engineering)
-2. Annahmen nie überprüfen (Under-Validation)
+2. Annahmen nie ueberpruefen (Under-Validation)
 
 ---
 
@@ -25,8 +25,8 @@ User Stories vor dem Stakeholder-Gespräch sind Hypothesen, keine Anforderungen.
 |---------|--------------|
 | Annahme | Was glauben wir? |
 | Konfidenz | Wie sicher sind wir? |
-| Validierungsfrage | Wie prüfen wir das? |
-| Implikation | Was bedeutet das für das Produkt? |
+| Validierungsfrage | Wie pruefen wir das? |
+| Implikation | Was bedeutet das fuer das Produkt? |
 
 ---
 
@@ -34,7 +34,7 @@ User Stories vor dem Stakeholder-Gespräch sind Hypothesen, keine Anforderungen.
 
 **H1: Ad-hoc-Anfragen**
 
-- **Annahme:** Forster beantwortet regelmäßig kurzfristige Anfragen
+- **Annahme:** Fachverantwortlicher beantwortet regelmaessig kurzfristige Anfragen
 - **Konfidenz:** hoch
 - **Validierungsfrage:** "Was war die letzte Ad-hoc-Anfrage?"
 - **Implikation:** Schnelle Filterung priorisieren
@@ -47,4 +47,4 @@ User Stories vor dem Stakeholder-Gespräch sind Hypothesen, keine Anforderungen.
 
 ---
 
-*Verknüpft mit: [[03-Hypothesen/index]], [[Promptotyping-Methode]]*
+*Verknuepft mit: [[03-Hypothesen/index]], [[Promptotyping-Methode]]*

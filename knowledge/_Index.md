@@ -22,13 +22,12 @@ Dieser Ordner ist ein **Obsidian Vault** und dokumentiert das Promptotyping-Proj
 
 ```
 knowledge/
-├── 00-Meta/          # Projekt-Übersicht und Methodik
+├── 00-Meta/          # Projekt-Uebersicht und Methodik
 ├── 01-Domaene/       # Fachwissen (Unis, Kennzahlen, Daten)
 ├── 02-Design/        # UI/UX-Entscheidungen
-├── 03-Hypothesen/    # Workshop-Vorbereitung
+├── 03-Hypothesen/    # User Stories und Annahmen
 ├── 04-Learnings/     # Destillierte Erkenntnisse
-├── 05-Journal/       # Chronologisches Protokoll
-└── archive/          # Veraltete Versionen
+└── 05-Journal/       # Chronologisches Protokoll
 ```
 
 ---
@@ -61,8 +60,6 @@ Dieser Vault verwendet folgende Tag-Konventionen:
 
 - `#status/draft` | `#status/active` | `#status/validated`
 - `#phase/preparation` | `#phase/exploration` | `#phase/destillation` | `#phase/implementation`
-- `#workshop/vorbereitung` | `#workshop/ergebnis`
-- `#validierung/offen` | `#validierung/bestaetigt`
 
 ---
 

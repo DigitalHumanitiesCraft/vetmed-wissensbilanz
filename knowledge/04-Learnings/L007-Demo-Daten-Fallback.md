@@ -14,9 +14,9 @@ tags: [learning, robustheit]
 
 Wenn die echten Daten noch nicht konvertiert sind, sollte das Dashboard trotzdem funktionieren. Ein Demo-Daten-Generator ermöglicht:
 
-1. Frühes Testen der UI ohne Datenabhängigkeit
-2. Demonstration im Workshop auch ohne finale Daten
-3. Schnelleres Iterieren während der Entwicklung
+1. Fruehes Testen der UI ohne Datenabhaengigkeit
+2. Demonstration auch ohne finale Daten
+3. Schnelleres Iterieren waehrend der Entwicklung
 
 ---
 

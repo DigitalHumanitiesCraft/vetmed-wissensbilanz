@@ -1,13 +1,13 @@
 ---
 created: 2026-01-30
 status: active
-aliases: [User Stories, Workshop-Vorbereitung]
-tags: [status/active, workshop/vorbereitung, validierung/offen]
+aliases: [User Stories]
+tags: [status/active]
 ---
 
 # Hypothesen
 
-Diese User Stories sind **Hypothesen**, nicht validierte Anforderungen. Sie müssen im Workshop überprüft werden.
+Diese User Stories sind **Hypothesen**, nicht validierte Anforderungen. Sie sollten mit Stakeholdern ueberprueft werden.
 
 ---
 
@@ -42,27 +42,6 @@ Diese User Stories sind **Hypothesen**, nicht validierte Anforderungen. Sie müs
 
 ---
 
-## Workshop-Fragestrategie
-
-### Einstiegsfragen (Arbeitspraxis verstehen)
-
-1. "Beschreiben Sie einen typischen Ablauf, wenn Sie einen Wissensbilanz-Bericht erstellen."
-2. "Was war die letzte Ad-hoc-Anfrage, die Sie zur Wissensbilanz bekommen haben?"
-3. "Wo verbringen Sie dabei die meiste Zeit?"
-
-### Vertiefungsfragen (Pain Points identifizieren)
-
-4. "Was passiert, wenn neue Jahresdaten von UniData kommen?"
-5. "Mit welchen anderen Universitäten vergleichen Sie sich am häufigsten?"
-6. "Wie prüfen Sie, ob die Daten plausibel sind?"
-
-### Abschlussfragen (Priorisierung)
-
-7. "Wenn Sie nur eine Sache verbessern könnten - was wäre das?"
-8. "Was dürfte das Tool auf keinen Fall falsch machen?"
-
----
-
 ## Erfolgskriterien (kompetenzorientiert)
 
 | Kriterium | Validierungsfrage |
@@ -74,4 +53,4 @@ Diese User Stories sind **Hypothesen**, nicht validierte Anforderungen. Sie müs
 
 ---
 
-*Status: Hypothesen, nicht validiert | Stand: 30. Januar 2026*
+*Verknuepft mit: [[Promptotyping-Methode]], [[UI-Prinzipien]]*

@@ -38,7 +38,7 @@ Wenn ein Projekt wächst, werden flache Markdown-Dateien zu unübersichtlich. Di
 00-Meta/          # Projekt-Übersicht
 01-Domaene/       # Fachwissen (stabil)
 02-Design/        # Entscheidungen (semi-stabil)
-03-Hypothesen/    # Workshop-Vorbereitung (temporär)
+03-Hypothesen/    # User Stories (temporaer)
 04-Learnings/     # Destillierte Erkenntnisse (wachsend)
 05-Journal/       # Chronologisches Log (append-only)
 ```
@@ -51,7 +51,7 @@ Wenn ein Projekt wächst, werden flache Markdown-Dateien zu unübersichtlich. Di
 |---------|------------|
 | `[[Wikilinks]]` | Interne Verknüpfungen |
 | Frontmatter | Status, Tags, Aliases |
-| Tags | Querverbindungen (#validierung/offen) |
+| Tags | Querverbindungen (#status/active) |
 | Graph View | Wissensvisualisierung |
 | Backlinks | Automatische Referenzen |
 

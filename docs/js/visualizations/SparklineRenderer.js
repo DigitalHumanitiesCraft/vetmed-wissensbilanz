@@ -83,7 +83,7 @@ export function createSparkline(cell, data, uniCode) {
     // Trend-Indikator (Pfeil)
     const firstValue = values[0];
     const lastValue = values[values.length - 1];
-    const trend = lastValue > firstValue ? '↑' : lastValue < firstValue ? '↓' : '→';
+    const trend = lastValue > firstValue ? '^' : lastValue < firstValue ? 'v' : '-';
     const trendColor = lastValue > firstValue ? '#28a745' : lastValue < firstValue ? '#dc3545' : '#6c757d';
 
     // Trend als Text neben Canvas

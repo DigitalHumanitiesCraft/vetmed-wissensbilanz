@@ -24,27 +24,27 @@ export function logBoot(components, state) {
     const styleGreen = 'color: #28a745;';
     const styleGray = 'color: #6c757d;';
 
-    console.log('%c┌─ Wissensbilanz Dashboard ─────────────────────────┐', style);
-    console.log('%c│ Components:', style);
+    console.log('%c+-- Wissensbilanz Dashboard -----------------------+', style);
+    console.log('%c| Components:', style);
 
     Object.entries(components).forEach(([name, instance]) => {
-        const status = instance ? '✓' : '✗';
+        const status = instance ? '[x]' : '[ ]';
         const statusStyle = instance ? styleGreen : 'color: #dc3545;';
-        console.log(`%c│   ${status} ${name}`, statusStyle);
+        console.log(`%c|   ${status} ${name}`, statusStyle);
     });
 
-    console.log('%c│', style);
-    console.log('%c│ State:', style);
-    console.log(`%c│   Universitäten: ${state.selectedUniversities?.length || 0} ausgewählt`, styleGray);
-    console.log(`%c│   Kennzahl: ${state.selectedKennzahl || 'keine'}`, styleGray);
-    console.log(`%c│   Zeitraum: ${state.yearRange?.start}-${state.yearRange?.end}`, styleGray);
-    console.log(`%c│   VizType: ${state.vizType || 'line'}`, styleGray);
-    console.log(`%c│   Page: ${state.activePage || 'dashboard'}`, styleGray);
-    console.log(`%c│   Tab: ${state.activeTab || 'chart'}`, styleGray);
+    console.log('%c|', style);
+    console.log('%c| State:', style);
+    console.log(`%c|   Universitaeten: ${state.selectedUniversities?.length || 0} ausgewaehlt`, styleGray);
+    console.log(`%c|   Kennzahl: ${state.selectedKennzahl || 'keine'}`, styleGray);
+    console.log(`%c|   Zeitraum: ${state.yearRange?.start}-${state.yearRange?.end}`, styleGray);
+    console.log(`%c|   VizType: ${state.vizType || 'line'}`, styleGray);
+    console.log(`%c|   Page: ${state.activePage || 'dashboard'}`, styleGray);
+    console.log(`%c|   Tab: ${state.activeTab || 'chart'}`, styleGray);
 
-    console.log('%c│', style);
-    console.log(`%c│ Debug: ${DEBUG ? 'ON (localStorage.debug=true)' : 'OFF (run log.enable())'}`, styleGray);
-    console.log('%c└───────────────────────────────────────────────────┘', style);
+    console.log('%c|', style);
+    console.log(`%c| Debug: ${DEBUG ? 'ON (localStorage.debug=true)' : 'OFF (run log.enable())'}`, styleGray);
+    console.log('%c+--------------------------------------------------+', style);
 }
 
 export const log = {

@@ -20,8 +20,6 @@ Promptotype im Rahmen von [[VetMedAI Promptotyping und KI-Kompetenzaufbau]].
 | **Repository** | [chpollin/vetmed-wissensbilanz](https://github.com/chpollin/vetmed-wissensbilanz) |
 | **Demo** | [chpollin.github.io/vetmed-wissensbilanz](https://chpollin.github.io/vetmed-wissensbilanz) |
 | **Rohdaten** | [unidata.gv.at](https://unidata.gv.at/Pages/auswertungen.aspx) |
-| **Initialer Workshop** | 11.02. oder 13.02.2026 |
-| **Follow-Up** | 22.04.2026, 10-13 Uhr |
 
 ---
 
@@ -102,12 +100,8 @@ Siehe: [[Datenquellen]], [[Kennzahlen]]
 
 ## Offene Punkte
 
-### Vor Workshop
 - [ ] Hypothesen [[H1-Ad-hoc-Anfragen]] bis [[H4-Plausibilitaetspruefung]] validieren
-- [ ] Repository umbenennen
-
-### Nach Workshop
-- [ ] Pagination-Schwellenwerte bestätigen
+- [ ] Pagination-Schwellenwerte bestaetigen
 - [ ] Report-Templates anpassen
 - [ ] Export-Funktionen (PNG)
 
