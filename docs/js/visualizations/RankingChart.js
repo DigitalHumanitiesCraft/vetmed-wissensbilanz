@@ -10,6 +10,7 @@
 import { state } from '../core/state.js';
 import { KENNZAHL_BY_CODE, formatValue, UNI_TYPES } from '../data/metadata.js';
 import { getUniColor } from '../utils/colorUtils.js';
+import { exportElementAsPng } from '../utils/exportUtils.js';
 
 export class RankingChart {
     constructor(container, data, options = {}) {
@@ -27,16 +28,24 @@ export class RankingChart {
         const years = this.getAvailableYears();
 
         this.container.innerHTML = `
-            <div class="ranking-container">
+            <div class="ranking-container" id="rankingExportArea">
                 <div class="ranking-header">
                     <h3 class="ranking-title">${kennzahl?.name || 'Kennzahl'} - Ranking</h3>
-                    <select class="form-select ranking-year-select" id="rankingYearSelect">
-                        ${years.map(year => `
-                            <option value="${year}" ${year === this.options.rankingYear ? 'selected' : ''}>
-                                ${year}
-                            </option>
-                        `).join('')}
-                    </select>
+                    <div class="ranking-header__controls">
+                        <select class="form-select ranking-year-select" id="rankingYearSelect">
+                            ${years.map(year => `
+                                <option value="${year}" ${year === this.options.rankingYear ? 'selected' : ''}>
+                                    ${year}
+                                </option>
+                            `).join('')}
+                        </select>
+                        <button class="btn btn--secondary btn--sm" id="exportRankingBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            PNG Export
+                        </button>
+                    </div>
                 </div>
                 <div class="ranking-chart" id="rankingChart">
                     ${this.renderBars(kennzahl)}
@@ -45,6 +54,7 @@ export class RankingChart {
         `;
 
         this.attachEventListeners();
+        this.attachExportListener();
     }
 
     getAvailableYears() {
@@ -141,5 +151,25 @@ export class RankingChart {
 
     resize() {
         // CSS-basiert, keine Action nötig
+    }
+
+    attachExportListener() {
+        const exportBtn = this.container.querySelector('#exportRankingBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportAsPng());
+        }
+    }
+
+    async exportAsPng() {
+        const exportArea = this.container.querySelector('#rankingExportArea');
+        if (!exportArea) {
+            console.error('Ranking Export-Area nicht gefunden');
+            return;
+        }
+
+        await exportElementAsPng(exportArea, 'ranking', {
+            backgroundColor: '#ffffff',
+            scale: 2
+        });
     }
 }

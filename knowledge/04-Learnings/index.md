@@ -24,6 +24,7 @@ Destillierte Erkenntnisse aus dem Promptotyping-Prozess.
 | [[L007-Demo-Daten-Fallback]] | Demo-Daten als Fallback-Strategie | 2026-01-30 | Robustheit |
 | [[L008-Vault-Refactoring]] | Wissensstrukturierung als Obsidian Vault | 2026-01-30 | Dokumentation |
 | [[L009-Annotated-Interface]] | Annotated Interface macht Methoden erlebbar | 2026-01-30 | Didaktik |
+| [[L010-Export-Strategien]] | Zentrale Export-Utilities für Multi-Format-Export | 2026-02-11 | Architektur |
 
 ---
 
@@ -42,6 +43,7 @@ Destillierte Erkenntnisse aus dem Promptotyping-Prozess.
 ### Technische Entscheidungen
 - [[L006-Vanilla-JS-Lernbarkeit]]
 - [[L007-Demo-Daten-Fallback]]
+- [[L010-Export-Strategien]]
 
 ### Requirements Engineering
 - [[L005-Hypothesen-vor-Workshop]]

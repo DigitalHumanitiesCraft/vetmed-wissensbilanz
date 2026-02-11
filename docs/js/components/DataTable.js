@@ -15,6 +15,7 @@ import { dataLoader } from '../data/dataLoader.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, formatValue } from '../data/metadata.js';
 import { getUniColor } from '../utils/colorUtils.js';
 import { createSparkline, groupDataByUni } from '../visualizations/SparklineRenderer.js';
+import { exportDataAsCsv, exportDataAsExcel, exportDataAsJson } from '../utils/exportUtils.js';
 
 class DataTable {
     constructor(container) {
@@ -43,7 +44,22 @@ class DataTable {
                             <option value="100" ${this.pageSize === 100 ? 'selected' : ''}>100 Zeilen</option>
                         </select>
                         <button class="btn btn--secondary btn--sm" id="exportCsvBtn">
-                            CSV Export
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            CSV
+                        </button>
+                        <button class="btn btn--secondary btn--sm" id="exportExcelBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            Excel
+                        </button>
+                        <button class="btn btn--secondary btn--sm" id="exportJsonBtn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                            </svg>
+                            JSON
                         </button>
                     </div>
                 </div>
@@ -107,6 +123,16 @@ class DataTable {
         // CSV Export
         this.container.querySelector('#exportCsvBtn')?.addEventListener('click', () => {
             this.exportToCsv();
+        });
+
+        // Excel Export
+        this.container.querySelector('#exportExcelBtn')?.addEventListener('click', () => {
+            this.exportToExcel();
+        });
+
+        // JSON Export
+        this.container.querySelector('#exportJsonBtn')?.addEventListener('click', () => {
+            this.exportToJson();
         });
     }
 
@@ -298,35 +324,17 @@ class DataTable {
 
     exportToCsv() {
         const sorted = this.getSortedData();
-        const kennzahl = KENNZAHL_BY_CODE[state.get('selectedKennzahl')];
+        exportDataAsCsv(sorted, 'datatable');
+    }
 
-        // CSV-Header
-        const headers = ['Universität', 'Code', 'Jahr', 'Wert', 'Einheit'];
-        const rows = sorted.map(row => {
-            const uni = UNI_BY_CODE[row.uniCode];
-            return [
-                uni?.name || row.uniCode,
-                row.uniCode,
-                row.year,
-                row.value ?? '',
-                kennzahl?.unit || ''
-            ];
-        });
+    exportToExcel() {
+        const sorted = this.getSortedData();
+        exportDataAsExcel(sorted, 'datatable');
+    }
 
-        // CSV erstellen
-        const csvContent = [
-            headers.join(';'),
-            ...rows.map(r => r.join(';'))
-        ].join('\n');
-
-        // Download
-        const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = `wissensbilanz_${kennzahl?.code || 'export'}_${new Date().toISOString().slice(0, 10)}.csv`;
-        link.click();
-        URL.revokeObjectURL(url);
+    exportToJson() {
+        const sorted = this.getSortedData();
+        exportDataAsJson(sorted, 'datatable');
     }
 
     showError(message) {

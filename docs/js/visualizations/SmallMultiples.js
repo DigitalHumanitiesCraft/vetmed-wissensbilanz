@@ -11,6 +11,7 @@ import { state } from '../core/state.js';
 import { eventBus, EVENTS } from '../core/eventBus.js';
 import { KENNZAHL_BY_CODE, UNI_TYPES, formatValue } from '../data/metadata.js';
 import { getUniColor } from '../utils/colorUtils.js';
+import { exportElementAsPng } from '../utils/exportUtils.js';
 
 export class SmallMultiples {
     constructor(container, data, options = {}) {
@@ -27,10 +28,18 @@ export class SmallMultiples {
         const byType = this.groupByUniType();
 
         this.container.innerHTML = `
-            <div class="small-multiples-container">
+            <div class="small-multiples-container" id="smallMultiplesExportArea">
                 <div class="small-multiples-header">
-                    <h3 class="small-multiples-title">${kennzahl?.name || 'Kennzahl'}</h3>
-                    <p class="small-multiples-subtitle">Gruppiert nach Universitäts-Typ</p>
+                    <div class="small-multiples-header__text">
+                        <h3 class="small-multiples-title">${kennzahl?.name || 'Kennzahl'}</h3>
+                        <p class="small-multiples-subtitle">Gruppiert nach Universitäts-Typ</p>
+                    </div>
+                    <button class="btn btn--secondary btn--sm" id="exportSmallMultiplesBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        PNG Export
+                    </button>
                 </div>
                 <div class="small-multiples-grid" id="smallMultiplesGrid">
                     ${Object.entries(UNI_TYPES).map(([typeId, typeMeta]) => `
@@ -52,6 +61,7 @@ export class SmallMultiples {
         `;
 
         this.attachEventListeners();
+        this.attachExportListener();
         this.renderCharts(byType, kennzahl);
     }
 
@@ -200,5 +210,26 @@ export class SmallMultiples {
 
     resize() {
         this.charts.forEach(chart => chart.resize());
+    }
+
+    attachExportListener() {
+        const exportBtn = this.container.querySelector('#exportSmallMultiplesBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportAsPng());
+        }
+    }
+
+    async exportAsPng() {
+        const exportArea = this.container.querySelector('#smallMultiplesExportArea');
+        if (!exportArea) {
+            console.error('SmallMultiples Export-Area nicht gefunden');
+            return;
+        }
+
+        // Höhere Auflösung wegen Multi-Chart-Grid
+        await exportElementAsPng(exportArea, 'smallmultiples', {
+            backgroundColor: '#ffffff',
+            scale: 3  // Höhere Auflösung für bessere Lesbarkeit
+        });
     }
 }

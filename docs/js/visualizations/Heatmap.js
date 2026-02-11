@@ -12,6 +12,7 @@
 import { state } from '../core/state.js';
 import { KENNZAHL_BY_CODE, formatValue, UNI_TYPES } from '../data/metadata.js';
 import { getUniColor, getUniColorWithAlpha } from '../utils/colorUtils.js';
+import { exportElementAsPng } from '../utils/exportUtils.js';
 
 export class Heatmap {
     constructor(container, data, options = {}) {
@@ -27,9 +28,15 @@ export class Heatmap {
         const { rows, years, valueRange } = this.prepareData();
 
         this.container.innerHTML = `
-            <div class="heatmap-container">
+            <div class="heatmap-container" id="heatmapExportArea">
                 <div class="heatmap-header-row">
                     <h3 class="heatmap-title">${kennzahl?.name || 'Kennzahl'}</h3>
+                    <button class="btn btn--secondary btn--sm" id="exportHeatmapBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+                        </svg>
+                        PNG Export
+                    </button>
                 </div>
                 <div class="heatmap-wrapper">
                     <div class="heatmap-labels" id="heatmapLabels">
@@ -80,6 +87,7 @@ export class Heatmap {
 
         this.tooltip = this.container.querySelector('#heatmapTooltip');
         this.attachEventListeners();
+        this.attachExportListener();
     }
 
     prepareData() {
@@ -207,5 +215,25 @@ export class Heatmap {
 
     resize() {
         // CSS-basiert, keine Action nötig
+    }
+
+    attachExportListener() {
+        const exportBtn = this.container.querySelector('#exportHeatmapBtn');
+        if (exportBtn) {
+            exportBtn.addEventListener('click', () => this.exportAsPng());
+        }
+    }
+
+    async exportAsPng() {
+        const exportArea = this.container.querySelector('#heatmapExportArea');
+        if (!exportArea) {
+            console.error('Heatmap Export-Area nicht gefunden');
+            return;
+        }
+
+        await exportElementAsPng(exportArea, 'heatmap', {
+            backgroundColor: '#ffffff',
+            scale: 2
+        });
     }
 }

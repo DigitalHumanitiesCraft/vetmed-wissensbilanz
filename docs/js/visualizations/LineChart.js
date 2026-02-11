@@ -11,6 +11,7 @@
 import { state } from '../core/state.js';
 import { UNI_BY_CODE, KENNZAHL_BY_CODE, formatValue } from '../data/metadata.js';
 import { getUniColor } from '../utils/colorUtils.js';
+import { exportChartAsPng } from '../utils/exportUtils.js';
 
 export class LineChart {
     /**
@@ -298,15 +299,6 @@ export class LineChart {
      * Exportiert Chart als PNG
      */
     exportAsPng() {
-        if (!this.chart) return;
-
-        const kennzahl = state.get('selectedKennzahl') || 'chart';
-        const timestamp = new Date().toISOString().split('T')[0];
-        const filename = `wissensbilanz_${kennzahl}_${timestamp}.png`;
-
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = this.chart.toBase64Image('image/png', 1);
-        link.click();
+        exportChartAsPng(this.chart, 'line');
     }
 }
